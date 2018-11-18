@@ -40,7 +40,7 @@ decim = 3  # we need sufficient statistics, not all time points -> saves time
 # we will also set state of the random number generator - ICA is a
 # non-deterministic algorithm, but we want to have the same decomposition
 # and the same order of components each time this tutorial is run
-random_state = 23
+random_state = 23 #
 ica = ICA(n_components=n_components, method=method, random_state=random_state)
 print(ica)
 reject = dict(mag=5e-12, grad=4000e-13)
@@ -58,7 +58,6 @@ eog_inds, scores = ica.find_bads_eog(eog_epochs)  # find via correlation
 # we can see that only one component is highly correlated and that this
 # component got detected by our correlation analysis (red).
 
-ica.plot_sources(eog_average, exclude=eog_inds)  # look at source time course
 
 
 
