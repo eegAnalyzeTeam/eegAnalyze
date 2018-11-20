@@ -6,26 +6,15 @@ import numpy as np
 from matplotlib import pyplot as plt
 import os, sys
 import check_file
-
-def readData(filePath):
-	#q = ['njh_after_pjk_20180725_close.vhdr', 'ccs_yb_20180813_close.vhdr']
-	q = ['njh_after_pjk_20180725_close.vhdr', 'ccs_yb_20180813_close.vhdr', 'njh_before_pjk_20180613_close.vhdr', 'ccs_before_wjy_20180817_close.vhdr', 'ccs_after_csx_20180511_close.vhdr']
-
-	control_raw = {}
+def troublesome_data(filePath):
 	control_q = []
-	patient_raw = {}
 	patient_q = []
 	for dirpath, dirs, files in os.walk(filePath):
-		# print('dirpath: ' + dirpath)
-		# print('dirs: --------------------' )
-		# print(dirs)
-		# print('files: ==================')
-		# print(files)
+
 		if 'eyeclose' in dirpath and 'health_control' in dirpath:
 			#health control group
 			for fname in files:
 				if '.vhdr' in fname:
-					print('control+'+fname)
 					id_control = fname[:-5]
 					vmrkf,eegf = check_file.get_vhdr_info(dirpath + '/' + fname) 
 					if vmrkf == eegf and vmrkf == id_control:
@@ -33,6 +22,36 @@ def readData(filePath):
 					else:
 						print('control: vhdr:' + id_control + ' vmrk: ' + vmrkf + ' eeg:' + eegf)
 						control_q.append(id_control)
+
+		elif 'eyeclose' in dirpath and 'mdd_patient' in dirpath:
+			#mdd group
+			for fname in files:
+				if '.vhdr' in fname:
+					id_patient = fname[:-5]
+					vmrkf,eegf = check_file.get_vhdr_info(dirpath + '/' + fname) 
+					if vmrkf == eegf and vmrkf == id_patient:
+						print('OK')
+					else:
+						print('patient: vhdr:' + id_patient + ' vmrk: ' + vmrkf + ' eeg:' + eegf)
+						patient_q.append(id_patient)
+
+	return control_q, patient_q
+
+def readData(filePath):
+	# q contains troublesome eeg files. skip them for now
+	control_q, patient_q = troublesome_data(filePath)
+	#q = ['njh_after_pjk_20180725_close.vhdr', 'ccs_yb_20180813_close.vhdr', 'njh_before_pjk_20180613_close.vhdr', 'ccs_before_wjy_20180817_close.vhdr', 'ccs_after_csx_20180511_close.vhdr']
+
+	control_raw = {}
+	patient_raw = {}
+
+	for dirpath, dirs, files in os.walk(filePath):
+
+		if 'eyeclose' in dirpath and 'health_control' in dirpath:
+			#health control group
+			for fname in files:
+				if '.vhdr' in fname and fname not in control_q:
+					id_control = fname[:-5]
 
 					raw = mne.io.read_raw_brainvision(dirpath + '/' + fname,preload=True)
 
@@ -42,17 +61,8 @@ def readData(filePath):
 		elif 'eyeclose' in dirpath and 'mdd_patient' in dirpath:
 			#mdd group
 			for fname in files:
-				if '.vhdr' in fname:
-					if fname in q:
-						continue
-					print('patient+'+fname)
+				if '.vhdr' in fname and fname not in patient_q:
 					id_patient = fname[:-5]
-					vmrkf,eegf = check_file.get_vhdr_info(dirpath + '/' + fname) 
-					if vmrkf == eegf and vmrkf == id_patient:
-						print('OK')
-					else:
-						print('patient: vhdr:' + id_patient + ' vmrk: ' + vmrkf + ' eeg:' + eegf)
-						patient_q.append(id_patient)
 
 					raw = mne.io.read_raw_brainvision(dirpath + '/' + fname,preload=True)
 
