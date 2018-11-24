@@ -6,6 +6,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import os, sys
 import check_file
+import eeg_psd_csv
 def troublesome_data(filePath):
 	control_q = []
 	patient_q = []
@@ -20,7 +21,7 @@ def troublesome_data(filePath):
 					if vmrkf == eegf and vmrkf == id_control:
 						print('OK')
 					else:
-						print('control: vhdr:' + id_control + ' vmrk: ' + vmrkf + ' eeg:' + eegf)
+						# print('control: vhdr:' + id_control + ' vmrk: ' + vmrkf + ' eeg:' + eegf)
 						control_q.append(id_control)
 
 		elif 'eyeclose' in dirpath and 'mdd_patient' in dirpath:
@@ -32,7 +33,7 @@ def troublesome_data(filePath):
 					if vmrkf == eegf and vmrkf == id_patient:
 						print('OK')
 					else:
-						print('patient: vhdr:' + id_patient + ' vmrk: ' + vmrkf + ' eeg:' + eegf)
+						# print('patient: vhdr:' + id_patient + ' vmrk: ' + vmrkf + ' eeg:' + eegf)
 						patient_q.append(id_patient)
 
 	return control_q, patient_q
@@ -41,7 +42,8 @@ def readData(filePath):
 	# q contains troublesome eeg files. skip them for now
 	control_q, patient_q = troublesome_data(filePath)
 	#q = ['njh_after_pjk_20180725_close.vhdr', 'ccs_yb_20180813_close.vhdr', 'njh_before_pjk_20180613_close.vhdr', 'ccs_before_wjy_20180817_close.vhdr', 'ccs_after_csx_20180511_close.vhdr']
-
+	print(patient_q)
+	print('---------===========-----------')
 	control_raw = {}
 	patient_raw = {}
 
@@ -53,7 +55,7 @@ def readData(filePath):
 				if '.vhdr' in fname and fname not in control_q:
 					id_control = fname[:-5]
 
-					raw = mne.io.read_raw_brainvision(dirpath + '/' + fname,preload=True)
+					raw = mne.io.read_raw_brainvision(dirpath + '/' + fname,preload=False)
 
 					raw.set_montage(mne.channels.read_montage("standard_1020"))
 					control_raw[id_control] = raw
@@ -61,10 +63,10 @@ def readData(filePath):
 		elif 'eyeclose' in dirpath and 'mdd_patient' in dirpath:
 			#mdd group
 			for fname in files:
-				if '.vhdr' in fname and fname not in patient_q:
+				if '.vhdr' in fname and fname[:-5] not in patient_q:
 					id_patient = fname[:-5]
 
-					raw = mne.io.read_raw_brainvision(dirpath + '/' + fname,preload=True)
+					raw = mne.io.read_raw_brainvision(dirpath + '/' + fname,preload=False)
 
 					raw.set_montage(mne.channels.read_montage("standard_1020"))
 					patient_raw[id_patient] = raw
@@ -75,10 +77,14 @@ def readData(filePath):
 #raw = mne.io.read_raw_brainvision('/home/caeit/Documents/work/eeg/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',preload=True)
 
 
-control_raw, patient_raw = readData('/home/caeit/Documents/work/eeg/eegData')
+
+#control_raw, patient_raw = readData('/home/caeit/Documents/work/eeg/eegData')
+control_raw, patient_raw = readData('/home/public2/eegData')
 #control_q, patient_q = readData('/home/caeit/Documents/work/eeg/eegData')
+eeg_psd_csv.eeg_psd(control_raw, patient_raw)
 print(control_raw)
 print('=================')
 print(patient_raw)
 print('control: ' + str(len(control_raw)))
 print('patient: ' + str(len(patient_raw)))
+
