@@ -427,5 +427,5 @@ def get_vhdr_info(vhdr_fname):
     eeg = cfg.get('Common Infos', 'DataFile')
     return marker[:-5], eeg[:-4]
 
-g = get_vhdr_info('/home/caeit/Documents/work/eeg/eegData/mdd_patient/eyeopen/njh_after_pjk_20180725_open.vhdr')
-print(g)
+#g = get_vhdr_info('/home/caeit/Documents/work/eeg/eegData/mdd_patient/eyeopen/njh_after_pjk_20180725_open.vhdr')
+#print(g)

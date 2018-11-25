@@ -56,9 +56,11 @@ def readData(filePath):
 					id_control = fname[:-5]
 
 					raw = mne.io.read_raw_brainvision(dirpath + '/' + fname,preload=False)
-
-					raw.set_montage(mne.channels.read_montage("standard_1020"))
-					control_raw[id_control] = raw
+					if len(raw.info['ch_names']) == 65:
+						raw.set_montage(mne.channels.read_montage("standard_1020"))
+						control_raw[id_control] = raw
+					else:
+						print("Abnormal data with " + str(len(raw.info['ch_names'])) + " channels. id=" + id_control)
 
 		elif 'eyeclose' in dirpath and 'mdd_patient' in dirpath:
 			#mdd group
@@ -68,8 +70,11 @@ def readData(filePath):
 
 					raw = mne.io.read_raw_brainvision(dirpath + '/' + fname,preload=False)
 
-					raw.set_montage(mne.channels.read_montage("standard_1020"))
-					patient_raw[id_patient] = raw
+					if len(raw.info['ch_names']) == 65:
+						raw.set_montage(mne.channels.read_montage("standard_1020"))
+						patient_raw[id_patient] = raw
+					else:
+						print("Abnormal data with " + str(len(raw.info['ch_names'])) + " channels. id=" + id_patient)
 
 	return control_raw, patient_raw
 	#return control_q, patient_q
@@ -79,8 +84,11 @@ def readData(filePath):
 
 
 #control_raw, patient_raw = readData('/home/caeit/Documents/work/eeg/eegData')
-control_raw, patient_raw = readData('/home/public2/eegData')
 #control_q, patient_q = readData('/home/caeit/Documents/work/eeg/eegData')
+
+control_raw, patient_raw = readData('/home/public2/eegData')
+#control_raw, patient_raw = readData('/home/paulbai/eeg/eegData')
+
 eeg_psd_csv.eeg_psd(control_raw, patient_raw)
 print(control_raw)
 print('=================')
