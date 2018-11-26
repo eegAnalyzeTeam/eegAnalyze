@@ -25,19 +25,38 @@ def calculate_eeg_psd(raw, eid):
     psd_subfreq['beta'],freqs5=mne.time_frequency.psd_welch(raw,fmin=13,fmax=30,n_fft=256,n_jobs=1)
     psd_subfreq['gamma'],freqs6=mne.time_frequency.psd_welch(raw,fmin=30,fmax=40,n_fft=512,n_jobs=1)
     
-    for (key, val) in psd_subfreq.items():
-    	temp_all = [t[0] for t in psd_all]
-    	if 0 not in temp_all:
-    		temp_sub = [t[0] for t in psd_subfreq[key]]
-    		psd_subfreq[key] = [x/y for x,y in zip(temp_sub,temp_all)]
-    	else:
-    		print("ERROR! id=" + eid + ' has a psd_all=0')
-    return psd_subfreq
+    rpsd_sub={}
+    rpsd_sub['delta']=[]
+    rpsd_sub['theta']=[]
+    rpsd_sub['alpha1']=[]
+    rpsd_sub['alpha2']=[]
+    rpsd_sub['beta']=[]
+    rpsd_sub['gamma']=[]
+    
+    for i in range(0,64):
+        sum_all=sum(psd_all[i])
+        rpsd_sub['delta'].append(sum(psd_subfreq['delta'][i]/sum_all))
+        rpsd_sub['theta'].append(sum(psd_subfreq['theta'][i]/sum_all))
+        rpsd_sub['alpha1'].append(sum(psd_subfreq['alpha1'][i]/sum_all))
+        rpsd_sub['alpha2'].append(sum(psd_subfreq['alpha2'][i]/sum_all))
+        rpsd_sub['beta'].append(sum(psd_subfreq['beta'][i]/sum_all))
+        rpsd_sub['gamma'].append(sum(psd_subfreq['gamma'][i]/sum_all))
+        
+    # for (key, val) in psd_subfreq.items():
+    # 	temp_all = [t[0] for t in psd_all]
+    # 	if 0 not in temp_all:
+    # 		temp_sub = [t[0] for t in psd_subfreq[key]]
+    # 		psd_subfreq[key] = [x/y for x,y in zip(temp_sub,temp_all)]
+    # 	else:
+    # 		print("ERROR! id=" + eid + ' has a psd_all=0')
+    # return psd_subfreq
+    return rpsd_sub
 
 def eeg_psd(control_raw, patient_raw):
 	control_raw = {}
 	channel_names, bad_channels = raw_data_info()
 	columns = channel_names.copy()
+	columns.insert(0, 'groupId')
 	columns.insert(0, 'id')
 	columns = columns[:-1]
 	df_c_delta = pd.DataFrame(columns = columns)
@@ -62,6 +81,8 @@ def eeg_psd(control_raw, patient_raw):
 		temp = psd_subfreq['delta'].copy()
 		# temp = list(psd_subfreq['delta'].copy())
 		# temp = [t[0] for t in psd_subfreq['delta']]
+		# control group id = 0	
+		temp.insert(0, 0)
 		temp.insert(0, eid)
 
 		df_c_delta.loc[len(df_c_delta)] = temp
@@ -69,30 +90,35 @@ def eeg_psd(control_raw, patient_raw):
 		temp = psd_subfreq['theta'].copy()
 		# temp = list(psd_subfreq['theta'].copy())
 		# temp = [t[0] for t in psd_subfreq['theta']]
+		temp.insert(0, 0)
 		temp.insert(0, eid)
 		df_c_theta.loc[len(df_c_theta)] = temp
 
 		temp = psd_subfreq['alpha1'].copy()
 		# temp = list(psd_subfreq['alpha1'].copy())
 		# temp = [t[0] for t in psd_subfreq['alpha1']]
+		temp.insert(0, 0)
 		temp.insert(0, eid)
 		df_c_alpha1.loc[len(df_c_alpha1)] = temp
 
 		temp = psd_subfreq['alpha2'].copy()
 		# temp = list(psd_subfreq['alpha2'].copy())
 		# temp = [t[0] for t in psd_subfreq['alpha2']]
+		temp.insert(0, 0)
 		temp.insert(0, eid)
 		df_c_alpha2.loc[len(df_c_alpha2)] = temp
 
 		temp = psd_subfreq['beta'].copy()
 		# temp = list(psd_subfreq['beta'].copy())
 		# temp = [t[0] for t in psd_subfreq['beta']]
+		temp.insert(0, 0)
 		temp.insert(0, eid)
 		df_c_beta.loc[len(df_c_beta)] = temp
 
 		temp = psd_subfreq['gamma'].copy()
 		# temp = list(psd_subfreq['gamma'].copy())
 		# temp = [t[0] for t in psd_subfreq['gamma']]
+		temp.insert(0, 0)
 		temp.insert(0, eid)
 		df_c_gamma.loc[len(df_c_gamma)] = temp
 
@@ -113,36 +139,43 @@ def eeg_psd(control_raw, patient_raw):
 		temp = psd_subfreq['delta'].copy()
 		# temp = list(psd_subfreq['delta'].copy())
 		# temp = [t[0] for t in psd_subfreq['delta']]
+		#Patient group id = 1
+		temp.insert(0, 1)
 		temp.insert(0, eid)
 		df_p_delta.loc[len(df_p_delta)] = temp
 
 		temp = psd_subfreq['theta'].copy()
 		# temp = list(psd_subfreq['theta'].copy())
 		# temp = [t[0] for t in psd_subfreq['theta']]
+		temp.insert(0, 1)
 		temp.insert(0, eid)
 		df_p_theta.loc[len(df_p_theta)] = temp
 
 		temp = psd_subfreq['alpha1'].copy()
 		# temp = list(psd_subfreq['alpha1'].copy())
 		# temp = [t[0] for t in psd_subfreq['alpha1']]
+		temp.insert(0, 1)
 		temp.insert(0, eid)
 		df_p_alpha1.loc[len(df_p_alpha1)] = temp
 
 		temp = psd_subfreq['alpha2'].copy()
 		# temp = list(psd_subfreq['alpha2'].copy())
 		# temp = [t[0] for t in psd_subfreq['alpha2']]
+		temp.insert(0, 1)
 		temp.insert(0, eid)
 		df_p_alpha2.loc[len(df_p_alpha2)] = temp
 
 		temp = psd_subfreq['beta'].copy()
 		# temp = list(psd_subfreq['beta'].copy())
 		# temp = [t[0] for t in psd_subfreq['beta']]
+		temp.insert(0, 1)
 		temp.insert(0, eid)
 		df_p_beta.loc[len(df_p_beta)] = temp
 
 		temp = psd_subfreq['gamma'].copy()
 		# temp = list(psd_subfreq['gamma'].copy())
 		# temp = [t[0] for t in psd_subfreq['gamma']]
+		temp.insert(0, 1)
 		temp.insert(0, eid)
 		df_p_gamma.loc[len(df_p_gamma)] = temp
 
