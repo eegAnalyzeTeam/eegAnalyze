@@ -7,6 +7,8 @@ from matplotlib import pyplot as plt
 import os, sys
 import check_file
 import eeg_psd_csv
+import eeg_psd_anova
+import eeg_psd_plot
 def troublesome_data(filePath):
 	control_q = []
 	patient_q = []
@@ -90,9 +92,15 @@ control_raw, patient_raw = readData('/home/public2/eegData')
 #control_raw, patient_raw = readData('/home/paulbai/eeg/eegData')
 
 eeg_psd_csv.eeg_psd(control_raw, patient_raw)
-print(control_raw)
-print('=================')
-print(patient_raw)
+
+eeg_psd_anova.psd_anova()
+
+eeg_psd_plot.plot_psd()
+
+
+#print(control_raw)
+#print('=================')
+#print(patient_raw)
 print('control: ' + str(len(control_raw)))
 print('patient: ' + str(len(patient_raw)))
 
