@@ -1,24 +1,26 @@
-import mne
 from math import sqrt
+
+import mne
 import numpy
 
 
 # 定义检验标准
-class compare():
-    def __init__(self, model, data):
-        self.model = model  # 加载模型数据
+class Compare:
+    def __init__(self, amodel, data):
+        self.model = amodel  # 加载模型数据
         self.data = data  # 加载待分析数据
         self.count = self.fitcount(self.model, self.data)  # 计算符合模型的区间个数
 
     # 皮尔逊相关系数
-    def pearson(self, T1, T2, cnt):
-        sum1 = sum(T1)
-        sum2 = sum(T2)
-        sqSum1 = sum(pow(num, 2) for num in T1)
-        sqSum2 = sum(pow(num, 2) for num in T2)
-        mulSum = sum(T1[i] * T2[i] for i in range(cnt))
-        son = mulSum - sum1 * sum2 / cnt
-        mot = sqrt((sqSum1 - pow(sum1, 2) / cnt) * (sqSum2 - pow(sum2, 2) / cnt))
+    @staticmethod
+    def pearson(list1, list2, num):
+        sum1 = sum(list1)
+        sum2 = sum(list2)
+        sqsum1 = sum(pow(num, 2) for num in list1)
+        sqsum2 = sum(pow(num, 2) for num in list2)
+        mulsum = sum(list1[k] * list2[k] for k in range(num))
+        son = mulsum - sum1 * sum2 / num
+        mot = sqrt((sqsum1 - pow(sum1, 2) / num) * (sqsum2 - pow(sum2, 2) / num))
         if mot == 0:
             r = 0
         else:
@@ -27,20 +29,19 @@ class compare():
 
     def fitcount(self, train, data):
         count = 0
-        i = 0
-        while (len(data) - i) >= len(train):
-            d = data[i:i + len(train)]
+        j = 0
+        while (len(data) - j) >= len(train):
+            d = data[j:j + len(train)]
             if (max(d) - min(d)) / 2 > 2:  # 振幅大于2才检验，提高效率
                 train_tmp = train * (max(d) - min(d)) / 2
                 # 振动既可能先下后上，也可能先上后下
-                r = max(self.pearson(train_tmp, d, len(train_tmp)), self.pearson(-train_tmp, d, len(train_tmp)))
+                r = max(self.pearson(train_tmp, d, len(train_tmp)), self.pearson(0 - train_tmp, d, len(train_tmp)))
                 if r > 0.8:  # 相关系数阈值设定
                     count += 1
                     print('r', r)
-                    i += len(train)
+                    j += len(train)
                     continue
-            i += int(len(train) / 2)
-            # 如果通过检验就跳过全部，否则只跳过一半，减小误差
+            j += int(len(train) / 2)  # 如果通过检验就跳过全部，否则只跳过一半，减小误差
         return count
 
 
@@ -60,7 +61,7 @@ sample = ica.get_sources(inst=raw_tmp, start=0, stop=raw_tmp.times[-1]).get_data
 
 content = []
 for i in range(64):
-    content.append(compare(model, sample[i]).count)
+    content.append(Compare(model, sample[i]).count)
     print(i)
     if content[-1] > 5:  # 通过检验数大于5即可接受
         break
