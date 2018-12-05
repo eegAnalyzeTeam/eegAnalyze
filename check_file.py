@@ -157,7 +157,7 @@ def get_vhdr_info(vhdr_fname):
     #     # standard explicitly assumed; the unit is only allowed to be
     #     # something else if explicitly stated (cf. EEGLAB export below)
     #     if len(props) < 4:
-    #         props += (u'µV',)
+    #         props += (u'ÂµV',)
     #     name, _, resolution, unit = props[:4]
     #     ch_dict[chan] = name
     #     ch_names[n] = name
@@ -169,7 +169,7 @@ def get_vhdr_info(vhdr_fname):
     #     unit = unit.replace(u'\xc2', u'')  # Remove unwanted control characters
     #     cals[n] = float(resolution)
     #     ranges[n] = _unit_dict.get(unit, 1) * scale
-    #     if unit not in ('V', u'µV', 'uV'):
+    #     if unit not in ('V', u'ÂµV', 'uV'):
     #         misc_chs[name] = (FIFF.FIFF_UNIT_CEL if unit == 'C'
     #                           else FIFF.FIFF_UNIT_NONE)
     # misc = list(misc_chs.keys()) if misc == 'auto' else misc
