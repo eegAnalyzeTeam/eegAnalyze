@@ -121,11 +121,6 @@
 - [x] centrality
 - [x] clustering coefficient
 
-
-
-
-
-
 ## 特征选择
 
 - [ ] TPOT?
@@ -136,6 +131,9 @@
 ## 建模
 
 - [ ] imbalanced-learn解决样本不匹配的问题?
+- [ ] 模型特征重要性解释？ `XGBoost`, `SHAP`, `[ELI5](https://github.com/TeamHG-Memex/eli5)`, `skater`
+    > Ref: https://towardsdatascience.com/human-interpretable-machine-learning-part-1-the-need-and-importance-of-model-interpretation-2ed758f5f476
+
 
 ## 加速
 
