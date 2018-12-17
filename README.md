@@ -9,7 +9,7 @@
 ### 数据信息
 
 | 参数 | 值|
-|------|---|
+|---|---|
 | 仪器名称：| BrainVision Recoder |
 | 通道数 :| 64|
 | 采样率： | 5000 Hz|
@@ -19,10 +19,10 @@
 | 工频陷波 | 无 |
 | 采样阻抗 | 10 kΩ|
 
-样本信息
+### 样本信息
 
 | | 睁眼 | 闭眼 |
-|--|--|--|
+|---|---|---|
 | MDD 组 | 84 | 87 |
 | Control 组 | 27 | 30 |
 
@@ -30,24 +30,24 @@
 
 主要依赖于[MNE软件包](https://mne-tools.github.io)进行。使用mne内置的mne.raw等数据结构。
 
-- [x] 导入数据,`mne.io.read_raw`，以下过程中均对mne.raw对象操作
-- [x]  标记坏通道，`raw.info['bads']`
-- [x]  坏通道插值，`interpolate_bads`
-- [ ]  标记坏段 `mne.Annotations`
-- [x]  去除工频噪声, `raw.notch_filter`
-- [x]  去除漂移，`raw.filter`
+- [x] 导入数据, `mne.io.read_raw`，以下过程中均对mne.raw对象操作
+- [x] 标记坏通道, `raw.info['bads']`
+- [x] 坏通道插值, `interpolate_bads`
+- [ ] 标记坏段, `mne.Annotations`
+- [x] 去除工频噪声, `raw.notch_filter`
+- [x] 去除漂移, `raw.filter`
 - [x] 去眼电/心电
   ``` python
   ica_model = get_artifact_model(mne_raw, ica_method='fastica', type = ['ECG', 'EOG'], plot = True, update_model = False)
 
-    mne_raw = apply_arifact_model(mne_raw, ica_model)
+  mne_raw = apply_arifact_model(mne_raw, ica_model)
   ```
-- [x]  降采样，`raw.resample(256, npad="auto")`
+- [x]  降采样, `raw.resample(256, npad="auto")`
 - [x]  可视化, `raw.plot`, `raw.plot_sensors`, `raw.plot_psd`, ...
-- [x] 保存数据，`raw.save`, `ica.save`,...
+- [x] 保存数据, `raw.save`, `ica.save`,...
 
 ## 特征计算
-以下过程均使用 pandas Dataframe数据结构，可通过mne.raw得到。
+以下过程均使用 pandas Dataframe 数据结构，可通过mne.raw得到。
 
 ### 时域
 
