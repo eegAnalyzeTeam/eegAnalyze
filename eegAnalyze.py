@@ -1,26 +1,38 @@
-# This program is where the main function at. 
+# This program is where the main function at.
 # The program calls preprocessing functions, calculate psds for each
 # person and use anova test to find the significant channels and sub-frequencies
+import os
+import sys
+
 import mne
 import numpy as np
 from matplotlib import pyplot as plt
-import os, sys
+
 import check_file
-import eeg_psd_csv
 import eeg_psd_anova
+import eeg_psd_csv
 import eeg_psd_plot
+<<<<<<< HEAD
 # import eeg_coherence
 # import eeg_coherence_plot
 # import eeg_coherence_anova
 # import eeg_coherence_anova_plot
+=======
+>>>>>>> 4bab13275698359399887e26df574008c4b1323b
 
 def troublesome_data(filePath):
     control_q = []
     patient_q = []
+<<<<<<< HEAD
     for dirpath, dirs, files in os.walk(filePath):
 
         if 'eyeclose' in dirpath and 'health_control' in dirpath:
             # health control group
+=======
+    for dirpath, _, files in os.walk(filePath):
+        if 'eyeclose' in dirpath and 'health_control' in dirpath:
+            #health control group
+>>>>>>> 4bab13275698359399887e26df574008c4b1323b
             for fname in files:
                 if '.vhdr' in fname:
                     id_control = fname[:-5]
@@ -32,7 +44,11 @@ def troublesome_data(filePath):
                         control_q.append(id_control)
 
         elif 'eyeclose' in dirpath and 'mdd_patient' in dirpath:
+<<<<<<< HEAD
             # mdd group
+=======
+            #mdd group
+>>>>>>> 4bab13275698359399887e26df574008c4b1323b
             for fname in files:
                 if '.vhdr' in fname:
                     id_patient = fname[:-5]
@@ -45,6 +61,58 @@ def troublesome_data(filePath):
 
     return control_q, patient_q
 
+<<<<<<< HEAD
+=======
+def readData(filePath):
+    # q contains troublesome eeg files. skip them for now
+    control_q, patient_q = troublesome_data(filePath)
+    #q = ['njh_after_pjk_20180725_close.vhdr', 'ccs_yb_20180813_close.vhdr', 'njh_before_pjk_20180613_close.vhdr', 'ccs_before_wjy_20180817_close.vhdr', 'ccs_after_csx_20180511_close.vhdr']
+    print(patient_q)
+    print('---------===========-----------')
+    control_raw = {}
+    patient_raw = {}
+
+    for dirpath, _, files in os.walk(filePath):
+
+        if 'eyeclose' in dirpath and 'health_control' in dirpath:
+            #health control group
+            for fname in files:
+                if '.vhdr' in fname and fname not in control_q:
+                    id_control = fname[:-5]
+
+                    raw = mne.io.read_raw_brainvision(dirpath + '/' + fname, preload=False)
+                    if len(raw.info['ch_names']) == 65:
+                        raw.set_montage(mne.channels.read_montage("standard_1020"))
+                        control_raw[id_control] = raw
+                    else:
+                        print("Abnormal data with " +
+                              str(len(raw.info['ch_names'])) + " channels. id=" + id_control)
+
+        elif 'eyeclose' in dirpath and 'mdd_patient' in dirpath:
+            #mdd group
+            for fname in files:
+                if '.vhdr' in fname and fname[:-5] not in patient_q:
+                    id_patient = fname[:-5]
+
+                    raw = mne.io.read_raw_brainvision(dirpath + '/' + fname, preload=False)
+
+                    if len(raw.info['ch_names']) == 65:
+                        raw.set_montage(mne.channels.read_montage("standard_1020"))
+                        patient_raw[id_patient] = raw
+                    else:
+                        print("Abnormal data with " +
+                              str(len(raw.info['ch_names'])) + " channels. id=" + id_patient)
+
+    return control_raw, patient_raw
+    #return control_q, patient_q
+#raw = mne.io.read_raw_brainvision('/home/caeit/Documents/work/eeg/eegData/mdd_patient/eyeopen/njh_after_pjk_20180725_open.vhdr',preload=True)
+#raw = mne.io.read_raw_brainvision('/home/caeit/Documents/work/eeg/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',preload=True)
+
+#control_raw, patient_raw = readData('/home/caeit/Documents/work/eeg/eegData')
+#control_q, patient_q = readData('/home/caeit/Documents/work/eeg/eegData')
+control_raw, patient_raw = readData('/home/public2/eegData')
+#control_raw, patient_raw = readData('/home/paulbai/eeg/eegData')
+>>>>>>> 4bab13275698359399887e26df574008c4b1323b
 
 def readData(filePath):
     # q contains troublesome eeg files. skip them for now
