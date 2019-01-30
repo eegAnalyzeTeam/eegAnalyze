@@ -72,5 +72,5 @@ def anova_plot():
     draw_p_value()
     draw_p_value_gray()
 
-# anova_plot()
+anova_plot()
 

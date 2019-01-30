@@ -6,12 +6,11 @@ import numpy as np
 from scipy import stats
 from statsmodels.formula.api import ols
 from statsmodels.stats.anova import anova_lm
-import eeg_psd_channel
 import mne
 # This program reads all csv files and does the ANOVA test
 
 def coh_get_channel_names():
-    raw = mne.io.read_raw_brainvision('/home/public2/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
+    raw = mne.io.read_raw_brainvision('eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
                                       preload=True)
     channel_names = []
     for i in raw.info['ch_names']:
@@ -94,6 +93,6 @@ def coh_anova_save_csv():
         writer.writerow(list(fvalue))
     fileread.close
 
-# get_coherence_anova()
+get_coherence_anova()
 
-# coh_anova_save_csv()
+coh_anova_save_csv()
