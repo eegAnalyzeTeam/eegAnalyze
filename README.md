@@ -161,4 +161,24 @@ RESTful API风格的应用服务。
 
 ### 抑郁预测
 
+## 代码结构
+
+### psd_code
+ 
+这是计算psd的主要python文件。
+- [ ] eeg_psd_anova.py
+  - [ ] 主要用来计算psd的anova
+- [ ] eeg_psd_channel.py
+  - [ ] 主要用来挑选差异比较大的通道
+- [ ] eeg_psd_csv.py
+    - [ ] 主要用来计算alpha1、alpha2、beta、gamma、delta等psd并存储csv文件
+ - [ ] eeg_psd_plot.py
+    - [ ] 用来画psd的图像
+ - [x] eeg_svm_classify.py
+    - [x] svm的分类器，基本弃用。
+    - [x] 分类可以使用classify目录下的eeg_classify_model.py
+ - [ ] eegAnalyze.py
+    - [ ] 用来读取eeg信息的文件
+ 
+
 
