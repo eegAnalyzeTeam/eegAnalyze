@@ -181,7 +181,7 @@ RESTful API风格的应用服务。
     - [ ] 用来读取eeg信息的文件
  
  
- ### coherence_code
+### coherence_code
  
 这是计算coherence的主要python文件。
 - [ ] eeg_coherence.py
@@ -203,5 +203,21 @@ RESTful API风格的应用服务。
  - [ ] pick_eeg_coherence.py
     - [ ] 将eeg_coherence_each.py的结果挑选差异比较大的通道对合成一张表
     - [ ] 主要用来分类使用
-
+ 
+### tsfresh&&selectFeatures_thread
+ 
+这是利用tsfresh库计算特征的主要python文件
+- [ ] eeg_features_alpha1.py
+    - [ ] 用来滤波和降采样alpha1
+    - [ ] 将数据存储为tsfresh库计算特征需要的格式
+- [ ] eeg_features_alpha2.py
+    - [ ] 用来滤波和降采样alpha2
+    - [ ] 将数据存储为tsfresh库计算特征需要的格式
+- [ ] tsfresh_calcFeatures.py
+    - [ ] 主要用来计算全部信号的特征（非多线程）
+ - [ ] eeg_tsfresh_dataGen.py
+    - [ ] 用来滤波和降采样全部信号
+    - [ ] 将数据存储为tsfresh库计算特征需要的格式
+ - [ ] thread_cal_festures.py
+    - [ ] 主要用来计算全部信号的特征（多线程）
 
