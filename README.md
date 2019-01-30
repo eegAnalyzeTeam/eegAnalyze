@@ -163,7 +163,7 @@ RESTful API风格的应用服务。
 
 ## 代码结构
 
-### psd_code
+### psd_code文件夹
  
 这是计算psd的主要python文件。
 - [ ] eeg_psd_anova.py
@@ -181,7 +181,7 @@ RESTful API风格的应用服务。
     - [ ] 用来读取eeg信息的文件
  
  
-### coherence_code
+### coherence_code文件夹
  
 这是计算coherence的主要python文件。
 - [ ] eeg_coherence.py
@@ -204,7 +204,7 @@ RESTful API风格的应用服务。
     - [ ] 将eeg_coherence_each.py的结果挑选差异比较大的通道对合成一张表
     - [ ] 主要用来分类使用
  
-### tsfresh&&selectFeatures_thread
+### tsfresh&&selectFeatures_thread文件夹
  
 这是利用tsfresh库计算特征的主要python文件
 - [ ] eeg_features_alpha1.py
@@ -214,7 +214,8 @@ RESTful API风格的应用服务。
     - [ ] 用来滤波和降采样alpha2
     - [ ] 将数据存储为tsfresh库计算特征需要的格式
 - [ ] tsfresh_calcFeatures.py
-    - [ ] 主要用来计算全部信号的特征（非多线程）
+    - [ ] 用来计算全部信号的特征（非多线程）
+    - [ ] 利用sklearn库选取特征
  - [ ] eeg_tsfresh_dataGen.py
     - [ ] 用来滤波和降采样全部信号
     - [ ] 将数据存储为tsfresh库计算特征需要的格式
@@ -222,7 +223,7 @@ RESTful API风格的应用服务。
     - [ ] 主要用来计算全部信号的特征（多线程）
     
     
-### classify_code
+### classify_code文件夹
  
 这是利用tsfresh库计算特征的主要python文件
 - [ ] eeg_classify_model.py
@@ -239,4 +240,9 @@ RESTful API风格的应用服务。
     - [ ] 主要用来计算全部信号的特征（多线程）
  - [ ] svm_cure.py
     - [ ] 用来画学习曲线
+   
+### 代码如果不能正常运行请检查以下两个方面
+
+- [x] 代码路径中的文件或文件夹是否存在或者路径是否正确
+- [x] import的py文件是否在正确路径
 
