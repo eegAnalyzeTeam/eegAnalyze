@@ -220,4 +220,23 @@ RESTful API风格的应用服务。
     - [ ] 将数据存储为tsfresh库计算特征需要的格式
  - [ ] thread_cal_festures.py
     - [ ] 主要用来计算全部信号的特征（多线程）
+    
+    
+### classify_code
+ 
+这是利用tsfresh库计算特征的主要python文件
+- [ ] eeg_classify_model.py
+    - [ ] 用来分类及交叉验证
+    - [ ] svm,决策树，随机森林，朴素贝叶斯
+- [ ] eeg_k_cv.py
+    - [ ] 对前边的几种方式k折交叉验证
+- [ ] tsfresh_calcFeatures.py
+    - [ ] 主要用来计算全部信号的特征（非多线程）
+ - [ ] eeg_tsfresh_dataGen.py
+    - [ ] 用来滤波和降采样全部信号
+    - [ ] 将数据存储为tsfresh库计算特征需要的格式
+ - [ ] thread_cal_festures.py
+    - [ ] 主要用来计算全部信号的特征（多线程）
+ - [ ] svm_cure.py
+    - [ ] 用来画学习曲线
 
