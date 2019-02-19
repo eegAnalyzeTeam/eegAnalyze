@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from array import array
 
 import mne
@@ -35,7 +34,7 @@ def eeg_get_counts(freq,length):
 
 
 def raw_data_info():
-    raw = mne.io.read_raw_brainvision('E:/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
+    raw = mne.io.read_raw_brainvision('/home/public2/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
                                       preload=True)
     #channel_names = raw.info['ch_names']
     print()
@@ -109,6 +108,7 @@ def calculate_eeg_psd_burg_matlab(raw,eid,eng):
 
 def calculate_eeg_psd_burg(raw, eid):
     raw.load_data()
+    raw=raw.filter(None,50)
     raw.resample(256,npad='auto')
     # print(raw)
     # print(raw.info)
@@ -177,7 +177,9 @@ def calculate_eeg_psd_welch(raw, eid):
     # raw=mne.io.read_raw_brainvision(fname,preload=True)
     psd_subfreq = {}
    # raw.load_data()
-   # raw.resample(256,npad='auto')
+    raw.load_data()
+    raw=raw.filter(None,50)
+    raw.resample(256,npad='auto')
     # print(raw)
     # print(raw.info)
     raw.info['bads'] = ['Oz', 'ECG']
@@ -199,33 +201,7 @@ def calculate_eeg_psd_welch(raw, eid):
     # plt.savefig('tttest3.png')
     # plt.close()
     # print(freqs0)
-=======
-import os
 
-import mne
-import numpy as np
-import pandas as pd
-from matplotlib import pyplot as plt
-
-
-def raw_data_info():
-    raw = mne.io.read_raw_brainvision(
-        '/home/public2/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr', preload=True)
-    channel_names = raw.info['ch_names']
-    bad_channels = []
-    return channel_names, bad_channels
-
-
-def calculate_eeg_psd(raw, eid):
-    #data_path='D:\health_control\eyeopen'
-    #fname=data_path+'\jkdz_dhl_20180411_open.vhdr'
-    # print(__doc__)
-    # raw=mne.io.read_raw_brainvision(fname,preload=True)
-    # psd_subfreq = {}
-
-    psd_all, _ = mne.time_frequency.psd_welch(
-        raw, fmin=0.5, fmax=40, n_fft=2048, n_jobs=1)
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
     # psd_subfreq['delta'],freqs1=mne.time_frequency.psd_welch(raw,fmin=0.5,fmax=4,n_fft=2048,n_jobs=1)
     # psd_subfreq['theta'],freqs2=mne.time_frequency.psd_welch(raw,fmin=4,fmax=7,n_fft=2048,n_jobs=1)
     # psd_subfreq['alpha1'],freqs3=mne.time_frequency.psd_welch(raw,fmin=8,fmax=10,n_fft=2048,n_jobs=1)
@@ -241,10 +217,7 @@ def calculate_eeg_psd(raw, eid):
     rpsd_sub['beta'] = []
     rpsd_sub['gamma'] = []
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
     # for i in range(0,64):
     #     sum_all=sum(psd_all[i])
     #     rpsd_sub['delta'].append(sum(psd_subfreq['delta'][i])/sum_all)
@@ -253,7 +226,7 @@ def calculate_eeg_psd(raw, eid):
     #     rpsd_sub['alpha2'].append(sum(psd_subfreq['alpha2'][i])/sum_all)
     #     rpsd_sub['beta'].append(sum(psd_subfreq['beta'][i])/sum_all)
     #     rpsd_sub['gamma'].append(sum(psd_subfreq['gamma'][i])/sum_all)
-<<<<<<< HEAD
+
     counts = eeg_get_counts(freqs0, len(freqs0))
     print(counts)
     for i in range(0, pick_len):
@@ -266,16 +239,7 @@ def calculate_eeg_psd(raw, eid):
        rpsd_sub['alpha2'].append(sum(psd_all[i][counts[3]:counts[4]]) / sum_all)
        rpsd_sub['beta'].append(sum(psd_all[i][counts[5]:counts[6]]) / sum_all)
        rpsd_sub['gamma'].append(sum(psd_all[i][counts[6]:]) / sum_all)
-=======
-    for i in range(0, 64):
-        sum_all = sum(psd_all[i])
-        rpsd_sub['delta'].append(sum(psd_all[i][0:1])/sum_all)
-        rpsd_sub['theta'].append(sum(psd_all[i][1:3])/sum_all)
-        rpsd_sub['alpha1'].append(sum(psd_all[i][3:4])/sum_all)
-        rpsd_sub['alpha2'].append(sum(psd_all[i][4:5])/sum_all)
-        rpsd_sub['beta'].append(sum(psd_all[i][5:13])/sum_all)
-        rpsd_sub['gamma'].append(sum(psd_all[i][13:])/sum_all)
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
+
 
     # for (key, val) in psd_subfreq.items():
     # 	temp_all = [t[0] for t in psd_all]
@@ -289,13 +253,9 @@ def calculate_eeg_psd(raw, eid):
 
 
 def eeg_psd(control_raw, patient_raw):
-<<<<<<< HEAD
     # control_raw = {}
     channel_names, bad_channels = raw_data_info()
-=======
-    #control_raw = {}
-    channel_names, _ = raw_data_info()
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
+
     columns = channel_names.copy()
     columns.insert(0, 'groupId')
     columns.insert(0, 'id')
@@ -314,7 +274,7 @@ def eeg_psd(control_raw, patient_raw):
     df_p_alpha2 = pd.DataFrame(columns=columns)
     df_p_beta = pd.DataFrame(columns=columns)
     df_p_gamma = pd.DataFrame(columns=columns)
-<<<<<<< HEAD
+
     # matlab test
     # print('init...')
     # eng = matlab.engine.start_matlab()
@@ -323,12 +283,6 @@ def eeg_psd(control_raw, patient_raw):
     for (eid, raw) in control_raw.items():
         psd_subfreq = calculate_eeg_psd_welch(raw, eid)
 
-=======
-
-    counter = 0
-    for (eid, raw) in control_raw.items():
-        psd_subfreq = calculate_eeg_psd(raw, eid)
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
         print('control: ' + str(counter))
         counter += 1
         temp = psd_subfreq['delta'].copy()
@@ -386,10 +340,6 @@ def eeg_psd(control_raw, patient_raw):
 
         df_c_gamma.loc[len(df_c_gamma)] = temp
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
     df_c_delta.to_csv('psd_c_delta.csv', index=True)
     df_c_theta.to_csv('psd_c_theta.csv', index=True)
     df_c_alpha1.to_csv('psd_c_alpha1.csv', index=True)
@@ -399,22 +349,17 @@ def eeg_psd(control_raw, patient_raw):
 
     counter = 0
     for (eid, raw) in patient_raw.items():
-<<<<<<< HEAD
+
         psd_subfreq = calculate_eeg_psd_welch(raw, eid)
-=======
-        psd_subfreq = calculate_eeg_psd(raw, eid)
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
         print('patient #' + str(counter) + ': ' + eid)
         counter += 1
 
         temp = psd_subfreq['delta'].copy()
         # temp = list(psd_subfreq['delta'].copy())
         # temp = [t[0] for t in psd_subfreq['delta']]
-<<<<<<< HEAD
+
         # Patient group id = 1
-=======
-        #Patient group id = 1
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
+
         temp.insert(0, 1)
         temp.insert(0, eid)
         temp.append(np.mean(psd_subfreq['delta']))
@@ -466,10 +411,6 @@ def eeg_psd(control_raw, patient_raw):
 
         df_p_gamma.loc[len(df_p_gamma)] = temp
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
     df_p_delta.to_csv('psd_p_delta.csv', index=True)
     df_p_theta.to_csv('psd_p_theta.csv', index=True)
     df_p_alpha1.to_csv('psd_p_alpha1.csv', index=True)

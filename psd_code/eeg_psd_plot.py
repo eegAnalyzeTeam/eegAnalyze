@@ -1,12 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
-<<<<<<< HEAD
 import eeg_psd_channel
 
 from eeg_psd_csv import pick_len
-=======
-import pandas as pd
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
+
 
 
 def eeg_psd_plot(name):
@@ -16,7 +13,7 @@ def eeg_psd_plot(name):
     p_df = pd.read_csv(p_file_name)
     del c_df['Unnamed: 0']
     del p_df['Unnamed: 0']
-<<<<<<< HEAD
+
     c_df = c_df.T[2:pick_len+2]
     #c_df.plot(alpha=0.2)
     c_df = c_df.T
@@ -31,17 +28,7 @@ def eeg_psd_plot(name):
     p_df = p_df.mean()
     x = range(1, pick_len+1, 1)
     # c_df.plot(label = 'control')
-=======
-    c_df = c_df.T[2:66]
-    c_df = c_df.T
-    name_df = c_df.columns
-    c_df = c_df.mean()
-    p_df = p_df.T[2:66]
-    p_df = p_df.T
-    p_df = p_df.mean()
-    x = range(1, 65, 1)
-    #c_df.plot(label = 'control')
->>>>>>> 4bab13275698359399887e26df574008c4b1323b
+
     p_df.plot(label='patient')
     c_df.plot(label='control').set_ylabel('PSD')
     plt.title(name)
