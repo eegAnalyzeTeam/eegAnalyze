@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import eeg_psd_channel
+import pandas as pd
 
 from eeg_psd_csv import pick_len
 
@@ -43,3 +44,4 @@ def plot_psd():
     # picks = eeg_psd_channel.pick_channel()
     for band in subBands:
         eeg_psd_plot(band)
+plot_psd()

@@ -108,8 +108,8 @@ def calculate_eeg_psd_burg_matlab(raw,eid,eng):
 
 def calculate_eeg_psd_burg(raw, eid):
     raw.load_data()
-    raw=raw.filter(None,50)
-    raw.resample(256,npad='auto')
+    raw=raw.filter(None,40)
+    raw.resample(160,npad='auto')
     # print(raw)
     # print(raw.info)
     raw.info['bads'] = ['Oz', 'ECG']
@@ -178,8 +178,8 @@ def calculate_eeg_psd_welch(raw, eid):
     psd_subfreq = {}
    # raw.load_data()
     raw.load_data()
-    raw=raw.filter(None,50)
-    raw.resample(256,npad='auto')
+    raw=raw.filter(None,40)
+    raw.resample(160,npad='auto')
     # print(raw)
     # print(raw.info)
     raw.info['bads'] = ['Oz', 'ECG']
@@ -281,7 +281,8 @@ def eeg_psd(control_raw, patient_raw):
     # print('init success...')
     counter = 0
     for (eid, raw) in control_raw.items():
-        psd_subfreq = calculate_eeg_psd_welch(raw, eid)
+        # psd_subfreq = calculate_eeg_psd_welch(raw, eid)
+        psd_subfreq=calculate_eeg_psd_burg(raw,eid)
 
         print('control: ' + str(counter))
         counter += 1
@@ -350,7 +351,10 @@ def eeg_psd(control_raw, patient_raw):
     counter = 0
     for (eid, raw) in patient_raw.items():
 
-        psd_subfreq = calculate_eeg_psd_welch(raw, eid)
+        # psd_subfreq = calculate_eeg_psd_welch(raw, eid)
+
+        psd_subfreq=calculate_eeg_psd_burg(raw,eid)
+
         print('patient #' + str(counter) + ': ' + eid)
         counter += 1
 

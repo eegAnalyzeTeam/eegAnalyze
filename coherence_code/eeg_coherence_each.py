@@ -43,7 +43,6 @@ def coh_get_channel_names():
     return channel_names[0:-1]
 
 
-
 def eeg_coherence(raw,name):
     fileread=open(name,'w',newline='')
     writer=csv.writer(fileread)
@@ -141,7 +140,6 @@ def read_data(filePath):
                         print("Abnormal data with " + str(len(raw.info['ch_names'])) + " channels. id=" + id_patient)
 
     return control_raw, patient_raw
-
 
 
 def read_file(filePath='/home/public2/eegData'):

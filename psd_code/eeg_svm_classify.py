@@ -108,5 +108,5 @@ def svm_train():
     print(out)
     print(np.array(msgs))
 
-
+handle_data()
 svm_train()

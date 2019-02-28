@@ -12,14 +12,20 @@ import matplotlib.pyplot as plt
 
 
 
-def get_xy(name='coh_train.csv'):
+def get_xy(name='format_psd_svm.csv'):
     csv_data = pd.read_csv(name)
-    y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
-    y = np.array(y_csv_data)[:, 1]
+    # y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
+    # y = np.array(y_csv_data)[:, 1]
+    #
+    # # del csv_data['id']
+    # del csv_data['Unnamed: 0']
+    # x = np.array(csv_data, dtype=float)
 
-    # del csv_data['id']
-    del csv_data['Unnamed: 0']
-    x = np.array(csv_data, dtype=float)
+    y=csv_data.loc[:,'type']
+    x = np.array(csv_data, dtype=float)[:,:-1]
+    y = np.array(y, dtype=float)
+    print(x)
+    print(y)
 
     return x, y
 
