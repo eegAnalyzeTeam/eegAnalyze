@@ -38,13 +38,5 @@ def read_all():
     base.to_csv('features_change/all/tsfresh_data.csv')
 
 
-
-def init():
-    read_alpha1()
-    print('alpha1 end')
-    read_alpha2()
-    print('alpha2 end')
-    read_all()
-    print('all end')
-
-init()
+read_alpha1()
+print('alpha1 end')
