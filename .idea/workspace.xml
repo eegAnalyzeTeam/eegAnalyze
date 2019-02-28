@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/3s_cut/all_calculate_features.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3s_cut/all_classify_model_c_k.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3s_cut/all_dataGen.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3s_cut/all_select_features.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3s_cut/handle_multi_csv.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3s_cut/test_k_cv_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classify_code/eeg_classify_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/classify_code/eeg_classify_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coherence_code/eeg_coherence_each.py" beforeDir="false" afterPath="$PROJECT_DIR$/coherence_code/eeg_coherence_each.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/psd_code/eeg_psd_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/psd_code/eeg_psd_csv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/psd_code/eeg_psd_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/psd_code/eeg_psd_plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/psd_code/eeg_svm_classify.py" beforeDir="false" afterPath="$PROJECT_DIR$/psd_code/eeg_svm_classify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsfresh_selectfeatures_code/eeg_tsfresh_calcFeatures.py" beforeDir="false" afterPath="$PROJECT_DIR$/tsfresh_selectfeatures_code/eeg_tsfresh_calcFeatures.py" afterDir="false" />
-    </list>
+    <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -390,15 +376,16 @@
       <workItem from="1550653422637" duration="2442000" />
       <workItem from="1550711123786" duration="650000" />
       <workItem from="1551085507124" duration="777000" />
-      <workItem from="1551353291267" duration="469000" />
+      <workItem from="1551353291267" duration="1067000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="321522000" />
+    <option name="totallyTimeSpent" value="322349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25305623" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

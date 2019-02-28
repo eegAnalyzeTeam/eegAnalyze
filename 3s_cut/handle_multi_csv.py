@@ -148,17 +148,17 @@ def read_3second_extracedFeatures():
 def get_svm_y():
     content=[]
 
-    # for i in range(0,1913):
-    #     content.append(0)
-    #
-    # for i in range(1913,8082):
-    #     content.append(1)
-
-    for i in range(0,5774):
+    for i in range(0,1913):
         content.append(0)
 
-    for i in range(5774,24363):
+    for i in range(1913,8082):
         content.append(1)
+
+    # for i in range(0,5774):
+    #     content.append(0)
+    #
+    # for i in range(5774,24363):
+    #     content.append(1)
 
     content=np.array(content).T
     df=pd.DataFrame(content)
