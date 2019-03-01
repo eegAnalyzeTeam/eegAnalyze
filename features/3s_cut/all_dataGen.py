@@ -172,7 +172,7 @@ def control_thread_entity(raw, bad_channels, columns, counter):
     for temp_raw in temp_raw_arr:
         time = 0.0
         print(len(temp_raw))
-        fileread = open('features_2019/all_test/control_data_' + str(counter) + '.csv', 'w', newline='')
+        fileread = open('control_data_' + str(counter) + '.csv', 'w', newline='')
         writer = csv.writer(fileread)
         writer.writerow(columns)
         for x in temp_raw:
@@ -193,7 +193,7 @@ def patient_thread_entity(raw, bad_channels, columns, counter):
     for temp_raw in temp_raw_arr:
         time = 0.0
         print(len(temp_raw))
-        fileread = open('features_2019/all_test/patient_data_' + str(counter) + '.csv', 'w', newline='')
+        fileread = open('patient_data_' + str(counter) + '.csv', 'w', newline='')
         writer = csv.writer(fileread)
         writer.writerow(columns)
         for x in temp_raw:

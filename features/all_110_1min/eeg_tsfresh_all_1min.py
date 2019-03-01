@@ -169,7 +169,7 @@ def control_thread_entity(raw, bad_channels, tsfresh_data, counter):
             time += 0.01
             x.append('1')
             tsfresh_data_copy.loc[len(tsfresh_data_copy)] = x
-        tsfresh_data_copy.to_csv('features_2019/all/control_data_' + str(counter) + '.csv')
+        tsfresh_data_copy.to_csv('control_data_' + str(counter) + '.csv')
         counter += 1
         print(counter)
     return counter
@@ -188,7 +188,7 @@ def patient_thread_entity(raw, bad_channels, tsfresh_data, counter):
             time += 0.01
             x.append('0')
             tsfresh_data_copy.loc[len(tsfresh_data_copy)] = x
-        tsfresh_data_copy.to_csv('features_2019/all/patient_data_' + str(counter) + '.csv')
+        tsfresh_data_copy.to_csv('patient_data_' + str(counter) + '.csv')
         counter += 1
         print(counter)
     return counter
