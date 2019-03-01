@@ -11,7 +11,7 @@
     - [ ] 使用sklearn库选择特征
  - [ ] handle_multi_csv.py
     - [ ] 把计算好特征的csv合并
-    - [ ] 只用到read_alpha1()函数
+    - [ ] 只用到read_alpha2()函数
  - [ ] svm_curve.py
     - [ ] 用来画学习曲线
  - [ ] thread_cal_features.py
