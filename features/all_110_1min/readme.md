@@ -6,7 +6,7 @@
 - [ ] eeg_tsfresh_1min.py
     - [ ] 用来对信号降采样和截取1分钟时间
     - [ ] 并分别保存csv文件
- - [ ] eeg_tsfresh_calcFeatures.py
+ - [ ] eeg_tsfresh_selectFeatures.py
     - [ ] 使用tsfresh库选择特征
     - [ ] 使用sklearn库选择特征
  - [ ] handle_multi_csv.py
@@ -22,7 +22,7 @@
 - [ ] eeg_tsfresh_1min.py
 - [ ] thread_cal_features.py
 - [ ] handle_multi_csv.py
-- [ ] eeg_tsfresh_calcFeatures.py
+- [ ] eeg_tsfresh_selectFeatures.py
 - [ ] eeg_classify_model.py
 - [ ] eeg_k_cv.py
 - [ ] svm_curve.py
