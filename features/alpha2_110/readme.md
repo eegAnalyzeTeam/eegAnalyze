@@ -24,5 +24,5 @@
     - [ ] handle_multi_csv.py
     - [ ] eeg_tsfresh_calcFeatures.py
     - [ ] eeg_classify_model.py
-    - [ ] test_k_cv.py
+    - [ ] eeg_k_cv.py
     - [ ] svm_curve.py
