@@ -117,7 +117,7 @@ def control_thread_entity(raw,bad_channels,tsfresh_data,counter):
         time += 0.01
         x.append('0')
         tsfresh_data.loc[len(tsfresh_data)] = x
-    tsfresh_data.to_csv('features_change/alpha2/control_data_'+str(counter)+'.csv')
+    tsfresh_data.to_csv('control_data_'+str(counter)+'.csv')
     print(counter)
 
 def patient_thread_entity(raw,bad_channels,tsfresh_data,counter):
@@ -131,7 +131,7 @@ def patient_thread_entity(raw,bad_channels,tsfresh_data,counter):
         time += 0.01
         x.append('1')
         tsfresh_data.loc[len(tsfresh_data)] = x
-    tsfresh_data.to_csv('features_change/alpha2/patient_data_'+str(counter)+'.csv')
+    tsfresh_data.to_csv('patient_data_'+str(counter)+'.csv')
     print(counter)
 
 
