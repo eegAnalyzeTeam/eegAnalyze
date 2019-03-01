@@ -3,7 +3,6 @@ from tsfresh.utilities.dataframe_functions import impute
 from tsfresh import extract_features, select_features
 from multiprocessing import Process
 import threading
-import eeg_tsfresh_calcFeatures
 
 
 def handle_y(y):
@@ -50,22 +49,4 @@ def get_features_thread():
             print(i)
 
 
-
-def read_allcut_extracedFeatures():
-    lack_alpha2=[0,15,77]
-    base = pd.read_csv('tsfresh_extractedFeatures' + str(0) + '.csv')
-    for i in range(1, 111):
-        if i in lack_alpha2:
-            continue
-        temp = pd.read_csv('tsfresh_extractedFeatures' + str(i) + '.csv')
-        base = base.append(temp)
-        print('alpha2 '+str(i))
-
-    base.to_csv('extracted_features.csv')
-
-
-
 get_features_thread()
-
-read_allcut_extracedFeatures()
-eeg_tsfresh_calcFeatures.start()

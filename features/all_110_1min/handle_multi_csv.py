@@ -72,7 +72,7 @@ def read_allcut_extracedFeatures():
             continue
         temp = pd.read_csv('tsfresh_extractedFeatures' + str(i) + '.csv')
         base = base.append(temp)
-        print('alpha2 '+str(i))
+        print('all '+str(i))
 
     base.to_csv('tsfresh_extractedFeatures.csv')
 

@@ -231,7 +231,7 @@ def save_csv_thread(control_raw, patient_raw, channel_names, bad_channels):
         person_count+=1
         print(person_count)
 
-   
+
 
 
 def read_file(filePath):
