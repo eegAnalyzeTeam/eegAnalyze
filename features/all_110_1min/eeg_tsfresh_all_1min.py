@@ -231,40 +231,7 @@ def save_csv_thread(control_raw, patient_raw, channel_names, bad_channels):
         person_count+=1
         print(person_count)
 
-    # for (eid, raw) in patient_raw.items():
-    #     patient_thread_entity(raw, bad_channels, tsfresh_data, counter)
-    #     counter += 1
-    #
-    #     if counter>=3:
-    #         break
-
-    # threads = []
-    # for (eid, raw) in control_raw.items():
-    #     t1 = Process(target=control_thread_entity, args=(raw, bad_channels, tsfresh_data, counter))
-    #     threads.append(t1)
-    #     counter += 1
-    #
-    # for (eid, raw) in patient_raw.items():
-    #     t1 = Process(target=patient_thread_entity, args=(raw, bad_channels, tsfresh_data, counter))
-    #     threads.append(t1)
-    #     counter += 1
-    #
-    # i = 0
-    # for x in threads:
-    #     i += 1
-    #     x.start()
-    #     if i % 10 == 0:
-    #         x.join()
-    #         threads[i - 2].join()
-    #         threads[i - 3].join()
-    #         threads[i - 4].join()
-    #         threads[i - 5].join()
-    #         threads[i - 6].join()
-    #         threads[i - 7].join()
-    #         threads[i - 8].join()
-    #         threads[i - 9].join()
-    #
-    # x.join()
+   
 
 
 def read_file(filePath):
