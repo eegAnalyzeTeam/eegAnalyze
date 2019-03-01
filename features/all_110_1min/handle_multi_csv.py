@@ -78,6 +78,4 @@ def read_allcut_extracedFeatures():
 
 
 
-
-
 read_allcut_extracedFeatures()
