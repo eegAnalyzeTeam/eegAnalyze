@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/1s_cut/all_dataGen.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/1s_cut/all_dataGen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/3s_cut/all_dataGen.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/3s_cut/all_dataGen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_all_1min.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_all_1min.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/alpha1_110/eeg_features_alpha1.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/alpha1_110/eeg_features_alpha1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_calcFeatures.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_calcFeatures.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_selectFeatures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/alpha1_110/eeg_tsfresh_calcFeatures.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/alpha1_110/eeg_tsfresh_selectFeatures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/alpha2_110/eeg_tsfresh_calcFeatures.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/alpha2_110/eeg_tsfresh_selectFeatures.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,17 +79,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/features/alpha1_110/eeg_k_cv.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4122">
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/features/alpha1_110/eeg_features_alpha1.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="780">
@@ -99,14 +87,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/features/alpha1_110/eeg_tsfresh_calcFeatures.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/features/alpha1_110/eeg_tsfresh_selectFeatures.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="642">
               <caret line="258" selection-start-line="258" selection-end-line="258" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_features_alpha2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="703">
+              <caret line="141" column="26" lean-forward="true" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -193,6 +190,7 @@
         <option value="$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_all_1min.py" />
         <option value="$PROJECT_DIR$/features/3s_cut/all_dataGen.py" />
         <option value="$PROJECT_DIR$/features/1s_cut/all_dataGen.py" />
+        <option value="$PROJECT_DIR$/features/alpha2_110/eeg_features_alpha2.py" />
       </list>
     </option>
   </component>
@@ -242,6 +240,12 @@
               <item name="eegAnalyze" type="462c0819:PsiDirectoryNode" />
               <item name="features" type="462c0819:PsiDirectoryNode" />
               <item name="alpha1_110" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eegAnalyze" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eegAnalyze" type="462c0819:PsiDirectoryNode" />
+              <item name="features" type="462c0819:PsiDirectoryNode" />
+              <item name="alpha2_110" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -445,16 +449,15 @@
       <workItem from="1550711123786" duration="650000" />
       <workItem from="1551085507124" duration="777000" />
       <workItem from="1551353291267" duration="4649000" />
-      <workItem from="1551401357139" duration="4659000" />
+      <workItem from="1551401357139" duration="5400000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="330590000" />
+    <option name="totallyTimeSpent" value="331331000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25611246" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -747,14 +750,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_features_alpha2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="208" column="24" lean-forward="true" selection-start-line="208" selection-start-column="24" selection-end-line="208" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_tsfresh_calcFeatures.py">
+    <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_tsfresh_selectFeatures.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6500">
           <caret line="260" selection-start-line="260" selection-end-line="260" />
@@ -812,7 +808,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_calcFeatures.py">
+    <entry file="file://$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_selectFeatures.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3958">
           <caret line="75" column="23" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
@@ -908,13 +904,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/alpha1_110/eeg_tsfresh_calcFeatures.py">
+    <entry file="file://$PROJECT_DIR$/features/alpha1_110/eeg_tsfresh_selectFeatures.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="642">
           <caret line="258" selection-start-line="258" selection-end-line="258" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_features_alpha2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="141" column="26" lean-forward="true" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
         </state>
       </provider>
     </entry>
