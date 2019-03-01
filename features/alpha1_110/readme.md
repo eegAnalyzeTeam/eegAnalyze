@@ -20,12 +20,12 @@
     - [ ] 使用tsfresh计算特征
  
     
- #    脚本执行顺序如下：
-    - [ ] eeg_features_alpha1.py
-    - [ ] thread_cal_features.py
-    - [ ] handle_multi_csv.py
-    - [ ] eeg_tsfresh_calcFeatures.py
-    - [ ] eeg_classify_model.py
-    - [ ] eeg_k_cv.py
-    - [ ] test_k_cv_3.py
-    - [ ] svm_curve.py
+#   脚本执行顺序如下：
+- [ ] eeg_features_alpha1.py
+- [ ] thread_cal_features.py
+- [ ] handle_multi_csv.py
+- [ ] eeg_tsfresh_calcFeatures.py
+- [ ] eeg_classify_model.py
+- [ ] eeg_k_cv.py
+- [ ] test_k_cv_3.py
+- [ ] svm_curve.py
