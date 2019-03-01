@@ -75,38 +75,6 @@ def _select_features(extracted_features_name='tsfresh_extractedFeatures.csv'):
     print('select end')
 
 
-# def test_sklearn_SelectKBest():
-#     csv_data = pd.read_csv('tsfresh_data.csv')
-#     y = csv_data[['id', 'y']]
-#     y = handle_y(y)
-#
-#     print(y)
-#
-#     # 全部特征
-#     extracted_features = pd.read_csv('tsfresh_extractedFeatures.csv')
-#     # 除掉 id
-#     del extracted_features['id']
-#     print('select start...')
-#
-#     y = np.array(np.array(y).tolist())
-#     extracted_features_arr = np.array(extracted_features)
-#     print(extracted_features)
-#     print(y)
-#     # features_filtered = SelectKBest(SelectFdr, k=20).fit_transform(extracted_features_arr, y)
-#     features_filtered = SelectFdr(chi2, alpha=0.01).fit_transform(extracted_features_arr, y)
-#     print(np.array(features_filtered))
-#
-#     # 获取列名？
-#     res_col = []
-#     arr = np.array(features_filtered).T
-#     for i in arr:
-#         for indexs in extracted_features.columns:
-#             if list(extracted_features[indexs]) == list(i):
-#                 res_col.append(indexs)
-#                 break
-#     df = pd.DataFrame(features_filtered, columns=res_col)
-#     df.to_csv('test_sklearn_SelectKBest.csv')
-
 
 # test sklearn SelectFromModel
 def test_sklearn_SelectFromModel(extracted_features_name='tsfresh_extractedFeatures.csv'):
@@ -281,22 +249,13 @@ def test_select_features_VarianceThreshold(extracted_features_name='test_sklearn
 
 
 def start():
-    # _select_features()
-    #
-    # test_sklearn_SelectFromModel()
-    # test_sklearn_ExtraTreesClassifier()
-    # test_sklearn_VarianceThreshold()
+    _select_features()
+
+    test_sklearn_SelectFromModel()
+    test_sklearn_ExtraTreesClassifier()
+    test_sklearn_VarianceThreshold()
     test_select_features_VarianceThreshold()
 
 
-# get_features('tsfresh_data_alpha2.csv')
-# _select_features()
-# test_sklearn_ExtraTreesClassifier()
-# test_sklearn_SelectFromModel()
-# test_sklearn_VarianceThreshold()
-# test_select_features_VarianceThreshold()
-# test_sklearn_SelectKBest()
-# test_sklearn_SelectFromModel()
-# svm_train()
 
 start()
