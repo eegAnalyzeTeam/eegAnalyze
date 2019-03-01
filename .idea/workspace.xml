@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/alpha1_110/handle_multi_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/alpha1_110/handle_multi_csv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/alpha2_110/handle_multi_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/alpha2_110/handle_multi_csv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/alpha2_110/eeg_classify_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/alpha2_110/eeg_classify_model.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,10 +20,18 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/features/alpha2_110/handle_multi_csv.py">
+        <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_classify_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="692">
-              <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+            <state relative-caret-position="450">
+              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/features/3s_cut/all_dataGen.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3522">
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -34,43 +40,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/features/alpha1_110/thread_cal_features.py">
+        <entry file="file://$PROJECT_DIR$/features/3s_cut/all_calculate_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
-              <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/features/alpha1_110/eeg_tsfresh_calcFeatures.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3225">
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/features/alpha1_110/handle_multi_csv.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="692">
-              <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/features/all_110_1min/handle_multi_csv.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="668">
-              <caret line="79" selection-start-line="79" selection-end-line="79" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
+            <state relative-caret-position="-483" />
           </provider>
         </entry>
       </file>
@@ -80,15 +52,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/features/1s_cut/all_calculate_features.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tsfresh_selectfeatures_code/eeg_features_alpha1.py">
+        <entry file="file://$PROJECT_DIR$/tsfresh_selectfeatures_code/eeg_features_alpha2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4400">
-              <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
+            <state relative-caret-position="-4772">
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -97,10 +63,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/features/all_110_1min/eeg_classify_model.py">
+        <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_features_alpha2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4325">
-              <caret line="183" selection-start-line="183" selection-end-line="183" />
+            <state relative-caret-position="428">
+              <caret line="208" column="24" lean-forward="true" selection-start-line="208" selection-start-column="24" selection-end-line="208" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_tsfresh_calcFeatures.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6500">
+              <caret line="260" selection-start-line="260" selection-end-line="260" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -109,14 +84,32 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_k_cv.py">
+        <entry file="file://$PROJECT_DIR$/features/alpha2_110/svm_curve.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="-1433">
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+                <element signature="e#2555#3262#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/features/alpha2_110/thread_cal_features.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1375">
+              <caret line="55" selection-start-line="55" selection-end-line="55" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/features/1s_cut/all_calculate_features.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -186,6 +179,7 @@
         <option value="$PROJECT_DIR$/features/all_110_1min/handle_multi_csv.py" />
         <option value="$PROJECT_DIR$/features/alpha2_110/handle_multi_csv.py" />
         <option value="$PROJECT_DIR$/features/alpha1_110/handle_multi_csv.py" />
+        <option value="$PROJECT_DIR$/features/alpha2_110/eeg_classify_model.py" />
       </list>
     </option>
   </component>
@@ -216,18 +210,13 @@
               <item name="eegAnalyze" type="b2602c69:ProjectViewProjectNode" />
               <item name="eegAnalyze" type="462c0819:PsiDirectoryNode" />
               <item name="features" type="462c0819:PsiDirectoryNode" />
-              <item name="alpha1_110" type="462c0819:PsiDirectoryNode" />
+              <item name="1s_cut" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="eegAnalyze" type="b2602c69:ProjectViewProjectNode" />
               <item name="eegAnalyze" type="462c0819:PsiDirectoryNode" />
               <item name="features" type="462c0819:PsiDirectoryNode" />
               <item name="alpha2_110" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eegAnalyze" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eegAnalyze" type="462c0819:PsiDirectoryNode" />
-              <item name="tsfresh_selectfeatures_code" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -431,12 +420,12 @@
       <workItem from="1550711123786" duration="650000" />
       <workItem from="1551085507124" duration="777000" />
       <workItem from="1551353291267" duration="4649000" />
-      <workItem from="1551401357139" duration="2253000" />
+      <workItem from="1551401357139" duration="2626000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="328184000" />
+    <option name="totallyTimeSpent" value="328557000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -490,8 +479,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://I:/eeg_psd_anova.py" />
-    <entry file="file://H:/eegAnalyze_newcode/eegAnalyze/psd_code/eeg_psd_csv.py" />
     <entry file="file://I:/eeg_coherence.py" />
     <entry file="file://H:/eeg_coherence_each.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -624,9 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/3s_cut/all_calculate_features.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/features/3s_cut/all_select_features.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -711,45 +695,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/alpha2_110/thread_cal_features.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1375">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/alpha2_110/svm_curve.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1808">
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_tsfresh_calcFeatures.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="642">
-          <caret line="260" selection-start-line="260" selection-end-line="260" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_features_alpha2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="208" column="24" lean-forward="true" selection-start-line="208" selection-start-column="24" selection-end-line="208" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_classify_model.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/features/all_110_1min/thread_cal_features.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="975">
@@ -808,12 +753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/1s_cut/all_dataGen.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/1s_cut/all_calculate_features.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/tsfresh_selectfeatures_code/eeg_features_alpha1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4400">
@@ -854,6 +793,79 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="692">
           <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/3s_cut/all_dataGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3522">
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/3s_cut/all_calculate_features.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-483" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/1s_cut/all_calculate_features.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/1s_cut/all_dataGen.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tsfresh_selectfeatures_code/eeg_features_alpha2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4772">
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_classify_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_features_alpha2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="208" column="24" lean-forward="true" selection-start-line="208" selection-start-column="24" selection-end-line="208" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/alpha2_110/eeg_tsfresh_calcFeatures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6500">
+          <caret line="260" selection-start-line="260" selection-end-line="260" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/alpha2_110/svm_curve.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1433">
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#2555#3262#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/alpha2_110/thread_cal_features.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1375">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
