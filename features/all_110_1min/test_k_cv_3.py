@@ -24,7 +24,7 @@ def get_xy(name):
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)[:, 1]
 
-    y = np.delete(y, lack_alpha1, axis=0)
+    y = np.delete(y, lack_cutall, axis=0)
 
     if 'id' in csv_data.columns.values.tolist():
         del csv_data['id']
@@ -216,6 +216,6 @@ def k_cv_3(name):
 # k_cv_3('tsfresh_extractedFeatures.csv')
 #
 file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier.csv']
-# file_names=['test_sklearn_ExtraTreesClassifier_10.csv']
+# file_names=['select_features_VarianceThreshold.csv']
 for x in file_names:
     k_cv_3(x)

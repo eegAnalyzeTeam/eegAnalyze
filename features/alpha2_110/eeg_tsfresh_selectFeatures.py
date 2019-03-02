@@ -222,7 +222,7 @@ def test_sklearn_VarianceThreshold(extracted_features_name='tsfresh_extractedFea
     extracted_features_arr = np.array(extracted_features)
     print(extracted_features)
     print(y)
-    res = VarianceThreshold(threshold=(.8 * (1 - .8)))
+    res = VarianceThreshold(threshold=(.6* (1 - .6)))
     features_filtered=res.fit_transform(extracted_features_arr)
     cols=get_cols(cols,res.fit(extracted_features_arr).get_support())
     print(np.array(features_filtered))

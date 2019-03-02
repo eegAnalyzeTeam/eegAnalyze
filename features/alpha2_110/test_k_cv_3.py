@@ -24,7 +24,7 @@ def get_xy(name):
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)[:, 1]
 
-    y = np.delete(y, lack_alpha1, axis=0)
+    y = np.delete(y, lack_alpha2, axis=0)
 
     if 'id' in csv_data.columns.values.tolist():
         del csv_data['id']
@@ -127,9 +127,9 @@ def random_forest(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
-    # scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
-    # x_train = scaling.transform(x_train)
-    # x_test = scaling.transform(x_test)
+    scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
+    x_train = scaling.transform(x_train)
+    x_test = scaling.transform(x_test)
 
     clf = RandomForestClassifier(n_estimators=100, max_depth=4,class_weight='balanced')
     clf.fit(x_train, y_train)
@@ -216,6 +216,6 @@ def k_cv_3(name):
 # k_cv_3('tsfresh_extractedFeatures.csv')
 #
 file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier.csv']
-# file_names=['test_sklearn_ExtraTreesClassifier_10.csv']
+# file_names=['select_features_VarianceThreshold.csv']
 for x in file_names:
     k_cv_3(x)
