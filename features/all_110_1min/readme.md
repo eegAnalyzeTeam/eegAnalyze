@@ -14,6 +14,8 @@
     - [ ] 只用到read_allcut_extracedFeatures()函数
  - [ ] svm_curve.py
     - [ ] 用来画学习曲线
+ - [ ] test_k_cv_3.py
+    - [ ] 交叉验证计算精确率、召回率和准确率
  - [ ] thread_cal_features.py
     - [ ] 使用tsfresh计算特征
  
@@ -24,5 +26,5 @@
 - [ ] handle_multi_csv.py
 - [ ] eeg_tsfresh_selectFeatures.py
 - [ ] eeg_classify_model.py
-- [ ] eeg_k_cv.py
+- [ ] eeg_k_cv.py(test_k_cv_3.py)
 - [ ] svm_curve.py
