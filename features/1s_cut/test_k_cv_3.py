@@ -136,7 +136,8 @@ def random_forest(x_train, x_test, y_train, y_test):
 
 
 def k_cv_3(name):
-    colums = ['svm_precision', 'svm_recall', 'svm_accuracy','tree_precision', 'tree_recall', 'tree_accuracy',
+    colums = ['svm_precision', 'svm_recall', 'svm_accuracy', 'knn_precision', 'knn_recall', 'knn_accuracy',
+              'tree_precision', 'tree_recall', 'tree_accuracy',
               'bayes_precision', 'bayes_recall', 'bayes_accuracy', 'forest_precision', 'forest_recall',
               'forest_accuracy']
     # colums = ['tree_precision', 'tree_recall', 'tree_accuracy',
@@ -177,12 +178,12 @@ def k_cv_3(name):
         temp.append(accuracy)
         print(precision, recall, accuracy)
 
-        # print('knn:')
-        # precision, recall, accuracy = k_n_n(x_train, x_test, y_train, y_test)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision, recall, accuracy)
+        print('knn:')
+        precision, recall, accuracy = k_n_n(x_train, x_test, y_train, y_test)
+        temp.append(precision)
+        temp.append(recall)
+        temp.append(accuracy)
+        print(precision, recall, accuracy)
 
         print('decide tree:')
         precision, recall, accuracy = decide_tree(x_train, x_test, y_train, y_test)
@@ -209,7 +210,7 @@ def k_cv_3(name):
 
 # k_cv_3('tsfresh_extractedFeatures.csv')
 #
-# file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier.csv']
-file_names=['test_sklearn_ExtraTreesClassifier_4.csv']
+file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier.csv']
+# file_names=['test_sklearn_ExtraTreesClassifier_4.csv']
 for x in file_names:
     k_cv_3(x)

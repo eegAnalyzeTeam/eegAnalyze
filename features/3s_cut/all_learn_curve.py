@@ -89,7 +89,7 @@ def init(my_csv):
 
 
 def start():
-    file_names = ['test_sklearn_ExtraTreesClassifier_4.csv']
+    file_names = ['test_sklearn_ExtraTreesClassifier.csv']
     for x in file_names:
         init(x)
 

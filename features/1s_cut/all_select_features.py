@@ -96,7 +96,7 @@ def test_sklearn_ExtraTreesClassifier(extracted_features):
     extracted_features_arr = np.array(extracted_features)
     print(extracted_features)
     print(y)
-    clf = ExtraTreesClassifier(n_estimators=2, max_depth=4)
+    clf = ExtraTreesClassifier(n_estimators=4, max_depth=4)
     clf = clf.fit(extracted_features_arr, y)
     res=SelectFromModel(clf, prefit=True)
     features_filtered = res.transform(extracted_features_arr)
@@ -112,7 +112,7 @@ def test_sklearn_ExtraTreesClassifier(extracted_features):
     #             res_col.append(indexs)
     #             break
     df = pd.DataFrame(features_filtered, columns=cols)
-    df.to_csv('test_sklearn_ExtraTreesClassifier_2.csv')
+    df.to_csv('test_sklearn_ExtraTreesClassifier_4.csv')
 
 
 # test
@@ -176,18 +176,18 @@ def start(extracted_features_name='tsfresh_extractedFeatures.csv'):
     print('start ...')
     extracted_features = pd.read_csv(extracted_features_name)
 
-    # print('filter')
-    # _select_features(extracted_features)
-    #
-    # print('linear')
-    # test_sklearn_SelectFromModel(extracted_features)
+    print('filter')
+    _select_features(extracted_features)
+
+    print('linear')
+    test_sklearn_SelectFromModel(extracted_features)
 
     print('tree')
     test_sklearn_ExtraTreesClassifier(extracted_features)
 
-    # print('varianceThreshold')
-    # test_sklearn_VarianceThreshold(extracted_features)
-    # test_select_features_VarianceThreshold()
+    print('varianceThreshold')
+    test_sklearn_VarianceThreshold(extracted_features)
+    test_select_features_VarianceThreshold()
 
 
 start()
