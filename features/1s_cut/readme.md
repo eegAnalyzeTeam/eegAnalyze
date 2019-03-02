@@ -1,4 +1,4 @@
-# 这是对分割成3s的信号，利用tsfresh库计算特征并进行分类的主要python文件
+# 这是对分割成1s的信号，利用tsfresh库计算特征并进行分类的主要python文件
 - [ ] all_calculate_features.py
     - [ ] 用来计算全部的特征
 - [ ] all_classify_model_c_k.py
