@@ -204,42 +204,9 @@ RESTful API风格的应用服务。
     - [ ] 将eeg_coherence_each.py的结果挑选差异比较大的通道对合成一张表
     - [ ] 主要用来分类使用
  
-### tsfresh_selectFeatures_thread文件夹
- 
-这是利用tsfresh库计算特征的主要python文件
-- [ ] eeg_features_alpha1.py
-    - [ ] 用来滤波和降采样alpha1
-    - [ ] 将数据存储为tsfresh库计算特征需要的格式
-- [ ] eeg_features_alpha2.py
-    - [ ] 用来滤波和降采样alpha2
-    - [ ] 将数据存储为tsfresh库计算特征需要的格式
-- [ ] tsfresh_calcFeatures.py
-    - [ ] 用来计算全部信号的特征（非多线程）
-    - [ ] 利用sklearn库选取特征
- - [ ] eeg_tsfresh_dataGen.py
-    - [ ] 用来滤波和降采样全部信号
-    - [ ] 将数据存储为tsfresh库计算特征需要的格式
- - [ ] thread_cal_festures.py
-    - [ ] 主要用来计算全部信号的特征（多线程）
-    
-    
-### classify_code文件夹
- 
-这是利用tsfresh库计算特征的主要python文件
-- [ ] eeg_classify_model.py
-    - [ ] 用来分类及交叉验证
-    - [ ] svm,决策树，随机森林，朴素贝叶斯
-- [ ] eeg_k_cv.py
-    - [ ] 对前边的几种方式k折交叉验证
-- [ ] tsfresh_calcFeatures.py
-    - [ ] 主要用来计算全部信号的特征（非多线程）
- - [ ] eeg_tsfresh_dataGen.py
-    - [ ] 用来滤波和降采样全部信号
-    - [ ] 将数据存储为tsfresh库计算特征需要的格式
- - [ ] thread_cal_festures.py
-    - [ ] 主要用来计算全部信号的特征（多线程）
- - [ ] svm_cure.py
-    - [ ] 用来画学习曲线
+### features文件夹
+
+用tsfresh库进行特征计算和sklearn库进行分类的主要python文件。
    
 ### 代码如果不能正常运行请检查以下两个方面
 
