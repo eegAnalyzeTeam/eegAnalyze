@@ -13,45 +13,10 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 
 
-def handle_y(y):
-    y=y.drop_duplicates(subset=['id', 'y'], keep='first')
-    y=y.reset_index(drop=True)
-    y=y.iloc[:,-1]
-
-    return y
-
-
-# 有效特征
-def get_features(file_name):
-    csv_data = pd.read_csv(file_name)
-    timeseries = csv_data.iloc[:, :-1]
-    del timeseries['Unnamed: 0']
-    y = csv_data[['id', 'y']]
-    y = handle_y(y)
-
-    print(timeseries)
-    print(y)
-
-    print('start getfeatures...')
-    # 全部特征
-    extracted_features = extract_features(timeseries, column_id="id", column_sort="time")
-    impute(extracted_features)
-    extracted_features.to_csv('tsfresh_extractedFeatures.csv')
-    print('all features end')
-    # 选取较相关的特征
-    # 可选属性 fdr_level = 0.05 ?
-    features_filtered = select_features(extracted_features, y,ml_task='classification',n_jobs=1,fdr_level =0.05)
-    features_filtered.to_csv('tsfresh_filteredFeatures.csv')
-
-lack_alpha1=[8,15,28]
-lack_alpha2=[11,21,28,53,93,95]
-lack_allcut=[0,15,77]
 
 def get_y():
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)[:, 1]
-
-    y=np.delete(y,lack_allcut,axis=0)
 
     print(y)
     print(len(y))
@@ -59,32 +24,33 @@ def get_y():
 
 
 # 从文件读取feature,在已经保存全部特征的情况下使用
-def _select_features(extracted_features_name='tsfresh_extractedFeatures.csv'):
+def _select_features(extracted_features):
     y=get_y()
 
     # 全部特征
-    extracted_features = pd.read_csv(extracted_features_name)
-    del extracted_features['Unnamed: 0']
+    # extracted_features = pd.read_csv(extracted_features_name)
+
+    # del extracted_features['Unnamed: 0']
     print(extracted_features)
     print('select start...')
 
     # 选取较相关的特征
     # 可选属性 fdr_level = 0.05 ?
-    features_filtered = select_features(extracted_features, y ,n_jobs=1,fdr_level =8,ml_task='classification')
+    features_filtered = select_features(extracted_features, y ,n_jobs=1,fdr_level =0.0001,ml_task='classification')
     print(features_filtered)
     features_filtered.to_csv('tsfresh_filteredFeatures.csv')
     print('select end')
 
 
 # test sklearn SelectFromModel
-def test_sklearn_SelectFromModel(extracted_features_name='tsfresh_extractedFeatures.csv'):
+def test_sklearn_SelectFromModel(extracted_features):
     y=get_y()
 
     # 全部特征
-    extracted_features = pd.read_csv(extracted_features_name)
+    # extracted_features = pd.read_csv(extracted_features_name)
     # 除掉 id
     del extracted_features['id']
-    del extracted_features['Unnamed: 0']
+    # del extracted_features['Unnamed: 0']
 
     cols=extracted_features.columns.values.tolist()
     print('select start...')
@@ -93,7 +59,7 @@ def test_sklearn_SelectFromModel(extracted_features_name='tsfresh_extractedFeatu
     extracted_features_arr = np.array(extracted_features)
     print(extracted_features)
     print(y)
-    lsvc = LinearSVC(C=1, penalty="l1", dual=False).fit(extracted_features_arr, y)
+    lsvc = LinearSVC(C=0.1, penalty="l1", dual=False).fit(extracted_features_arr, y)
     res = SelectFromModel(lsvc, prefit=True)
     features_filtered=res.transform(extracted_features_arr)
     cols=get_cols(cols,res.get_support())
@@ -111,61 +77,17 @@ def test_sklearn_SelectFromModel(extracted_features_name='tsfresh_extractedFeatu
     df.to_csv('test_sklearn_SelectFromModel.csv')
 
 
-def split_data(i):
-    # handle_data()
-    csv_data = pd.read_csv('test_sklearn_SelectFromModel.csv')
-    y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
-    y = np.array(y_csv_data)[:,1]
-
-    del csv_data['Unnamed: 0']
-    x=np.array(csv_data,dtype=float)
-    print(x)
-    msg=[]
-
-    x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=i, train_size=0.6)
-    msg.append("y_train_"+str(i)+':'+str(np.sum(y_train.ravel())))
-    return x_train, x_test, y_train, y_test,msg
-
-
-def svm_train():
-    out=[]
-    msgs=[]
-    test_pre=[]
-    for i in range(1, 21):
-        x_train, x_test, y_train, y_test, msg = split_data(i)
-        msgs.append(msg)
-        clf = svm.SVC(kernel='linear',C=1.3, decision_function_shape='ovo')
-        # scores = cross_val_score(clf, x_test, y_test, cv=10)
-        # print(scores)
-        # out.append(str(i)+':'+str(scores.mean()))
-        # print(str(scores.mean()))
-        clf.fit(x_train, y_train.ravel())
-
-        joblib.dump(clf, 'clf.model')  # 保存模型
-
-        print('训练集:')
-        print(clf.score(x_train, y_train))
-        y_hat = clf.predict(x_train)
-        print(classification_report(y_train, y_hat))
-
-        print('测试集:')
-        print(clf.score(x_test, y_test))
-        test_pre.append(clf.score(x_test, y_test))
-        out.append(str(i) + ':' + str(clf.score(x_test, y_test)))
-        y_hat = clf.predict(x_test)
-        print(classification_report(y_test, y_hat))
-    print(test_pre)
-
 # test sklearn ExtraTreesClassifier
 # not used
-def test_sklearn_ExtraTreesClassifier(extracted_features_name='tsfresh_extractedFeatures.csv'):
+def test_sklearn_ExtraTreesClassifier(extracted_features):
     y=get_y()
 
     # 全部特征
-    extracted_features = pd.read_csv(extracted_features_name)
+    # extracted_features = pd.read_csv(extracted_features_name)
     # 除掉 id
-    del extracted_features['id']
-    del extracted_features['Unnamed: 0']
+    if 'id' in extracted_features.columns.values.tolist():
+        del extracted_features['id']
+    # del extracted_features['Unnamed: 0']
 
     cols=extracted_features.columns.values.tolist()
     print('select start...')
@@ -174,7 +96,7 @@ def test_sklearn_ExtraTreesClassifier(extracted_features_name='tsfresh_extracted
     extracted_features_arr = np.array(extracted_features)
     print(extracted_features)
     print(y)
-    clf = ExtraTreesClassifier(n_estimators=50, max_depth=4)
+    clf = ExtraTreesClassifier(n_estimators=10, max_depth=4)
     clf = clf.fit(extracted_features_arr, y)
     res=SelectFromModel(clf, prefit=True)
     features_filtered = res.transform(extracted_features_arr)
@@ -190,7 +112,7 @@ def test_sklearn_ExtraTreesClassifier(extracted_features_name='tsfresh_extracted
     #             res_col.append(indexs)
     #             break
     df = pd.DataFrame(features_filtered, columns=cols)
-    df.to_csv('test_sklearn_ExtraTreesClassifier.csv')
+    df.to_csv('test_sklearn_ExtraTreesClassifier_10.csv')
 
 
 # test
@@ -204,14 +126,15 @@ def get_cols(x,y):
 
 # test sklearn VarianceThreshold
 # not used
-def test_sklearn_VarianceThreshold(extracted_features_name='tsfresh_extractedFeatures.csv'):
+def test_sklearn_VarianceThreshold(extracted_features):
     y=get_y()
 
     # 全部特征
-    extracted_features = pd.read_csv(extracted_features_name)
+    # extracted_features = pd.read_csv(extracted_features_name)
     # 除掉 id
-    del extracted_features['id']
-    del extracted_features['Unnamed: 0']
+    if 'id' in extracted_features.columns.values.tolist():
+        del extracted_features['id']
+    # del extracted_features['Unnamed: 0']
 
     cols=extracted_features.columns.values.tolist()
     print('select start...')
@@ -242,20 +165,29 @@ def test_select_features_VarianceThreshold(extracted_features_name='test_sklearn
 
     # 选取较相关的特征
     # 可选属性 fdr_level = 0.05 ?
-    features_filtered = select_features(extracted_features, y, n_jobs=1, fdr_level=5,ml_task='classification')
+    features_filtered = select_features(extracted_features, y, n_jobs=1, fdr_level=0.01,ml_task='classification')
     print(features_filtered)
     features_filtered.to_csv('select_features_VarianceThreshold.csv')
     print('select end')
 
 
-def start():
-    _select_features()
+def start(extracted_features_name='tsfresh_extractedFeatures.csv'):
 
-    test_sklearn_SelectFromModel()
-    test_sklearn_ExtraTreesClassifier()
-    test_sklearn_VarianceThreshold()
-    test_select_features_VarianceThreshold()
+    print('start ...')
+    extracted_features = pd.read_csv(extracted_features_name)
 
+    # print('filter')
+    # _select_features(extracted_features)
+    #
+    # print('linear')
+    # test_sklearn_SelectFromModel(extracted_features)
+
+    print('tree')
+    test_sklearn_ExtraTreesClassifier(extracted_features)
+
+    # print('varianceThreshold')
+    # test_sklearn_VarianceThreshold(extracted_features)
+    # test_select_features_VarianceThreshold()
 
 
 start()
