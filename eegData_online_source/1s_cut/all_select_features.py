@@ -176,18 +176,18 @@ def start(extracted_features_name='tsfresh_extractedFeatures.csv'):
     print('start ...')
     extracted_features = pd.read_csv(extracted_features_name)
 
-    # print('filter')
-    # _select_features(extracted_features)
-    #
-    # print('linear')
-    # test_sklearn_SelectFromModel(extracted_features)
+    print('filter')
+    _select_features(extracted_features)
+
+    print('linear')
+    test_sklearn_SelectFromModel(extracted_features)
 
     print('tree')
     test_sklearn_ExtraTreesClassifier(extracted_features)
 
-    # print('varianceThreshold')
-    # test_sklearn_VarianceThreshold(extracted_features)
-    # test_select_features_VarianceThreshold()
+    print('varianceThreshold')
+    test_sklearn_VarianceThreshold(extracted_features)
+    test_select_features_VarianceThreshold()
 
 
 start()

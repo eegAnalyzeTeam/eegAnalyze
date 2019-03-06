@@ -209,7 +209,7 @@ def k_cv_3(name):
 
 # k_cv_3('tsfresh_extractedFeatures.csv')
 #
-# file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier_4.csv']
-file_names=['test_sklearn_ExtraTreesClassifier_4.csv']
+file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier_4.csv']
+# file_names=['test_sklearn_ExtraTreesClassifier_4.csv']
 for x in file_names:
     k_cv_3(x)
