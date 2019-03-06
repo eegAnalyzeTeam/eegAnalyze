@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/eegData_online_source/1s_cut/all_classify_model_c_k.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eegData_online_source/1s_cut/all_select_features.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eegData_online_source/1s_cut/eeg_analyze_features.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eegData_online_source/1s_cut/eeg_calcFeatures.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eegData_online_source/1s_cut/eeg_getData.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eegData_online_source/1s_cut/handle_multi_csv.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eegData_online_source/1s_cut/test_k_cv_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_selectFeatures.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_selectFeatures.py" afterDir="false" />
-    </list>
+    <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -467,12 +457,12 @@
       <workItem from="1551495024535" duration="13580000" />
       <workItem from="1551747514447" duration="1809000" />
       <workItem from="1551772680440" duration="19453000" />
-      <workItem from="1551839628284" duration="9461000" />
+      <workItem from="1551839628284" duration="9926000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="390585000" />
+    <option name="totallyTimeSpent" value="391050000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
