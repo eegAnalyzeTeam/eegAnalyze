@@ -147,7 +147,7 @@ def k_cv_3(name):
 
     x, y = get_xy(name)
 
-    kf = KFold(n_splits=10, shuffle=False)
+    kf = KFold(n_splits=10, shuffle=True)
     for train_index, test_index in kf.split(x):
         print(len(train_index))
         print(len(test_index))

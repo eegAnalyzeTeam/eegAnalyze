@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eegData_online_source/1s_cut/all_select_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/1s_cut/all_select_features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eegData_online_source/1s_cut/test_k_cv_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/1s_cut/test_k_cv_3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eegData_online_source/3s_cut/all_select_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/3s_cut/all_select_features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eegData_online_source/3s_cut/test_k_cv_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/3s_cut/test_k_cv_3.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eegData_online_source/3s_cut/all_select_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="178" selection-start-line="178" selection-end-line="182" selection-end-column="52" />
+            <state relative-caret-position="-1283">
+              <caret line="114" column="50" selection-start-line="114" selection-start-column="50" selection-end-line="114" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -44,7 +40,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eegData_online_source/3s_cut/test_k_cv_3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="628">
+            <state relative-caret-position="642">
               <caret line="214" selection-start-line="214" selection-end-line="214" />
             </state>
           </provider>
@@ -107,7 +103,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eegData_online_source/1s_cut/test_k_cv_3.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="628">
@@ -193,9 +189,9 @@
         <option value="$PROJECT_DIR$/eegData_online_source/1s_cut/all_classify_model_c_k.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/3s_cut/all_classify_model_c_k.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/1s_cut/all_select_features.py" />
-        <option value="$PROJECT_DIR$/eegData_online_source/3s_cut/all_select_features.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/3s_cut/test_k_cv_3.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/1s_cut/test_k_cv_3.py" />
+        <option value="$PROJECT_DIR$/eegData_online_source/3s_cut/all_select_features.py" />
       </list>
     </option>
   </component>
@@ -446,16 +442,15 @@
       <workItem from="1551495024535" duration="13580000" />
       <workItem from="1551747514447" duration="1809000" />
       <workItem from="1551772680440" duration="19453000" />
-      <workItem from="1551839628284" duration="16193000" />
+      <workItem from="1551839628284" duration="16824000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="397317000" />
+    <option name="totallyTimeSpent" value="397948000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22066015" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -831,16 +826,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eegData_online_source/3s_cut/eeg_calcFeatures.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2133">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/anaconda/envs/mne/Lib/site-packages/tsfresh/feature_selection/selection.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -890,24 +875,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eegData_online_source/3s_cut/all_select_features.py">
+    <entry file="file://$PROJECT_DIR$/eegData_online_source/1s_cut/test_k_cv_3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="178" selection-start-line="178" selection-end-line="182" selection-end-column="52" />
+        <state relative-caret-position="628">
+          <caret line="213" lean-forward="true" selection-start-line="213" selection-end-line="213" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eegData_online_source/3s_cut/test_k_cv_3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="628">
+        <state relative-caret-position="642">
           <caret line="214" selection-start-line="214" selection-end-line="214" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eegData_online_source/1s_cut/test_k_cv_3.py">
+    <entry file="file://$PROJECT_DIR$/eegData_online_source/3s_cut/eeg_calcFeatures.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="628">
-          <caret line="213" lean-forward="true" selection-start-line="213" selection-end-line="213" />
+        <state relative-caret-position="-2133">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eegData_online_source/3s_cut/all_select_features.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1283">
+          <caret line="114" column="50" selection-start-line="114" selection-start-column="50" selection-end-line="114" selection-end-column="50" />
         </state>
       </provider>
     </entry>
