@@ -95,7 +95,7 @@ def test_sklearn_ExtraTreesClassifier(extracted_features_name='tsfresh_extracted
     extracted_features_arr = np.array(extracted_features)
     print(extracted_features)
     print(y)
-    clf = ExtraTreesClassifier(n_estimators=4, max_depth=4)
+    clf = ExtraTreesClassifier(n_estimators=10, max_depth=4)
     clf = clf.fit(extracted_features_arr, y)
     res=SelectFromModel(clf, prefit=True)
     features_filtered = res.transform(extracted_features_arr)
