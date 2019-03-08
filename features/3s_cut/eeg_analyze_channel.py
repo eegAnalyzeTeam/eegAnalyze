@@ -22,7 +22,7 @@ def calculate_anova_p(name):
     colnums, control, patient = handle_data(name)
 
     res = {}
-    for i in range(88):
+    for i in range(len(colnums)):
         f, p = f_oneway(control[i], patient[i])
         res[colnums[i]] = p
 
