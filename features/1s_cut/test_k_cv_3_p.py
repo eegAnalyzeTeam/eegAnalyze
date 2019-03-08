@@ -24,8 +24,8 @@ def get_xy(name):
     #     del csv_data['id']
     # del csv_data['Unnamed: 0']
 
-    pick=pd.read_csv('analyze_result_all.csv')
-    pick=list(np.array(pick['name'])[1:11])
+    pick=pd.read_csv('analyze_result.csv')
+    pick=list(np.array(pick['name'])[:2])
     print(pick)
     # csv_data=csv_data[pick]
     csv_data = pd.read_csv(name,usecols=pick)
@@ -211,7 +211,7 @@ def k_cv_3(name):
         acc_pd.loc[len(acc_pd)] = temp
 
     acc_pd.loc['mean'] = acc_pd.mean()
-    acc_pd.to_csv(name[:-4] + '_classify_c_k_p_all_10.csv')
+    acc_pd.to_csv(name[:-4] + '_classify_c_k_p_2.csv')
 
 file_names=['test_sklearn_ExtraTreesClassifier_4.csv']
 for x in file_names:

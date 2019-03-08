@@ -25,7 +25,7 @@ def get_xy(name):
     # del csv_data['Unnamed: 0']
 
     pick=pd.read_csv('analyze_result.csv')
-    pick=list(np.array(pick['name'])[:5])
+    pick=list(np.array(pick['name'])[:2])
     print(pick)
     # csv_data=csv_data[pick]
 
@@ -73,7 +73,6 @@ def decide_tree(x_train, x_test, y_train, y_test):
 
     expected = y_test
     predicted = clf.predict(x_test)
-
 
     return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
 
@@ -212,7 +211,7 @@ def k_cv_3(name):
         acc_pd.loc[len(acc_pd)] = temp
 
     acc_pd.loc['mean'] = acc_pd.mean()
-    acc_pd.to_csv(name[:-4] + '_classify_c_k_p_5.csv')
+    acc_pd.to_csv(name[:-4] + '_classify_c_k_p_2.csv')
 
 file_names=['test_sklearn_ExtraTreesClassifier.csv']
 for x in file_names:
