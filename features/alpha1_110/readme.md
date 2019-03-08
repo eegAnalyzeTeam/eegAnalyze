@@ -20,7 +20,7 @@
     - [ ] 使用tsfresh计算特征
  
     
-#   脚本执行顺序如下：
+#   脚本执行顺序如下（仅参考）：
 - [ ] eeg_features_alpha1.py
 - [ ] thread_cal_features.py
 - [ ] handle_multi_csv.py
