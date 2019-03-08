@@ -14,6 +14,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.externals import joblib
 
 
+# 读取csv文件，获取训练需要的x，y
 def get_xy(name):
     csv_data = pd.read_csv(name)
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
@@ -28,6 +29,7 @@ def get_xy(name):
     return x, y
 
 
+# 贝叶斯，将返回精确率、召回率和准确率
 def naive_bayes_GaussianNB(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
@@ -46,6 +48,7 @@ def naive_bayes_GaussianNB(x_train, x_test, y_train, y_test):
 
 
 # 决策树
+# 其i参数时用来选取一个特定的模型，后来实际上没有用到，只是随机选择了一个模型（下同）
 def decide_tree(x_train, x_test, y_train, y_test, i):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
@@ -63,6 +66,7 @@ def decide_tree(x_train, x_test, y_train, y_test, i):
     clf = clf.fit(x_train, y_train.ravel())
 
     if i == 0:
+        # 保存训练好的模型，以及标准化数据的模型
         joblib.dump(clf, "tree_model.m")
         joblib.dump(scaling, "tree_scaling.m")
 
@@ -72,7 +76,7 @@ def decide_tree(x_train, x_test, y_train, y_test, i):
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
 
 
-
+# 线性svm
 def linear_svm(x_train, x_test, y_train, y_test,i):
     # x_train=preprocessing.scale(x_train)
     # x_test=preprocessing.scale(x_test)
@@ -86,6 +90,7 @@ def linear_svm(x_train, x_test, y_train, y_test,i):
 
 
     if i == 0:
+        # 保存训练好的模型，以及标准化数据的模型
         joblib.dump(clf, "svm_model.m")
         joblib.dump(scaling, "svm_scaling.m")
     # expected = y_train
@@ -97,7 +102,7 @@ def linear_svm(x_train, x_test, y_train, y_test,i):
 
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
 
-
+# knn
 def k_n_n(x_train, x_test, y_train, y_test,i):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
@@ -110,6 +115,7 @@ def k_n_n(x_train, x_test, y_train, y_test,i):
     clf.fit(x_train, y_train)
 
     if i == 5:
+        # 保存训练好的模型，以及标准化数据的模型
         joblib.dump(clf, "knn_model.m")
         joblib.dump(scaling, "knn_scaling.m")
     # expected = y_train
@@ -140,7 +146,7 @@ def random_forest(x_train, x_test, y_train, y_test):
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
 
 
-
+# 十折交叉验证
 def k_cv_3(name):
     colums = ['svm_precision', 'svm_recall', 'svm_accuracy', 'knn_precision', 'knn_recall', 'knn_accuracy',
               'tree_precision', 'tree_recall', 'tree_accuracy',
@@ -167,20 +173,6 @@ def k_cv_3(name):
         x_train, y_train = x[train_index], y[train_index]
         x_test, y_test = x[test_index], y[test_index]
         temp = []
-
-        # print('svm:')
-        # precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision, recall, accuracy)
-
-        # print('svm:')
-        # precision, recall, accuracy = svm_train(x_train, x_test, y_train, y_test)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision, recall, accuracy)
 
         print('svm:')
         precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test,i)
@@ -220,7 +212,7 @@ def k_cv_3(name):
     acc_pd.loc['mean'] = acc_pd.mean()
     acc_pd.to_csv(name[:-4] + '_c_k_clf_test.csv')
 
-
+# 把数据三七分割
 def get_train_test(name):
     csv_data = pd.read_csv(name)
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
@@ -235,7 +227,8 @@ def get_train_test(name):
 
     return x_train, x_test, y_train.ravel(), y_test.ravel()
 
-
+# 利用保存的模型，在原先没有用的30%的数据上测试
+# 调用方法见下
 def get_3test(name_x, name_y):
     x_test = np.loadtxt(name_x, delimiter=",")
     y_test = np.loadtxt(name_y, delimiter=",")
@@ -270,7 +263,6 @@ def get_3test(name_x, name_y):
     expected = y_test.ravel()
     predicted = clf.predict(x_test)
     print(precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted))
-
 
 
 file_names=['test_sklearn_ExtraTreesClassifier_4.csv']

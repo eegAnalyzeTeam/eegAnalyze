@@ -11,7 +11,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
 
-
+# 读取需要的csv，并分割成测试集和训练集
 def split_data(my_csv):
     # handle_data()
     csv_data = pd.read_csv(my_csv)
@@ -28,7 +28,7 @@ def split_data(my_csv):
 
     return x, y
 
-
+# 根据传入的参数计算出模型的得分
 def get_score(x,y,clf):
     train_sizes=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
     train_score=[]
@@ -52,6 +52,7 @@ def get_score(x,y,clf):
     return train_sizes,np.array(train_score),np.array(test_score)
 
 
+# 根据传入的参数，画出学习曲线
 def learn_curve(clf, name,my_csv):
     x, y = split_data(my_csv)
     # clf = svm.SVC(kernel='linear', C=1.3, decision_function_shape='ovo')
@@ -74,22 +75,29 @@ def learn_curve(clf, name,my_csv):
     plt.close()
 
 
+# 针对几种不同的模型画学习曲线
 def init(my_csv):
     name =['svm','knn','bayes','decision tree','random forest']
+    # svm
     clf = svm.LinearSVC(penalty='l2',class_weight='balanced',loss='hinge')
     learn_curve(clf, name[0],my_csv)
+    # knn
     clf = KNeighborsClassifier()
     learn_curve(clf, name[1], my_csv)
+    # 贝叶斯
     clf = GaussianNB()
     learn_curve(clf, name[2],my_csv)
+    # 决策树
     clf = tree.DecisionTreeClassifier(class_weight='balanced')
     learn_curve(clf, name[3],my_csv)
+    # 随机森林
     clf = RandomForestClassifier(n_estimators=100, max_depth=4, class_weight='balanced')
     learn_curve(clf, name[4],my_csv)
 
-
+# 画学习曲线的入口函数
 def start():
     file_names = ['test_sklearn_ExtraTreesClassifier_4.csv']
+    # 这里的for循环是为了画多个学习曲线的时候用
     for x in file_names:
         init(x)
 

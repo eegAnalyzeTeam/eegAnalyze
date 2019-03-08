@@ -14,12 +14,13 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
 
-
+# 从文件中读取训练需要的x、y
 def get_xy(name):
     csv_data = pd.read_csv(name)
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)[:, 1]
 
+    # 如果有id这一列，则删掉
     if 'id' in csv_data.columns.values.tolist():
         del csv_data['id']
     del csv_data['Unnamed: 0']
@@ -27,8 +28,7 @@ def get_xy(name):
 
     return x, y
 
-
-
+# 贝叶斯
 def naive_bayes_GaussianNB(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
@@ -71,7 +71,7 @@ def decide_tree(x_train, x_test, y_train, y_test):
     return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
 
 
-
+# svm
 def linear_svm(x_train, x_test, y_train, y_test):
     # x_train=preprocessing.scale(x_train)
     # x_test=preprocessing.scale(x_test)
@@ -93,7 +93,7 @@ def linear_svm(x_train, x_test, y_train, y_test):
     return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
 
 
-
+# knn
 def k_n_n(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
@@ -134,15 +134,12 @@ def random_forest(x_train, x_test, y_train, y_test):
     return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
 
 
-
+# 入口函数，分别计算十折交叉验证在几种模型下的精确率，召回率和准确率，并存成csv文件
 def k_cv_3(name):
     colums = ['svm_precision', 'svm_recall', 'svm_accuracy', 'knn_precision', 'knn_recall', 'knn_accuracy',
               'tree_precision', 'tree_recall', 'tree_accuracy',
               'bayes_precision', 'bayes_recall', 'bayes_accuracy', 'forest_precision', 'forest_recall',
               'forest_accuracy']
-    # colums = ['tree_precision', 'tree_recall', 'tree_accuracy',
-    #           'bayes_precision', 'bayes_recall', 'bayes_accuracy', 'forest_precision', 'forest_recall',
-    #           'forest_accuracy']
     acc_pd = pd.DataFrame(columns=colums)
 
     x, y = get_xy(name)
@@ -155,21 +152,6 @@ def k_cv_3(name):
         x_train, y_train = x[train_index], y[train_index]
         x_test, y_test = x[test_index], y[test_index]
         temp = []
-
-        # print('svm:')
-        # precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision, recall, accuracy)
-
-
-        # print('svm:')
-        # precision, recall, accuracy = svm_train(x_train, x_test, y_train, y_test)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision, recall, accuracy)
 
         print('svm:')
         precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test)
@@ -208,8 +190,7 @@ def k_cv_3(name):
     acc_pd.loc['mean'] = acc_pd.mean()
     acc_pd.to_csv(name[:-4] + '_classify_c_k.csv')
 
-# k_cv_3('tsfresh_extractedFeatures.csv')
-#
+
 file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier.csv']
 # file_names=['test_sklearn_ExtraTreesClassifier_4.csv']
 for x in file_names:

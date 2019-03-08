@@ -1,19 +1,9 @@
 import pandas as pd
 from tsfresh.utilities.dataframe_functions import impute
-from tsfresh import extract_features, select_features
-import handle_multi_csv
+from tsfresh import extract_features
 
 
-
-def handle_y(y):
-    y=y.drop_duplicates(subset=['id', 'y'], keep='first')
-    y=y.reset_index(drop=True)
-    y=y.iloc[:,-1]
-
-    return y
-
-
-# 有效特征
+# 针对每一个csv文件，用tsfresh库计算全部特征
 def get_features(file_name,count):
     csv_data = pd.read_csv(file_name)
     timeseries = csv_data.iloc[:, :-1]
@@ -29,9 +19,11 @@ def get_features(file_name,count):
     print(str(count)+'  end')
 
 
+# 一个入口函数，两个循环分别计算正常人和病人的全部特征
 def get_features_thread():
     # threads=[]
 
+    # 正常人
     for i in range(0, 5774):
         try:
             temp='control_data_' + str(i) + '.csv'
@@ -39,6 +31,7 @@ def get_features_thread():
         except Exception:
             print(i)
 
+    # 病人
     for i in range(23003, 24363):
         try:
             temp='patient_data_' + str(i) + '.csv'

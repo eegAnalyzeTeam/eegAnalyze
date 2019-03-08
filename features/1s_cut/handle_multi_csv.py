@@ -3,43 +3,8 @@ import pandas as pd
 import csv
 import traceback
 
-
-def read_alpha2():
-    base = pd.read_csv('features_change/alpha2/control_data_' + str(0) + '.csv')
-    for i in range(1, 30):
-        temp = pd.read_csv('features_change/alpha2/control_data_' + str(i) + '.csv')
-        base = base.append(temp)
-    for i in range(30, 111):
-        temp = pd.read_csv('features_change/alpha2/patient_data_' + str(i) + '.csv')
-        base = base.append(temp)
-
-    base.to_csv('features_change/alpha2/tsfresh_data.csv')
-
-
-def read_alpha1():
-    base = pd.read_csv('features_change/alpha1/control_data_' + str(0) + '.csv')
-    for i in range(1, 30):
-        temp = pd.read_csv('features_change/alpha1/control_data_' + str(i) + '.csv')
-        base = base.append(temp)
-    for i in range(30, 111):
-        temp = pd.read_csv('features_change/alpha1/patient_data_' + str(i) + '.csv')
-        base = base.append(temp)
-
-    base.to_csv('features_change/alpha1/tsfresh_data.csv')
-
-
-def read_all():
-    base = pd.read_csv('features_change/all/control_data_' + str(0) + '.csv')
-    for i in range(1, 30):
-        temp = pd.read_csv('features_change/all/control_data_' + str(i) + '.csv')
-        base = base.append(temp)
-    for i in range(30, 111):
-        temp = pd.read_csv('features_change/all/patient_data_' + str(i) + '.csv')
-        base = base.append(temp)
-
-    base.to_csv('features_change/all/tsfresh_data.csv')
-
-
+# 将alpha1的每个全部特征文件合并成一个文件
+# 这里没用到
 def read_alpha1_extractedFeatures():
     lack_alpha1=[8,15,28]
     base = pd.read_csv('features_change/alpha1/tsfresh_extractedFeatures' + str(0) + '.csv')
@@ -52,7 +17,8 @@ def read_alpha1_extractedFeatures():
 
     base.to_csv('features_change/alpha1/extracted_features.csv')
 
-
+# 将alpha2的每个全部特征文件合并成一个文件
+# 这里没用到
 def read_alpha2_extractedFeatures():
     lack_alpha2=[11,21,28,53,93,95]
     base = pd.read_csv('features_change/alpha2/tsfresh_extractedFeatures' + str(0) + '.csv')
@@ -66,6 +32,8 @@ def read_alpha2_extractedFeatures():
     base.to_csv('features_change/alpha2/extracted_features.csv')
 
 
+# 将all的每个全部特征文件合并成一个文件
+# 这里没用到
 def read_allcut_extracedFeatures():
     lack_cutall=[0,15,77]
     base = pd.read_csv('tsfresh_extractedFeatures' + str(1) + '.csv')
@@ -79,16 +47,7 @@ def read_allcut_extracedFeatures():
     base.to_csv('tsfresh_extractedFeatures.csv')
 
 
-def read_1second_extracedFeatures():
-    base = pd.read_csv('tsfresh_extractedFeatures' + str(0) + '.csv')
-    for i in range(1, 24363):
-        temp = pd.read_csv('tsfresh_extractedFeatures' + str(i) + '.csv')
-        base = base.append(temp)
-        print('all '+str(i))
-
-    base.to_csv('tsfresh_extractedFeatures.csv')
-
-
+# 将1s的数据各个文件合并成一个文件
 def read_1second_extracedFeatures_numpy():
     res = []
     csv_file = open('tsfresh_extractedFeatures' + str(0) + '.csv')  # 打开csv文件
@@ -111,6 +70,8 @@ def read_1second_extracedFeatures_numpy():
     fileread.close()
 
 
+# 将3s的数据各个文件合并成一个文件
+# 这里没用到
 def read_3second_extracedFeatures_numpy():
     # base = np.loadtxt('tsfresh_extractedFeatures' + str(0) + '.csv',delimiter=',')
     # res = np.array(base)
@@ -135,16 +96,7 @@ def read_3second_extracedFeatures_numpy():
     fileread.close()
 
 
-def read_3second_extracedFeatures():
-    base = pd.read_csv('tsfresh_extractedFeatures' + str(0) + '.csv')
-    for i in range(1, 8082):
-        temp = pd.read_csv('tsfresh_extractedFeatures' + str(i) + '.csv')
-        base = base.append(temp)
-        print('all '+str(i))
-
-    base.to_csv('tsfresh_extractedFeatures.csv')
-
-
+# 根据顺序构造出每个人对应的y值
 def get_svm_y():
     content=[]
 
@@ -165,25 +117,9 @@ def get_svm_y():
     df.to_csv('svm_y.csv',header=0)
 
 
-def init():
-    # read_alpha1()
-    # print('alpha1 end')
-    # read_alpha2()
-    # print('alpha2 end')
-    # read_all() # too big
-    # print('all end')
-
-    read_alpha1_extractedFeatures()
-    print('alpha1 features end')
-    read_alpha2_extractedFeatures()
-    print('alpha2 features end')
-
-
-# read_allcut_extracedFeatures()
 try:
     get_svm_y()
     read_1second_extracedFeatures_numpy()
 except Exception as e:
     print(str(e))
     traceback.print_exc()
-# read_3second_extracedFeatures()
