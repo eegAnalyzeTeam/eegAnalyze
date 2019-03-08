@@ -42,7 +42,7 @@ def calculate_anova_p(name):
 
     df.to_csv('analyze_result_all.csv')
 
-calculate_anova_p('tsfresh_extractedFeatures.csv')
+calculate_anova_p('test_sklearn_ExtraTreesClassifier_4.csv')
 
 
 # def get_data(name):
