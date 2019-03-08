@@ -213,6 +213,6 @@ def k_cv_3(name):
     acc_pd.loc['mean'] = acc_pd.mean()
     acc_pd.to_csv(name[:-4] + '_classify_c_k_p_all_10.csv')
 
-file_names=['tsfresh_extractedFeatures.csv']
+file_names=['test_sklearn_ExtraTreesClassifier_4.csv']
 for x in file_names:
     k_cv_3(x)
