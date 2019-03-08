@@ -204,9 +204,6 @@ RESTful API风格的应用服务。
     - [ ] 将eeg_coherence_each.py的结果挑选差异比较大的通道对合成一张表
     - [ ] 主要用来分类使用
  
-### features文件夹
-
-用tsfresh库进行特征计算和sklearn库进行分类的主要python文件。
    
 ### 代码如果不能正常运行请检查以下两个方面
 
