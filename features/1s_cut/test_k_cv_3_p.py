@@ -25,7 +25,7 @@ def get_xy(name):
     # del csv_data['Unnamed: 0']
 
     pick=pd.read_csv('analyze_result.csv')
-    pick=list(np.array(pick['name'])[:5])
+    pick=list(np.array(pick['name'])[:6])
     print(pick)
     # csv_data=csv_data[pick]
     csv_data = pd.read_csv(name,usecols=pick)
