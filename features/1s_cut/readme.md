@@ -12,6 +12,8 @@
 - [ ] all_select_features.py
     - [ ] 使用sklearn库选择特征
     - [ ] 使用tsfresh库选择特征
+- [ ] eeg_analyze_channel.py
+    - [ ] 对选到的t特征按p值排序并保存csv
 - [ ] eeg_classify_model.py
     - [ ] 0.7训练集0.3测试集计算分类，可以看到病人和正常人分类
 - [ ] handle_multi_csv.py
@@ -19,8 +21,10 @@
     - [ ] 只用到get_svm_y()和read_3second_extracedFeatures_numpy()两个函数
 - [ ] test_k_cv_3.py
     - [ ] 对选出的特征做10折交叉验证
+- [ ] test_k_cv_3_p.py
+    - [ ] 再选取p值较小的几列做分类
     
-#  脚本执行顺序如下：
+#  脚本执行顺序如下（仅参考）：
 - [ ] all_dataGen.py
 - [ ] all_calculate_features.py
 - [ ] handle_multi_csv.py
@@ -29,3 +33,5 @@
 - [ ] eeg_classify_model.py
 - [ ] all_curve.py
 - [ ] all_classify_model_c_k.py
+- [ ] eeg_analyze_channel.py
+- [ ] test_k_cv_3_p.py
