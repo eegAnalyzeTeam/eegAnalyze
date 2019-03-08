@@ -1,5 +1,3 @@
-# features文件夹
-
-用tsfresh库进行特征计算和sklearn库进行分类的主要python文件。
+# 用tsfresh库进行特征计算和sklearn库进行分类的主要python文件。
 
 此目录各个文件夹的脚本很多重复在1s_cut下后来添加了函数的注释，其余几个文件夹下函数功能类似。有疑问可以参照1s_cut下的脚本函数，或者直接@guoyu
