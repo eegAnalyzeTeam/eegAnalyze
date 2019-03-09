@@ -3,6 +3,7 @@ import pandas as pd
 import mne
 
 
+# 从csv文件获取特征名字
 def get_colums(file_name):
     temp = np.loadtxt(file_name, dtype=str, delimiter=',')
     temp = map(lambda x: x.strip('"'), list(temp[0]))
@@ -11,6 +12,7 @@ def get_colums(file_name):
     return list(temp)
 
 
+# 获取两个列表共有的特征
 def analyze_colums(list1, list2, all):
     temp_features = []
     for x in list1:
@@ -24,6 +26,7 @@ def analyze_colums(list1, list2, all):
     return temp_features
 
 
+# 从特征名字获取通道名字
 def get_channel(features):
     temp_res = []
     for x in features:
@@ -32,6 +35,7 @@ def get_channel(features):
     return list(set(temp_res))
 
 
+# 获取3份特征中的通道名字，并分析他们共同用到的通道
 def analyze_channel(features1, features2, features3):
     channel1 = get_channel(features1)
     channel2 = get_channel(features2)
@@ -61,7 +65,7 @@ def analyze_channel(features1, features2, features3):
     print('all:')
     print(all)
 
-
+# 读取3种选择的特征中涉及的特征名字及通道名字（特征名字存储csv）
 def get_all_colums():
     feature_alpha1 = get_colums('test_sklearn_SelectFromModel_alpha1.csv')[1:]
     feature_alpha2 = get_colums('test_sklearn_SelectFromModel_alpha2.csv')[1:]
@@ -89,8 +93,7 @@ def get_all_colums():
     df.to_csv('analyze_features_all.csv', index=False, header=False)
 
 
-# get_all_colums()
-
+# 获取3份特征中的通道名字，并分析他们共同用到的通道
 def analyze_channel_2(features1, features2, feature_all):
     channel1 = get_channel(features1)
     channel2 = get_channel(features2)
@@ -128,7 +131,7 @@ def analyze_channel_2(features1, features2, feature_all):
         else:
             print(x)
 
-
+# 读取3种选择的特征中涉及的特征名字及通道名字（特征名字存储csv）
 def get_all_colums_2019():
     feature_alpha1 = get_colums('alpha1/select_features_VarianceThreshold.csv')[1:]
     feature_alpha2 = get_colums('alpha2/select_features_VarianceThreshold.csv')[1:]
@@ -157,6 +160,7 @@ def get_all_colums_2019():
     df.to_csv('analyze_features_all.csv', index=False, header=False)
 
 
+# 读取全部通道信息
 def raw_data_info(filePath):
     raw = mne.io.read_raw_brainvision(filePath + '/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
                                       preload=True)
@@ -172,6 +176,7 @@ def raw_data_info(filePath):
     return channel_names, bad_channels
 
 
+# 读取选择的特征中涉及的特征名字及通道名字
 def get_colums_tree(name):
     feature_3s = pd.read_csv(name).columns.values.tolist()
 
@@ -185,6 +190,7 @@ def get_colums_tree(name):
     df.to_csv('analyze_features.csv', index=False, header=False)
 
 
+# 获取两个通道列表中共有的通道
 def get_same_channel(channel1, channel3):
     features1 = get_channel(np.array(pd.read_csv(channel1)).T.tolist()[0])
     features2 = get_channel(np.array(pd.read_csv(channel3)).T.tolist()[0])

@@ -2,6 +2,7 @@ import mne
 import os
 
 
+# 只关心闭眼数据
 def file_name(file_dir):
     files = []
     for root, dirs, fs in os.walk(file_dir):
@@ -11,6 +12,7 @@ def file_name(file_dir):
     return files
 
 
+# 将病人数据和病人数据区分
 def get_patinet_control_name(name_list):
     control = []
     patient = []
@@ -38,6 +40,7 @@ bad_channel = ['EEG 23A-23R', 'EEG 24A-24R','STI 014']
 #      'EEG T6-LE', 'EEG Cz-LE', 'EEG Pz-LE', 'EEG A2-A1', 'EEG 23A-23R', 'EEG 24A-24R', 'STI 014']
 
 
+# 根据目录读取eeg信息（只读取共有的20个通道）
 def read_file(file_dir):
     files = file_name(file_dir)
     control_dir, patient_dir = get_patinet_control_name(files)
@@ -64,6 +67,7 @@ def read_file(file_dir):
     return control_raw, patient_raw
 
 
+# 读取文件的入口函数
 def start():
     control_raw,patient_raw=read_file('eegData_4244171/')
 

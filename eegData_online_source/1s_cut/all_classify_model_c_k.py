@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB, MultinomialNB
+from sklearn.naive_bayes import GaussianNB
 from sklearn import tree
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
@@ -14,24 +14,12 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.externals import joblib
 
 
-def get_xy(name):
-    csv_data = pd.read_csv(name)
-    y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
-    y = np.array(y_csv_data)[:, 1]
-
-
-    if 'id' in csv_data.columns.values.tolist():
-        del csv_data['id']
-    del csv_data['Unnamed: 0']
-    x = np.array(csv_data, dtype=float)
-
-    return x, y
-
-
+# 贝叶斯 返回精确率、召回率和准确率
 def naive_bayes_GaussianNB(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -55,6 +43,7 @@ def decide_tree(x_train, x_test, y_train, y_test, i):
     print(x_test)
     print(len(x_test[0]))
 
+    # 缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -63,6 +52,7 @@ def decide_tree(x_train, x_test, y_train, y_test, i):
     clf = clf.fit(x_train, y_train.ravel())
 
     if i == 0:
+        # 保存训练好的模型，以及标准化数据的模型
         joblib.dump(clf, "tree_model.m")
         joblib.dump(scaling, "tree_scaling.m")
 
@@ -72,11 +62,12 @@ def decide_tree(x_train, x_test, y_train, y_test, i):
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
 
 
-
-def linear_svm(x_train, x_test, y_train, y_test,i):
+# svm
+def linear_svm(x_train, x_test, y_train, y_test, i):
     # x_train=preprocessing.scale(x_train)
     # x_test=preprocessing.scale(x_test)
 
+    # 缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -84,8 +75,8 @@ def linear_svm(x_train, x_test, y_train, y_test,i):
     clf = svm.LinearSVC(penalty='l2', class_weight='balanced', loss='hinge')
     clf.fit(x_train, y_train)
 
-
     if i == 0:
+        # 保存训练好的模型，以及标准化数据的模型
         joblib.dump(clf, "svm_model.m")
         joblib.dump(scaling, "svm_scaling.m")
     # expected = y_train
@@ -98,10 +89,12 @@ def linear_svm(x_train, x_test, y_train, y_test,i):
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
 
 
-def k_n_n(x_train, x_test, y_train, y_test,i):
+# knn
+def k_n_n(x_train, x_test, y_train, y_test, i):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -110,6 +103,7 @@ def k_n_n(x_train, x_test, y_train, y_test,i):
     clf.fit(x_train, y_train)
 
     if i == 5:
+        # 保存训练好的模型，以及标准化数据的模型
         joblib.dump(clf, "knn_model.m")
         joblib.dump(scaling, "knn_scaling.m")
     # expected = y_train
@@ -127,6 +121,7 @@ def random_forest(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -140,18 +135,14 @@ def random_forest(x_train, x_test, y_train, y_test):
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
 
 
-
+# 十折交叉验证
 def k_cv_3(name):
     colums = ['svm_precision', 'svm_recall', 'svm_accuracy', 'knn_precision', 'knn_recall', 'knn_accuracy',
               'tree_precision', 'tree_recall', 'tree_accuracy',
               'bayes_precision', 'bayes_recall', 'bayes_accuracy', 'forest_precision', 'forest_recall',
               'forest_accuracy']
-    # colums = ['tree_precision', 'tree_recall', 'tree_accuracy',
-    #           'bayes_precision', 'bayes_recall', 'bayes_accuracy', 'forest_precision', 'forest_recall',
-    #           'forest_accuracy']
-    acc_pd = pd.DataFrame(columns=colums)
 
-    # x, y = get_xy(name)
+    acc_pd = pd.DataFrame(columns=colums)
 
     x, x_test, y, y_test = get_train_test(name)
 
@@ -168,29 +159,15 @@ def k_cv_3(name):
         x_test, y_test = x[test_index], y[test_index]
         temp = []
 
-        # print('svm:')
-        # precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision, recall, accuracy)
-
-        # print('svm:')
-        # precision, recall, accuracy = svm_train(x_train, x_test, y_train, y_test)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision, recall, accuracy)
-
         print('svm:')
-        precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test,i)
+        precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test, i)
         temp.append(precision)
         temp.append(recall)
         temp.append(accuracy)
         print(precision, recall, accuracy)
 
         print('knn:')
-        precision, recall, accuracy = k_n_n(x_train, x_test, y_train, y_test,i)
+        precision, recall, accuracy = k_n_n(x_train, x_test, y_train, y_test, i)
         temp.append(precision)
         temp.append(recall)
         temp.append(accuracy)
@@ -221,6 +198,7 @@ def k_cv_3(name):
     acc_pd.to_csv(name[:-4] + '_c_k_clf_test.csv')
 
 
+# 将数据三七分，其中30%的部分专门用作验证
 def get_train_test(name):
     csv_data = pd.read_csv(name)
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
@@ -236,25 +214,29 @@ def get_train_test(name):
     return x_train, x_test, y_train.ravel(), y_test.ravel()
 
 
+# 利用保存的模型，在30%未用的数据上验证
 def get_3test(name_x, name_y):
     x_test = np.loadtxt(name_x, delimiter=",")
     y_test = np.loadtxt(name_y, delimiter=",")
 
     print('tree:')
+    # 决策树模型时用到的数据标准化模型
     scaling = joblib.load("tree_scaling.m")
     x_test = scaling.transform(x_test)
+    # 决策树模型
     clf = joblib.load("tree_model.m")
     expected = y_test.ravel()
     predicted = clf.predict(x_test)
     print(precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted))
 
-
     x_test = np.loadtxt(name_x, delimiter=",")
     y_test = np.loadtxt(name_y, delimiter=",")
 
     print('svm:')
+    # svm模型时用到的数据标准化模型
     scaling = joblib.load("svm_scaling.m")
     x_test = scaling.transform(x_test)
+    # svm模型
     clf = joblib.load("svm_model.m")
     expected = y_test.ravel()
     predicted = clf.predict(x_test)
@@ -264,16 +246,17 @@ def get_3test(name_x, name_y):
     y_test = np.loadtxt(name_y, delimiter=",")
 
     print('knn:')
+    # knn模型时用到的数据标准化模型
     scaling = joblib.load("knn_scaling.m")
     x_test = scaling.transform(x_test)
+    # knn模型
     clf = joblib.load("knn_model.m")
     expected = y_test.ravel()
     predicted = clf.predict(x_test)
     print(precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted))
 
 
-
-file_names=['test_sklearn_ExtraTreesClassifier_4.csv']
+file_names = ['test_sklearn_ExtraTreesClassifier_4.csv']
 for x in file_names:
     k_cv_3(x)
 

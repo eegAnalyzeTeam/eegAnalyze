@@ -13,7 +13,7 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 
 
-
+# 从文件中读取y
 def get_y():
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)[:, 1]
@@ -23,7 +23,7 @@ def get_y():
     return y
 
 
-# 从文件读取feature,在已经保存全部特征的情况下使用
+# 从文件读取feature,并使用tsfresh库的函数选取特征
 def _select_features(extracted_features):
     y=get_y()
 
@@ -42,7 +42,7 @@ def _select_features(extracted_features):
     print('select end')
 
 
-# test sklearn SelectFromModel
+# sklearn库中 SelectFromModel， 线性特征选取
 def test_sklearn_SelectFromModel(extracted_features):
     y=get_y()
 
@@ -65,20 +65,11 @@ def test_sklearn_SelectFromModel(extracted_features):
     cols=get_cols(cols,res.get_support())
     print(np.array(features_filtered))
 
-    # # 获取列名？
-    # res_col = []
-    # arr = np.array(features_filtered).T
-    # for i in arr:
-    #     for indexs in extracted_features.columns:
-    #         if list(extracted_features[indexs]) == list(i):
-    #             res_col.append(indexs)
-    #             break
     df = pd.DataFrame(features_filtered, columns=cols)
     df.to_csv('test_sklearn_SelectFromModel.csv')
 
 
-# test sklearn ExtraTreesClassifier
-# not used
+# sklearn 库中 ExtraTreesClassifier，生成树特征选取
 def test_sklearn_ExtraTreesClassifier(extracted_features):
     y=get_y()
 
@@ -103,19 +94,11 @@ def test_sklearn_ExtraTreesClassifier(extracted_features):
     cols=get_cols(cols,res.get_support())
     print(np.array(features_filtered))
 
-    # # 获取列名？
-    # res_col = []
-    # arr = np.array(features_filtered).T
-    # for i in arr:
-    #     for indexs in extracted_features.columns:
-    #         if list(extracted_features[indexs]) == list(i):
-    #             res_col.append(indexs)
-    #             break
     df = pd.DataFrame(features_filtered, columns=cols)
     df.to_csv('test_sklearn_ExtraTreesClassifier_10.csv')
 
 
-# test
+# 将留下的特征抽取出来
 def get_cols(x,y):
     cols=[]
     for i in range(len(y)):
@@ -124,8 +107,7 @@ def get_cols(x,y):
     return cols
 
 
-# test sklearn VarianceThreshold
-# not used
+# sklearn库中的 VarianceThreshold，删除低方差的特征
 def test_sklearn_VarianceThreshold(extracted_features):
     y=get_y()
 
@@ -152,7 +134,8 @@ def test_sklearn_VarianceThreshold(extracted_features):
     df.to_csv('test_sklearn_VarianceThreshold.csv')
 
 
-# not used
+# 利用tsfresh库select_features函数选取特征（先删除低方差后）
+# 在test_sklearn_VarianceThreshold函数后调用
 def test_select_features_VarianceThreshold(extracted_features_name='test_sklearn_VarianceThreshold.csv'):
     y=get_y()
 
@@ -171,6 +154,7 @@ def test_select_features_VarianceThreshold(extracted_features_name='test_sklearn
     print('select end')
 
 
+# 选择特征的入口函数
 def start(extracted_features_name='tsfresh_extractedFeatures.csv'):
 
     print('start ...')

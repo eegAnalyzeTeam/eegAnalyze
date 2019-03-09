@@ -9,6 +9,7 @@ from tsfresh.utilities.dataframe_functions import impute
 import pandas as pd
 
 
+# 分割数据，每1分钟分为一段
 def handle_channel(raw):
     picks = mne.pick_types(raw.info, eeg=True)
 
@@ -26,6 +27,7 @@ def handle_channel(raw):
     return temp_res
 
 
+# 保存正常人的csv
 def control_thread_entity(raw, columns, counter):
     temp_raw_arr = handle_channel(raw)
     for temp_raw in temp_raw_arr:
@@ -47,6 +49,7 @@ def control_thread_entity(raw, columns, counter):
     return counter
 
 
+# 保存病人的csv
 def patient_thread_entity(raw, columns, counter):
     temp_raw_arr = handle_channel(raw)
     for temp_raw in temp_raw_arr:
@@ -68,6 +71,7 @@ def patient_thread_entity(raw, columns, counter):
     return counter
 
 
+# 对每个人的数据做切割后，保存csv
 def get_DataFrame(control_raw, patient_raw):
     columns = eeg_getData.channel_names
     columns = list(map(lambda x: x[4:], columns))
@@ -92,15 +96,7 @@ def get_DataFrame(control_raw, patient_raw):
 
 
 
-def handle_y(y):
-    y=y.drop_duplicates(subset=['id', 'y'], keep='first')
-    y=y.reset_index(drop=True)
-    y=y.iloc[:,-1]
-
-    return y
-
-
-# 有效特征
+# 计算全部特征
 def get_features(file_name,count):
     csv_data = pd.read_csv(file_name)
     timeseries = csv_data.iloc[:, :-1]
@@ -116,6 +112,7 @@ def get_features(file_name,count):
     print(str(count)+'  end')
 
 
+# 两个for循环针对每个csv文件计算特征
 def get_features_thread():
     # threads=[]
 
@@ -134,6 +131,4 @@ def get_features_thread():
             print(i)
 
 
-# control_raw, patient_raw = eeg_getData.start()
-# get_DataFrame(control_raw, patient_raw)
 get_features_thread()
