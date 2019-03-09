@@ -14,6 +14,8 @@
     - [ ] 使用tsfresh库选择特征
 - [ ] eeg_analyze_channel.py
     - [ ] 对选到的t特征按p值排序并保存csv
+- [ ] eeg_analyze_features.py
+    - [ ] 分析选区的特征和通道（主要是从csv文件中提取出来）
 - [ ] eeg_classify_model.py
     - [ ] 0.7训练集0.3测试集计算分类，可以看到病人和正常人分类
 - [ ] handle_multi_csv.py
@@ -32,6 +34,7 @@
 - [ ] test_k_cv_3.py
 - [ ] eeg_classify_model.py
 - [ ] all_curve.py
+- [ ] eeg_analyze_features.py
 - [ ] all_classify_model_c_k.py
 - [ ] eeg_analyze_channel.py
 - [ ] test_k_cv_3_p.py
