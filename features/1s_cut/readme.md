@@ -26,7 +26,7 @@
 - [ ] test_k_cv_3_p.py
     - [ ] 再选取p值较小的几列做分类
     
-#  脚本执行顺序如下（仅参考）：
+#  脚本执行顺序如下（仅参考，可以根据实际有调整或者单独运行某个脚本）：
 - [ ] all_dataGen.py
 - [ ] all_calculate_features.py
 - [ ] handle_multi_csv.py
