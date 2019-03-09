@@ -164,6 +164,7 @@ def k_cv_3(name):
     pd.DataFrame(x).to_csv('x_test.csv', header=False, index=False)
     pd.DataFrame(y).to_csv('y_test.csv', header=False, index=False)
 
+    # 将index划分成10份
     kf = KFold(n_splits=10, shuffle=True)
     i = 0
     for train_index, test_index in kf.split(x):
@@ -234,8 +235,10 @@ def get_3test(name_x, name_y):
     y_test = np.loadtxt(name_y, delimiter=",")
 
     print('tree:')
+    # 决策树模型时用到的数据标准化模型
     scaling = joblib.load("tree_scaling.m")
     x_test = scaling.transform(x_test)
+    # 决策树模型
     clf = joblib.load("tree_model.m")
     expected = y_test.ravel()
     predicted = clf.predict(x_test)
@@ -246,8 +249,10 @@ def get_3test(name_x, name_y):
     y_test = np.loadtxt(name_y, delimiter=",")
 
     print('svm:')
+    # svm模型时用到的数据标准化模型
     scaling = joblib.load("svm_scaling.m")
     x_test = scaling.transform(x_test)
+    # svm模型
     clf = joblib.load("svm_model.m")
     expected = y_test.ravel()
     predicted = clf.predict(x_test)
@@ -257,8 +262,10 @@ def get_3test(name_x, name_y):
     y_test = np.loadtxt(name_y, delimiter=",")
 
     print('knn:')
+    # knn模型时用到的数据标准化模型
     scaling = joblib.load("knn_scaling.m")
     x_test = scaling.transform(x_test)
+    # knn模型
     clf = joblib.load("knn_model.m")
     expected = y_test.ravel()
     predicted = clf.predict(x_test)

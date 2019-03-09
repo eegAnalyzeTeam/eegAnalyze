@@ -39,7 +39,7 @@ def _select_features(extracted_features):
     print('select end')
 
 
-# sklearn库中 SelectFromModel， 线性特征选区
+# sklearn库中 SelectFromModel， 线性特征选取
 def test_sklearn_SelectFromModel(extracted_features):
     y=get_y()
 

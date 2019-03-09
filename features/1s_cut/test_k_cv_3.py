@@ -33,6 +33,7 @@ def naive_bayes_GaussianNB(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 将数据缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -52,6 +53,7 @@ def decide_tree(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 将数据缩放到（-1，1）
     print(x_train)
     print(len(x_train[0]))
     print(x_test)
@@ -76,6 +78,7 @@ def linear_svm(x_train, x_test, y_train, y_test):
     # x_train=preprocessing.scale(x_train)
     # x_test=preprocessing.scale(x_test)
 
+    # 将数据缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -98,6 +101,7 @@ def k_n_n(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 将数据缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -121,6 +125,7 @@ def random_forest(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 将数据缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
