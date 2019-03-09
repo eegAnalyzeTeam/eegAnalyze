@@ -156,8 +156,8 @@ def svm_train():
         print(classification_report(y_test, y_hat))
     print(test_pre)
 
+
 # test sklearn ExtraTreesClassifier
-# not used
 def test_sklearn_ExtraTreesClassifier(extracted_features_name='tsfresh_extractedFeatures.csv'):
     y=get_y()
 
@@ -181,14 +181,6 @@ def test_sklearn_ExtraTreesClassifier(extracted_features_name='tsfresh_extracted
     cols=get_cols(cols,res.get_support())
     print(np.array(features_filtered))
 
-    # # 获取列名？
-    # res_col = []
-    # arr = np.array(features_filtered).T
-    # for i in arr:
-    #     for indexs in extracted_features.columns:
-    #         if list(extracted_features[indexs]) == list(i):
-    #             res_col.append(indexs)
-    #             break
     df = pd.DataFrame(features_filtered, columns=cols)
     df.to_csv('test_sklearn_ExtraTreesClassifier.csv')
 
@@ -203,7 +195,6 @@ def get_cols(x,y):
 
 
 # test sklearn VarianceThreshold
-# not used
 def test_sklearn_VarianceThreshold(extracted_features_name='tsfresh_extractedFeatures.csv'):
     y=get_y()
 
@@ -229,7 +220,6 @@ def test_sklearn_VarianceThreshold(extracted_features_name='tsfresh_extractedFea
     df.to_csv('test_sklearn_VarianceThreshold.csv')
 
 
-# not used
 def test_select_features_VarianceThreshold(extracted_features_name='test_sklearn_VarianceThreshold.csv'):
     y=get_y()
 
