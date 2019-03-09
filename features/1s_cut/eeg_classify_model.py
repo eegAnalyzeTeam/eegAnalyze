@@ -172,7 +172,7 @@ def random_forest(i=1):
     return clf.score(x_test, y_test), accuracy_little, accuracy_big
 
 
-# 取30个随机序列做训练，并保存最正常人和病人的准确度，以及全部的准确度
+# 取30个随机序列做训练，并分别保存正常人和病人的准确度，以及全部的准确度
 def init_main():
     colums = ['svm', 'knn', 'decide_tree', 'naive_bayes_GaussianNB', 'random_forest']
     res_pd = pd.DataFrame(columns=colums)
