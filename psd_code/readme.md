@@ -14,3 +14,8 @@
     - [ ] 分类可以使用classify目录下的eeg_classify_model.py
  - [ ] eegAnalyze.py
     - [ ] 用来读取eeg信息的文件
+    
+  ### 代码如果不能正常运行请检查以下两个方面
+
+- [x] 代码路径中的文件或文件夹是否存在或者路径是否正确
+- [x] import的py文件是否在正确路径
