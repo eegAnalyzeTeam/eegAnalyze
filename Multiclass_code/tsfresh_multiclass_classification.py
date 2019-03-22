@@ -12,6 +12,7 @@ from sklearn.preprocessing import MinMaxScaler
 base_path = '../Multiclass/'
 
 
+# 从文件中读取x、y的值
 def get_xy(name):
     csv_data = pd.read_csv(base_path + name)
     y_csv_data = np.loadtxt(base_path + 'multiclass_60s_y.csv', dtype=float, delimiter=',')
@@ -24,7 +25,7 @@ def get_xy(name):
 
     return x, y
 
-
+# 贝叶斯
 def naive_bayes_GaussianNB(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
@@ -64,7 +65,7 @@ def decide_tree(x_train, x_test, y_train, y_test):
 
     return precision_score(expected, predicted, average="weighted"), recall_score(expected, predicted, average="weighted"), accuracy_score(expected, predicted)
 
-
+# 线性svm
 def linear_svm(x_train, x_test, y_train, y_test):
     # x_train=preprocessing.scale(x_train)
     # x_test=preprocessing.scale(x_test)
@@ -86,6 +87,7 @@ def linear_svm(x_train, x_test, y_train, y_test):
     return precision_score(expected, predicted, average="weighted"), recall_score(expected, predicted, average="weighted"), accuracy_score(expected, predicted)
 
 
+# knn
 def k_n_n(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
@@ -125,6 +127,7 @@ def random_forest(x_train, x_test, y_train, y_test):
     return precision_score(expected, predicted, average="weighted"), recall_score(expected, predicted, average="weighted"), accuracy_score(expected, predicted)
 
 
+# 交叉验证
 def k_cv_3(name):
     colums = ['svm_precision', 'svm_recall', 'svm_accuracy', 'knn_precision', 'knn_recall', 'knn_accuracy',
               'tree_precision', 'tree_recall', 'tree_accuracy',
@@ -182,6 +185,7 @@ def k_cv_3(name):
     acc_pd.to_csv(base_path + name[:-4] + '_classify_c_k.csv')
 
 
+# 入口主函数
 def classify():
     file_names = ['tsfresh_filteredFeatures.csv', 'test_sklearn_SelectFromModel.csv',
                   'select_features_VarianceThreshold.csv', 'test_sklearn_ExtraTreesClassifier.csv']

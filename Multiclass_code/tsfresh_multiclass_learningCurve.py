@@ -14,6 +14,7 @@ from sklearn.preprocessing import MinMaxScaler
 base_path = '../Multiclass/'
 
 
+# 从文件中读取数据
 def split_data(my_csv):
     # handle_data()
     csv_data = pd.read_csv(base_path + my_csv)
@@ -30,6 +31,7 @@ def split_data(my_csv):
     return x, y
 
 
+# 获取不同比例训练集的得分
 def get_score(x, y, clf):
     train_sizes = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     train_score = []
@@ -53,6 +55,7 @@ def get_score(x, y, clf):
     return train_sizes, np.array(train_score), np.array(test_score)
 
 
+# 画图
 def learn_curve(clf, name, my_csv):
     x, y = split_data(my_csv)
     # clf = svm.SVC(kernel='linear', C=1.3, decision_function_shape='ovo')
@@ -75,6 +78,7 @@ def learn_curve(clf, name, my_csv):
     plt.close()
 
 
+# 画多种分类器的学习曲线
 def init(my_csv):
     name = ['svm', 'knn', 'bayes', 'decision tree', 'random forest']
     clf = svm.LinearSVC(penalty='l2', class_weight='balanced', loss='hinge')
@@ -89,6 +93,7 @@ def init(my_csv):
     learn_curve(clf, name[4], my_csv)
 
 
+# 入口主函数，画多中特征选择结果的学习曲线
 def start():
     file_names = ['tsfresh_filteredFeatures.csv', 'test_sklearn_SelectFromModel.csv',
                   'select_features_VarianceThreshold.csv', 'test_sklearn_ExtraTreesClassifier.csv']

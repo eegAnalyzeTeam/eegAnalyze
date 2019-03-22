@@ -15,6 +15,7 @@ from sklearn.model_selection import train_test_split
 base_path = '../Multiclass/'
 
 
+# 从文件里读取y
 def get_y():
     y_csv_data = np.loadtxt(base_path + 'multiclass_60s_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)
@@ -24,7 +25,7 @@ def get_y():
     return y
 
 
-# 从文件读取feature,在已经保存全部特征的情况下使用
+# tsfresh select_features
 def _select_features(extracted_features_name=base_path + 'multiclass_60s_features.csv'):
     y = get_y()
 
@@ -43,7 +44,7 @@ def _select_features(extracted_features_name=base_path + 'multiclass_60s_feature
     print('select end')
 
 
-# test sklearn SelectFromModel
+#  sklearn 线性选取特征
 def test_sklearn_SelectFromModel(extracted_features_name=base_path + 'multiclass_60s_features.csv'):
     y = get_y()
 
@@ -78,7 +79,7 @@ def test_sklearn_SelectFromModel(extracted_features_name=base_path + 'multiclass
     df.to_csv(base_path + 'test_sklearn_SelectFromModel.csv')
 
 
-# test sklearn ExtraTreesClassifier
+#  sklearn 生成树选取特征
 def test_sklearn_ExtraTreesClassifier(extracted_features_name=base_path + 'multiclass_60s_features.csv'):
     y = get_y()
 
@@ -106,7 +107,7 @@ def test_sklearn_ExtraTreesClassifier(extracted_features_name=base_path + 'multi
     df.to_csv(base_path + 'test_sklearn_ExtraTreesClassifier.csv')
 
 
-# test
+# 根据结果反馈，获取选择的特征名字
 def get_cols(x, y):
     cols = []
     for i in range(len(y)):
@@ -115,7 +116,7 @@ def get_cols(x, y):
     return cols
 
 
-# test sklearn VarianceThreshold
+#  sklearn 去除低方差
 def test_sklearn_VarianceThreshold(extracted_features_name=base_path + 'multiclass_60s_features.csv'):
     y = get_y()
 
@@ -141,6 +142,7 @@ def test_sklearn_VarianceThreshold(extracted_features_name=base_path + 'multicla
     df.to_csv(base_path + 'test_sklearn_VarianceThreshold.csv')
 
 
+# tsfresh 按照fdr选取特征
 def test_select_features_VarianceThreshold(extracted_features_name=base_path + 'test_sklearn_VarianceThreshold.csv'):
     y = get_y()
 
@@ -159,6 +161,7 @@ def test_select_features_VarianceThreshold(extracted_features_name=base_path + '
     print('select end')
 
 
+# 入口主函数
 def start():
     print('filter')
     _select_features()

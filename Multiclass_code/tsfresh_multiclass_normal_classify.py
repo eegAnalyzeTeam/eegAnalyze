@@ -12,6 +12,7 @@ from sklearn.preprocessing import MinMaxScaler
 base_path = '../Multiclass/'
 
 
+# 从文件中读取x、y
 def get_xy(name):
     csv_data = pd.read_csv(base_path + name)
     y_csv_data = np.loadtxt(base_path + 'multiclass_60s_y.csv', dtype=float, delimiter=',')
@@ -25,12 +26,14 @@ def get_xy(name):
     return x, y
 
 
+# 划分训练集和测试集
 def split_data(name, i=1):
     x, y = get_xy(name)
     x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=i, train_size=0.8)
     return x_train, x_test, y_train.ravel(), y_test.ravel()
 
 
+# 线性svm
 def linear_svm_classify(name, i):
     x_train, x_test, y_train, y_test = split_data(name, i)
 
@@ -52,6 +55,7 @@ def linear_svm_classify(name, i):
     return calcAccuracy(matrix)
 
 
+# knn
 def knn_classify(name, i):
     x_train, x_test, y_train, y_test = split_data(name, i)
 
@@ -73,6 +77,7 @@ def knn_classify(name, i):
     return calcAccuracy(matrix)
 
 
+# 贝叶斯
 def bayes_classify(name, i):
     x_train, x_test, y_train, y_test = split_data(name, i)
 
@@ -94,6 +99,7 @@ def bayes_classify(name, i):
     return calcAccuracy(matrix)
 
 
+# 决策树
 def decide_tree_classify(name, i):
     x_train, x_test, y_train, y_test = split_data(name, i)
 
@@ -115,6 +121,7 @@ def decide_tree_classify(name, i):
     return calcAccuracy(matrix)
 
 
+# 随机森林
 def random_tree_classify(name, i):
     x_train, x_test, y_train, y_test = split_data(name, i)
 
@@ -136,6 +143,7 @@ def random_tree_classify(name, i):
     return calcAccuracy(matrix)
 
 
+# 根据混淆矩阵计算各个类别准确率
 def calcAccuracy(matrix):
     data = np.array(matrix)
     res = []
@@ -151,6 +159,7 @@ def calcAccuracy(matrix):
     return res
 
 
+# 入口主函数
 def start(name):
     cols = ['svm_0', 'svm_1', 'svm_2', 'svm_3', 'svm_4',
             'knn_0', 'knn_1', 'knn_2', 'knn_3', 'knn_4',
