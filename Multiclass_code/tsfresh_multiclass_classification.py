@@ -5,16 +5,16 @@ from sklearn import tree
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import KFold
-from sklearn.metrics import precision_score,recall_score,accuracy_score
+from sklearn.metrics import precision_score, recall_score, accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
 
+base_path = '../Multiclass/'
 
-base_path='../Multiclass/'
 
 def get_xy(name):
     csv_data = pd.read_csv(base_path + name)
-    y_csv_data = np.loadtxt(base_path + 'multiclass_180s_y.csv', dtype=float, delimiter=',')
+    y_csv_data = np.loadtxt(base_path + 'multiclass_60s_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)
 
     if 'id' in csv_data.columns.values.tolist():
@@ -39,7 +39,7 @@ def naive_bayes_GaussianNB(x_train, x_test, y_train, y_test):
     expected = y_test
     predicted = clf.predict(x_test)
 
-    return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
+    return precision_score(expected, predicted, average="weighted"), recall_score(expected, predicted, average="weighted"), accuracy_score(expected, predicted)
 
 
 # 决策树
@@ -62,8 +62,7 @@ def decide_tree(x_train, x_test, y_train, y_test):
     expected = y_test
     predicted = clf.predict(x_test)
 
-
-    return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
+    return precision_score(expected, predicted, average="weighted"), recall_score(expected, predicted, average="weighted"), accuracy_score(expected, predicted)
 
 
 def linear_svm(x_train, x_test, y_train, y_test):
@@ -74,7 +73,7 @@ def linear_svm(x_train, x_test, y_train, y_test):
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
 
-    clf = svm.LinearSVC(penalty='l2',class_weight='balanced',loss='hinge')
+    clf = svm.LinearSVC(penalty='l2', class_weight='balanced', loss='hinge')
     clf.fit(x_train, y_train)
 
     # expected = y_train
@@ -84,7 +83,7 @@ def linear_svm(x_train, x_test, y_train, y_test):
     expected = y_test
     predicted = clf.predict(x_test)
 
-    return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
+    return precision_score(expected, predicted, average="weighted"), recall_score(expected, predicted, average="weighted"), accuracy_score(expected, predicted)
 
 
 def k_n_n(x_train, x_test, y_train, y_test):
@@ -105,7 +104,7 @@ def k_n_n(x_train, x_test, y_train, y_test):
     expected = y_test
     predicted = clf.predict(x_test)
 
-    return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
+    return precision_score(expected, predicted, average="weighted"), recall_score(expected, predicted, average="weighted"), accuracy_score(expected, predicted)
 
 
 # 随机森林
@@ -117,17 +116,18 @@ def random_forest(x_train, x_test, y_train, y_test):
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
 
-    clf = RandomForestClassifier(n_estimators=100, max_depth=4,class_weight='balanced')
+    clf = RandomForestClassifier(n_estimators=100, max_depth=4, class_weight='balanced')
     clf.fit(x_train, y_train)
 
     expected = y_test
     predicted = clf.predict(x_test)
 
-    return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
+    return precision_score(expected, predicted, average="weighted"), recall_score(expected, predicted, average="weighted"), accuracy_score(expected, predicted)
 
 
 def k_cv_3(name):
-    colums = ['svm_precision', 'svm_recall', 'svm_accuracy','knn_precision','knn_recall','knn_accuracy','tree_precision', 'tree_recall', 'tree_accuracy',
+    colums = ['svm_precision', 'svm_recall', 'svm_accuracy', 'knn_precision', 'knn_recall', 'knn_accuracy',
+              'tree_precision', 'tree_recall', 'tree_accuracy',
               'bayes_precision', 'bayes_recall', 'bayes_accuracy', 'forest_precision', 'forest_recall',
               'forest_accuracy']
 
@@ -135,7 +135,7 @@ def k_cv_3(name):
 
     x, y = get_xy(name)
 
-    kf = KFold(n_splits=10, shuffle=True)
+    kf = KFold(n_splits=2, shuffle=True)
     for train_index, test_index in kf.split(x):
         print(len(train_index))
         print(len(test_index))
@@ -183,6 +183,10 @@ def k_cv_3(name):
 
 
 def classify():
-    file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier.csv']
+    file_names = ['tsfresh_filteredFeatures.csv', 'test_sklearn_SelectFromModel.csv',
+                  'select_features_VarianceThreshold.csv', 'test_sklearn_ExtraTreesClassifier.csv']
     for x in file_names:
         k_cv_3(x)
+
+
+classify()

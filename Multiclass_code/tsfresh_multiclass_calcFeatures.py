@@ -18,39 +18,29 @@ def get_feature_entity(file_name, count):
     extracted_features = extract_features(timeseries, column_id="id", column_sort="time")
     impute(extracted_features)
     print(str(count) + 'start save ...')
-    extracted_features.to_csv(base_path + 'features/multiclass_180s_features_' + str(count) + '.csv')
+    extracted_features.to_csv(base_path + 'features/multiclass_60s_features_' + str(count) + '.csv')
 
 
 # 将计算好的特征合并为一个csv
 def get_sumcsv():
-    path = '/home/rbai/Multiclass/features'  # 文件夹目录
-    files = os.listdir(path)  # 得到文件夹下的所有文件名称
-    base = pd.read_csv(base_path + files[0])
-    count = 0
+    base = pd.read_csv(base_path + 'features/multiclass_60s_features_' + str(0) + '.csv')
 
-    for file in files:
-        if count == 0:
-            count += 1
+    for count in range(1, 59):
+        if count == 12:
             continue
-        temp = pd.read_csv(base_path + file)
-        base = base.append(temp)
-        count += 1
+        base = base.append(pd.read_csv(base_path + 'features/multiclass_60s_features_' + str(count) + '.csv'))
         print(count)
 
-    base.to_csv(base_path + 'multiclass_180s_features.csv', index=False)
+    base.to_csv(base_path + 'multiclass_60s_features.csv', index=False)
 
 
 # 入口函数，对每一个样本计算特征
 def get_features():
-    path = '/home/rbai/Multiclass/data'  # 文件夹目录
-    files = os.listdir(path)  # 得到文件夹下的所有文件名称
-
-    count = 0
-    for file in files:
-        get_feature_entity('data/' + file, count)
-        count += 1
-
-    get_sumcsv()
+    for count in range(59):
+        get_feature_entity(base_path + 'data/multiclass_60s_data_' + str(count) + '.csv', count)
 
 
-get_features()
+
+
+# get_features()
+get_sumcsv()

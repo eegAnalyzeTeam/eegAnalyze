@@ -17,8 +17,8 @@ base_path = '../Multiclass/'
 def split_data(my_csv):
     # handle_data()
     csv_data = pd.read_csv(base_path + my_csv)
-    y_csv_data = np.loadtxt(base_path + 'multiclass_180s_y.csv', dtype=float, delimiter=',')
-    y = np.array(y_csv_data)[:, 1]
+    y_csv_data = np.loadtxt(base_path + 'multiclass_60s_y.csv', dtype=float, delimiter=',')
+    y = np.array(y_csv_data)
 
     if 'id' in csv_data.columns.values.tolist():
         del csv_data['id']

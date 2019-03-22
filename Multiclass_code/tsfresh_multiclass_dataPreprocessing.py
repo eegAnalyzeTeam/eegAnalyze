@@ -2,6 +2,7 @@ import pandas as pd
 import mne
 import numpy as np
 import os
+import traceback
 
 base_path = '../Multiclass/'
 
@@ -31,6 +32,7 @@ def handle_xlsx(name):
         df.loc[len(df)] = temp
 
     df.to_csv(base_path + 'info.csv', index=False)
+    print('info end')
 
 
 # 获取文件中的关键信息
@@ -57,6 +59,7 @@ def raw_data_info(filePath='/home/rbai/eegData'):
 # 根据文件名读取raw
 def get_raw(fname, badchannels, path='/home/rbai/eegData/mdd_patient/eyeclose/'):
     raw = mne.io.read_raw_brainvision(path + '/' + fname, preload=True)
+
     raw = raw.filter(None, 40)
     print('filter success')
 
@@ -66,7 +69,7 @@ def get_raw(fname, badchannels, path='/home/rbai/eegData/mdd_patient/eyeclose/')
     raw.info['bads'] = badchannels
     picks = mne.pick_types(raw.info, eeg=True, exclude='bads')
 
-    raw = raw.get_data(picks)
+    raw = raw.get_data(picks, start=9600, stop=19200)
     raw = np.array(raw).T
 
     return raw
@@ -89,7 +92,7 @@ def handle_entity(fname, badchannels, type, count):
 
 # 入口主函数
 def dataPreprocessing():
-    # handle_xlsx('patient_info.xlsx')
+    handle_xlsx('patient_info.xlsx')
     pd_info = get_info()
     columns, bad_channels = raw_data_info()
     columns.insert(0, 'time')
@@ -104,12 +107,14 @@ def dataPreprocessing():
             temp = handle_entity(str(row['file']), bad_channels, str(row['types']), count)
             print(count)
             res = pd.DataFrame(temp, columns=columns)
-            res.to_csv(base_path + 'data/multiclass_180s_data_' + str(row['id']) + '_' + str(count) + '.csv',
+            res.to_csv(base_path + 'data/multiclass_60s_data_' + str(count) + '.csv',
                        index=False)
             count += 1
 
-        except Exception:
+        except Exception as e:
             error.append(str(row['file']))
+            print(str(e))
+            traceback.print_exc()
 
     print(error)
 
@@ -119,22 +124,20 @@ def get_csv():
     path = '/home/rbai/Multiclass/data'  # 文件夹目录
     files = os.listdir(path)  # 得到文件夹下的所有文件名称
     base = pd.read_csv(path + '/' + files[0])
-    y=pd.DataFrame(columns=['y'])
-    y.loc[len((y))]=list(base['y'])[0]
-    count = 0
-    for file in files:
-        if count == 0:
-            count += 1
+    y = pd.DataFrame(columns=['y'])
+    y.loc[len((y))] = list(base['y'])[0]
+
+    for count in range(1,59):
+        if count == 12:
             continue
-        temp = pd.read_csv(path + '/' + file)
+        print(count)
+        temp = pd.read_csv(base_path + 'data/multiclass_60s_data_' + str(count) + '.csv')
         base = base.append(temp)
         y.loc[len((y))] = list(temp['y'])[0]
-        count += 1
-        print(count)
 
-    y.to_csv(base_path + 'multiclass_180s_y.csv',index=False)
+    y.to_csv(base_path + 'multiclass_60s_y.csv', index=False, header=False)
     print('y success')
-    base.to_csv(base_path + 'multiclass_180s_data.csv',index=False)
+    base.to_csv(base_path + 'multiclass_60s_data.csv', index=False)
 
 
 # dataPreprocessing()
