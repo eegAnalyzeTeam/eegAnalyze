@@ -1,4 +1,6 @@
 # 这是对110个人的alpha1频段的信号，利用tsfresh库计算特征并进行分类的主要python文件
+- [ ] eeg_analyze_channel.py
+    - [ ] 将特征按p值排序（test）
 - [ ] eeg_classify_model.py
     - [ ] 用来对选出的特征进行分类
 - [ ] eeg_features_alpha1.py
@@ -16,6 +18,8 @@
     - [ ] 用来画学习曲线
  - [ ] test_k_cv_3.py
     - [ ] 十折交叉验证后计算精确度，准确度以及召回率
+ - [ ] test_k_cv_3_p.py
+    - [ ] 对p值较小的部分特征分类（test）
  - [ ] thread_cal_features.py
     - [ ] 使用tsfresh计算特征
  
