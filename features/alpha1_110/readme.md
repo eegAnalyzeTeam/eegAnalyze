@@ -19,7 +19,7 @@
  - [ ] test_k_cv_3.py
     - [ ] 十折交叉验证后计算精确度，准确度以及召回率
  - [ ] test_k_cv_3_p.py
-    - [ ] 对p值较小的部分特征分类（test）
+    - [ ] 对p值较小的部分特征交叉验证（test）
  - [ ] thread_cal_features.py
     - [ ] 使用tsfresh计算特征
  
