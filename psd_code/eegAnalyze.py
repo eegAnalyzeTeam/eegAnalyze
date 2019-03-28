@@ -90,7 +90,7 @@ def readData(filePath):
 
 #control_raw, patient_raw = readData('/home/caeit/Documents/work/eeg/eegData')
 #control_q, patient_q = readData('/home/caeit/Documents/work/eeg/eegData')
-control_raw, patient_raw = readData('/home/public2/eegData')
+control_raw, patient_raw = readData('/home/rbai/eegData')
 #control_raw, patient_raw = readData('/home/paulbai/eeg/eegData')
 
 eeg_psd_csv.eeg_psd(control_raw, patient_raw)

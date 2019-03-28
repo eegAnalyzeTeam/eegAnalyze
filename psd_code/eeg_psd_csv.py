@@ -5,7 +5,7 @@ import numpy as np
 import pylab
 import os
 import pandas as pd
-import spectrum
+# import spectrum
 # import matplotlib.pyplot as plt
 # import matlab.engine
 
@@ -34,7 +34,7 @@ def eeg_get_counts(freq,length):
 
 
 def raw_data_info():
-    raw = mne.io.read_raw_brainvision('/home/public2/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
+    raw = mne.io.read_raw_brainvision('/home/rbai/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
                                       preload=True)
     #channel_names = raw.info['ch_names']
     print()
@@ -281,8 +281,8 @@ def eeg_psd(control_raw, patient_raw):
     # print('init success...')
     counter = 0
     for (eid, raw) in control_raw.items():
-        # psd_subfreq = calculate_eeg_psd_welch(raw, eid)
-        psd_subfreq=calculate_eeg_psd_burg(raw,eid)
+        psd_subfreq = calculate_eeg_psd_welch(raw, eid)
+        # psd_subfreq=calculate_eeg_psd_burg(raw,eid)
 
         print('control: ' + str(counter))
         counter += 1
@@ -351,9 +351,8 @@ def eeg_psd(control_raw, patient_raw):
     counter = 0
     for (eid, raw) in patient_raw.items():
 
-        # psd_subfreq = calculate_eeg_psd_welch(raw, eid)
-
-        psd_subfreq=calculate_eeg_psd_burg(raw,eid)
+        psd_subfreq = calculate_eeg_psd_welch(raw, eid)
+        # psd_subfreq=calculate_eeg_psd_burg(raw,eid)
 
         print('patient #' + str(counter) + ': ' + eid)
         counter += 1

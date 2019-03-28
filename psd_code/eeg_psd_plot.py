@@ -44,4 +44,3 @@ def plot_psd():
     # picks = eeg_psd_channel.pick_channel()
     for band in subBands:
         eeg_psd_plot(band)
-plot_psd()
