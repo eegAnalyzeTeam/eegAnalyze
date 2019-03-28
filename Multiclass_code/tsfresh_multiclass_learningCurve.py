@@ -74,7 +74,7 @@ def learn_curve(clf, name, my_csv):
     plt.ylabel('accuracy')
     plt.title(name + '  learning curve')
     plt.show()
-    plt.savefig(my_csv + '_' + name + '.png')
+    plt.savefig(base_path + my_csv + '_' + name + '.png')
     plt.close()
 
 

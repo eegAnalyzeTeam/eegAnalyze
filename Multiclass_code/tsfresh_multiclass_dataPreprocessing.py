@@ -121,9 +121,7 @@ def dataPreprocessing():
 
 # 将每个样本的csv合成一个大的csv
 def get_csv():
-    path = '/home/rbai/Multiclass/data'  # 文件夹目录
-    files = os.listdir(path)  # 得到文件夹下的所有文件名称
-    base = pd.read_csv(path + '/' + files[0])
+    base = pd.read_csv(base_path + 'data/multiclass_60s_data_' + str(0) + '.csv')
     y = pd.DataFrame(columns=['y'])
     y.loc[len((y))] = list(base['y'])[0]
 
