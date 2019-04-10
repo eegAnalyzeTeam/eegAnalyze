@@ -13,9 +13,9 @@ import os
 import check_file
 import matplotlib.pyplot as plt
 import matplotlib.mlab as plot
-import eeg_coherence_anova
-import eeg_coherence_anova_plot
-import eeg_coherence_plot
+import coherence_code.eeg_coherence_anova as eeg_coherence_anova
+import coherence_code.eeg_coherence_anova_plot as eeg_coherence_anova_plot
+import coherence_code.eeg_coherence_plot as eeg_coherence_plot
 
 
 def coh_get_Section(f,a,b):
