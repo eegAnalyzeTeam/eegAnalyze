@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/coherence_code/eeg_coherence.py" beforeDir="false" afterPath="$PROJECT_DIR$/coherence_code/eeg_coherence.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/psd_code/eegAnalyze.py" beforeDir="false" afterPath="$PROJECT_DIR$/psd_code/eegAnalyze.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/coherence_code/eeg_coherence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="17" column="62" selection-start-line="17" selection-start-column="62" selection-end-line="17" selection-end-column="62" />
+            <state relative-caret-position="653">
+              <caret line="238" column="37" selection-start-line="238" selection-start-column="37" selection-end-line="238" selection-end-column="37" />
               <folding>
                 <element signature="e#85#109#0" expanded="true" />
               </folding>
@@ -449,12 +448,12 @@
       <workItem from="1551772680440" duration="19453000" />
       <workItem from="1551839628284" duration="17830000" />
       <workItem from="1551928977350" duration="8919000" />
-      <workItem from="1554884793392" duration="797000" />
+      <workItem from="1554884793392" duration="1003000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="408670000" />
+    <option name="totallyTimeSpent" value="408876000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -899,8 +898,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/coherence_code/eeg_coherence.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="17" column="62" selection-start-line="17" selection-start-column="62" selection-end-line="17" selection-end-column="62" />
+        <state relative-caret-position="653">
+          <caret line="238" column="37" selection-start-line="238" selection-start-column="37" selection-end-line="238" selection-end-column="37" />
           <folding>
             <element signature="e#85#109#0" expanded="true" />
           </folding>

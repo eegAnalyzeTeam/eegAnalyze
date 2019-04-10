@@ -237,17 +237,3 @@ eeg_coherence_anova.coh_anova_save_csv()
 eeg_coherence_anova.get_coherence_anova()
 
 eeg_coherence_anova_plot.anova_plot()
-# raw_fname= 'jkdz_cc_01_20180430_close.vhdr'
-# raw=mne.io.read_raw_brainvision(raw_fname, preload=True)
-# raw.drop_channels(['Oz', 'ECG'])
-# alpha1_raw = eeg_sub_bands.eeg_sub_bands(raw, 'alpha1')
-# alpha1_raw = alpha1_raw.resample(100, npad='auto')
-# eeg_coherence(alpha1_raw)
-# print('end')
-# x,y = alpha1_raw[63][0][0], alpha1_raw[0][0][0]
-# f,Cxy=signal.coherence(x,y, 5000, nperseg=1024)
-# plt.semilogy(f, Cxy)
-# #plt.show()
-# coh, f = plt.cohere(x,y,256,  1./.01)
-# print(f)
-# plt.show()
