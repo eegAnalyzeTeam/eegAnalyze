@@ -1,4 +1,7 @@
 # 这是对分割成1s的信号，利用tsfresh库计算特征并进行分类的主要python文件
+
+## 调用命令： python -m eegData_online_source.cut_1s
+
 - [ ] all_classify_model_c_k.py
     - [ ] 首先把数据(对表现好的情况)按照0.3、0.7的比例分割，在0.7的数据部分进行十折交叉验证
     - [ ] 选出交叉验证时表现比较好的模型
