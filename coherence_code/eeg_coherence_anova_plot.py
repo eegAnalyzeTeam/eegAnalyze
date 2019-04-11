@@ -7,9 +7,10 @@ def get_pvalue():
     N = 62
     map_pvalue = pd.read_csv('coh_anova_pvalue.csv')
 
-    return  map_pvalue,N
+    return map_pvalue, N
 
-def draw(data, xlabels, ylabels,name,isgary):
+
+def draw(data, xlabels, ylabels, name, isgary):
     plt.style.use('classic')
     figure = plt.figure(facecolor='lightgrey')
     ax = figure.add_subplot(111)
@@ -17,7 +18,7 @@ def draw(data, xlabels, ylabels,name,isgary):
     ax.set_yticklabels(ylabels)
     ax.set_xticks(range(len(xlabels)))
     ax.set_xticklabels(xlabels)
-    if  isgary:
+    if isgary:
         _map = ax.imshow(data, interpolation='nearest', cmap=plt.cm.gray, aspect='auto')
     else:
         _map = ax.imshow(data, interpolation='nearest', cmap=plt.cm.rainbow, aspect='auto', vmin=0, vmax=0.02)
@@ -26,8 +27,9 @@ def draw(data, xlabels, ylabels,name,isgary):
     plt.savefig(name)
     plt.close()
 
+
 def draw_p_value():
-    map_pvalue,N = get_pvalue()
+    map_pvalue, N = get_pvalue()
 
     xlabels = map_pvalue.columns.tolist()
     ylabels = map_pvalue.columns.tolist()[::-1]
@@ -40,16 +42,18 @@ def draw_p_value():
 
     map_pvalue = np.array(lists)
 
-    draw(map_pvalue,xlabels,ylabels,'anova_pvalue',False)
+    draw(map_pvalue, xlabels, ylabels, 'anova_pvalue', False)
+
 
 def check_pvalue(x):
-    if x<0.01:
+    if x < 0.01:
         return 1
     else:
         return 0
 
+
 def draw_p_value_gray():
-    map_pvalue,N = get_pvalue()
+    map_pvalue, N = get_pvalue()
 
     xlabels = map_pvalue.columns.tolist()
     ylabels = map_pvalue.columns.tolist()[::-1]
@@ -62,15 +66,12 @@ def draw_p_value_gray():
 
     map_pvalue = np.array(lists)
 
-    draw(map_pvalue, xlabels, ylabels, 'anova_pvalue_gray',True)
+    draw(map_pvalue, xlabels, ylabels, 'anova_pvalue_gray', True)
 
-# def draw_histogram():
-#     histogram_list = pd.read_csv('coh_anova_histogram.csv')
+
 
 
 def anova_plot():
     draw_p_value()
     draw_p_value_gray()
-
-anova_plot()
 

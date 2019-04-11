@@ -110,9 +110,3 @@ def brain_plot():
     mg.imsave('test_control',image)
 
 
-# conherence_sort()
-# gray_plot()
-
-brain_plot()
-
-print('end')

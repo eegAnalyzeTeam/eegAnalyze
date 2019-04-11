@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+# 根据 coh_anova_histogram.csv 选择
 x_index=[58,56,56,55,54]
 y_index=[61,57,58,56,55]
 
@@ -27,6 +28,3 @@ def get_file():
 
     df=pd.DataFrame(np.array(res),columns=['FT9-CPz','P08-P07','P07-FT9','P07-TP8','TP8-TP7'])
     df.to_csv('coh_train.csv')
-
-
-get_file()

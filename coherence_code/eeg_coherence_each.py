@@ -4,36 +4,39 @@ import check_file
 import os
 from scipy import signal
 import csv
-import pandas as pd
+
+from coherence_code import pick_eeg_coherence
+from coherence_code import eeg_classify_model
 
 
-
-def coh_get_Section(f,a,b):
-    start=-1
-    end=-1
-    for i in range(0,len(f)):
-        if start ==-1 and f[i]>a:
-            start=i
-        if end == -1 and f[i]>b:
-            end=i
+def coh_get_Section(f, a, b):
+    start = -1
+    end = -1
+    for i in range(0, len(f)):
+        if start == -1 and f[i] > a:
+            start = i
+        if end == -1 and f[i] > b:
+            end = i
             break
-    return start,end
-start=-1
-end=-1
+    return start, end
 
 
-def coherence(x,y,a,b):
-    fs=48
-    f,Cxy=signal.coherence(x,y,fs,nperseg=20)
+start = -1
+end = -1
+
+
+def coherence(x, y, a, b):
+    fs = 48
+    f, Cxy = signal.coherence(x, y, fs, nperseg=20)
     global start
     global end
-    if start ==-1:
-        start,end = coh_get_Section(f,a,b)
-    return(np.mean(Cxy[start:end]))
+    if start == -1:
+        start, end = coh_get_Section(f, a, b)
+    return (np.mean(Cxy[start:end]))
 
 
 def coh_get_channel_names():
-    raw = mne.io.read_raw_brainvision('/home/public2/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
+    raw = mne.io.read_raw_brainvision('/home/rbai/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
                                       preload=True)
     channel_names = []
     for i in raw.info['ch_names']:
@@ -43,31 +46,31 @@ def coh_get_channel_names():
     return channel_names[0:-1]
 
 
-def eeg_coherence(raw,name):
-    fileread=open(name,'w',newline='')
-    writer=csv.writer(fileread)
+def eeg_coherence(raw, name):
+    fileread = open(name, 'w', newline='')
+    writer = csv.writer(fileread)
     writer.writerow(coh_get_channel_names())
-    for i in range(0,62):
-        data=[]
-        for j in range(0,62):
+    for i in range(0, 62):
+        data = []
+        for j in range(0, 62):
             print('channel: ', i, ' ', j)
-            data+=[coherence(raw[61-i][0][0],raw[j][0][0],8,12)]
+            data += [coherence(raw[61 - i][0][0], raw[j][0][0], 8, 12)]
         writer.writerow(data)
     fileread.close
 
 
 def raw_data_info(filePath):
-    raw = mne.io.read_raw_brainvision(filePath+'/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
+    raw = mne.io.read_raw_brainvision(filePath + '/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
                                       preload=True)
-    #channel_names = raw.info['ch_names']
+    # channel_names = raw.info['ch_names']
     print()
     channel_names = []
     for i in raw.info['ch_names']:
-        if i!='Oz':
-            if i!='ECG':
+        if i != 'Oz':
+            if i != 'ECG':
                 channel_names.append(i)
 
-    bad_channels = ['Oz','ECG']
+    bad_channels = ['Oz', 'ECG']
     return channel_names, bad_channels
 
 
@@ -142,33 +145,34 @@ def read_data(filePath):
     return control_raw, patient_raw
 
 
-def read_file(filePath='/home/public2/eegData'):
-    control_raw,patient_raw=read_data(filePath)
+def read_file(filePath='/home/rbai/eegData'):
+    control_raw, patient_raw = read_data(filePath)
     print('read success')
 
-    count=0
-    for (eid,raw) in control_raw.items():
-        count+=1
+    count = 0
+    for (eid, raw) in control_raw.items():
+        count += 1
         raw.load_data()
         raw.drop_channels(['Oz', 'ECG'])
         # raw = eeg_sub_bands.eeg_sub_bands(raw, 'alpha1')
         raw = raw.filter(8, 12)
         raw = raw.resample(48, npad='auto')
-        eeg_coherence(raw,'coherence/eeg_coherence_c_'+str(count)+'.csv')
+        eeg_coherence(raw, 'coherence/eeg_coherence_c_' + str(count) + '.csv')
         print(count)
 
-    count=0
-    for (eid,raw) in patient_raw.items():
-        count+=1
+    count = 0
+    for (eid, raw) in patient_raw.items():
+        count += 1
         raw.load_data()
         raw.drop_channels(['Oz', 'ECG'])
         # raw = eeg_sub_bands.eeg_sub_bands(raw, 'alpha1')
         raw = raw.filter(8, 12)
         raw = raw.resample(48, npad='auto')
-
 
         eeg_coherence(raw, 'coherence/eeg_coherence_p_' + str(count) + '.csv')
         print(count)
 
 
-read_file()
+def _start():
+    pick_eeg_coherence.get_file()
+    eeg_classify_model.init_main()
