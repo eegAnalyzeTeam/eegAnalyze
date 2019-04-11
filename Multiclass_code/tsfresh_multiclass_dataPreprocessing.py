@@ -1,7 +1,6 @@
 import pandas as pd
 import mne
 import numpy as np
-import os
 import traceback
 
 base_path = '../Multiclass/'
@@ -138,5 +137,6 @@ def get_csv():
     base.to_csv(base_path + 'multiclass_60s_data.csv', index=False)
 
 
-# dataPreprocessing()
-get_csv()
+def start():
+    dataPreprocessing()
+    # get_csv()

@@ -4,8 +4,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn import tree, metrics
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import KFold, train_test_split
-from sklearn.metrics import precision_score, recall_score, accuracy_score
+from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
 
@@ -160,7 +159,7 @@ def calcAccuracy(matrix):
 
 
 # 入口主函数
-def start(name):
+def start(name='select_features_VarianceThreshold.csv'):
     cols = ['svm_0', 'svm_1', 'svm_2', 'svm_3', 'svm_4',
             'knn_0', 'knn_1', 'knn_2', 'knn_3', 'knn_4',
             'bayes_0', 'bayes_1', 'bayes_2', 'bayes_3', 'bayes_4',
@@ -180,6 +179,3 @@ def start(name):
 
     df.loc['mean'] = df.mean()
     df.to_csv(base_path + name[:-4] + 'test_.csv')
-
-
-start('select_features_VarianceThreshold.csv')

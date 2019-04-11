@@ -193,4 +193,5 @@ def classify():
         k_cv_3(x)
 
 
-classify()
+def start():
+    classify()

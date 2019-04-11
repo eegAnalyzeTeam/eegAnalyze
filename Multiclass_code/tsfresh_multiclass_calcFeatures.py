@@ -1,7 +1,6 @@
 import pandas as pd
 from tsfresh.utilities.dataframe_functions import impute
-from tsfresh import extract_features, select_features
-import os
+from tsfresh import extract_features
 
 base_path = '../Multiclass/'
 
@@ -40,7 +39,6 @@ def get_features():
         get_feature_entity(base_path + 'data/multiclass_60s_data_' + str(count) + '.csv', count)
 
 
-
-
-# get_features()
-get_sumcsv()
+def start():
+    get_features()
+    get_sumcsv()

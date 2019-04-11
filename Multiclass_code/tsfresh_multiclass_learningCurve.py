@@ -1,5 +1,3 @@
-from sklearn import svm
-from sklearn.model_selection import learning_curve, validation_curve
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -99,6 +97,3 @@ def start():
                   'select_features_VarianceThreshold.csv', 'test_sklearn_ExtraTreesClassifier.csv']
     for x in file_names:
         init(x)
-
-
-start()
