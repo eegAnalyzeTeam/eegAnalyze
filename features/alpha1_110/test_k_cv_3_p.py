@@ -19,7 +19,7 @@ def get_xy(name):
     #     del csv_data['id']
     # del csv_data['Unnamed: 0']
 
-    pick = pd.read_csv('analyze_result_all.csv')
+    pick = pd.read_csv('analyze_result_alpha1.csv')
     pick = list(np.array(pick['name'])[:10])
     print(pick)
     # csv_data=csv_data[pick]

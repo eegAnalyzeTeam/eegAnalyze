@@ -38,7 +38,7 @@ def calculate_anova_p(name):
         temp.append(x[1])
         df.loc[len(df)] = x
 
-    df.to_csv('analyze_result.csv')
+    df.to_csv('analyze_result_all.csv')
 
 
 def start():
