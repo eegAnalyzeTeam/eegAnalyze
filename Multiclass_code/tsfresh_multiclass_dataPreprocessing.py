@@ -3,7 +3,7 @@ import mne
 import numpy as np
 import traceback
 
-base_path = '../Multiclass/'
+base_path = '/home/rbai/Multiclass/'
 
 
 # 从patient_info文件中整理出我们想要的信息

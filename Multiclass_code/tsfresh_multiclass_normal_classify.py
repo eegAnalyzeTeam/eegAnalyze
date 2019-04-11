@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
 
-base_path = '../Multiclass/'
+base_path = '/home/rbai/Multiclass/'
 
 
 # 从文件中读取x、y

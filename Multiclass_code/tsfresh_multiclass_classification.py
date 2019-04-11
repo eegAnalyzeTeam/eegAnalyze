@@ -9,7 +9,7 @@ from sklearn.metrics import precision_score, recall_score, accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
 
-base_path = '../Multiclass/'
+base_path = '/home/rbai/Multiclass/'
 
 
 # 从文件中读取x、y的值

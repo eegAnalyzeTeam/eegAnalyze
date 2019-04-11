@@ -2,7 +2,7 @@ import pandas as pd
 from tsfresh.utilities.dataframe_functions import impute
 from tsfresh import extract_features
 
-base_path = '../Multiclass/'
+base_path = '/home/rbai/Multiclass/'
 
 
 # 根据传入的参数tsfresh计算特征

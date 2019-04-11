@@ -5,7 +5,7 @@ from sklearn.ensemble import ExtraTreesClassifier
 import numpy as np
 from sklearn.svm import LinearSVC
 
-base_path = '../Multiclass/'
+base_path = '/home/rbai/Multiclass/'
 
 
 # 从文件里读取y
