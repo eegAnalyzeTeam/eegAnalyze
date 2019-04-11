@@ -5,10 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.externals import joblib
 from sklearn.metrics import classification_report
 from psd_code import eeg_psd_channel
-from sklearn.svm import SVR
-from sklearn.model_selection import cross_val_score
-from sklearn import linear_model
-import matplotlib.pyplot as plt
+from psd_code import eeg_classify_model
 
 N = 62
 
@@ -111,6 +108,58 @@ def svm_train():
     print(np.array(msgs))
 
 
+# 多种分类方法
+# 后期添加，此函数没有经过测试
+def classify_model():
+    colums = ['svm', 'decide_tree', 'naive_bayes_GaussianNB', 'random_forest']
+    res_pd = pd.DataFrame(columns=colums)
+
+    colums = ['svm_less', 'svm_many', 'tree_less', 'tree_many', 'bayes_less', 'bayes_many', 'forest_less',
+              'forest_many']
+    acc_pd = pd.DataFrame(columns=colums)
+
+    for i in range(30):
+        temp = []
+        acc_temp = []
+
+        x_train, x_test, y_train, y_test, msg = split_data(i)
+        y_train = y_train.ravel()
+        y_test = y_test.ravel()
+        print('svm:')
+        score_svm, little, big = eeg_classify_model.svm_train(x_train, x_test, y_train, y_test)
+        temp.append(score_svm)
+        acc_temp.append(little)
+        acc_temp.append(big)
+
+        print('decide tree:')
+        score_tree, little, big = eeg_classify_model.decide_tree(x_train, x_test, y_train, y_test)
+        temp.append(score_tree)
+        acc_temp.append(little)
+        acc_temp.append(big)
+
+        print('native bayes:')
+        score_bayes, little, big = eeg_classify_model.naive_bayes_GaussianNB(x_train, x_test, y_train, y_test)
+        temp.append(score_bayes)
+        acc_temp.append(little)
+        acc_temp.append(big)
+
+        print('random forest:')
+        score_forest, little, big = eeg_classify_model.random_forest(x_train, x_test, y_train, y_test)
+        temp.append(score_forest)
+        acc_temp.append(little)
+        acc_temp.append(big)
+
+        res_pd.loc[len(res_pd)] = temp
+        acc_pd.loc[len(res_pd)] = acc_temp
+    res_pd.loc['mean'] = res_pd.mean()
+    res_pd.to_csv('psd_classify_models_test.csv')
+
+    acc_pd.loc['mean'] = acc_pd.mean()
+    acc_pd.to_csv('psd_classify_acc_test.csv')
+
+
 def start():
     handle_data()
     svm_train()
+
+    classify_model()
