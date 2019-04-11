@@ -2,16 +2,24 @@ import numpy as np
 import pandas as pd
 import mne
 
+
+#
+#  主要用来分析 all_110_1min、alpha1_110、alpha2_110选出来的特征的分析
+#  主要是求三者共有的特征、通道等
+#  不是主要脚本，看情况使用
+#
+
+
 def get_colums(file_name):
-    temp = np.loadtxt(file_name, dtype=str,delimiter=',')
-    temp=map(lambda x:x.strip('"'),list(temp[0]))
-    temp=list(temp)
+    temp = np.loadtxt(file_name, dtype=str, delimiter=',')
+    temp = map(lambda x: x.strip('"'), list(temp[0]))
+    temp = list(temp)
     # temp = map(lambda x: x.split('"')[0], temp)
     return list(temp)
 
 
-def analyze_colums(list1,list2,all):
-    temp_features=[]
+def analyze_colums(list1, list2, all):
+    temp_features = []
     for x in list1:
         for y in list2:
             if x == y:
@@ -24,17 +32,17 @@ def analyze_colums(list1,list2,all):
 
 
 def get_channel(features):
-    temp_res=[]
+    temp_res = []
     for x in features:
-        temp=str(x).split('_')[0]
+        temp = str(x).split('_')[0]
         temp_res.append(temp)
     return list(set(temp_res))
 
 
-def analyze_channel(features1,features2,features3):
-    channel1=get_channel(features1)
-    channel2=get_channel(features2)
-    channel3=get_channel(features3)
+def analyze_channel(features1, features2, features3):
+    channel1 = get_channel(features1)
+    channel2 = get_channel(features2)
+    channel3 = get_channel(features3)
 
     print('alpha1:')
     print(channel1)
@@ -46,14 +54,14 @@ def analyze_channel(features1,features2,features3):
     print(channel3)
     print(len(channel3))
 
-    alpha2=[]
+    alpha2 = []
     for x in channel1:
         if x not in channel2:
             alpha2.append(x)
     print('alpha2:')
     print(alpha2)
 
-    all=[]
+    all = []
     for x in channel1:
         if x not in channel3:
             all.append(x)
@@ -62,9 +70,9 @@ def analyze_channel(features1,features2,features3):
 
 
 def get_all_colums():
-    feature_alpha1=get_colums('test_sklearn_SelectFromModel_alpha1.csv')[1:]
-    feature_alpha2=get_colums('test_sklearn_SelectFromModel_alpha2.csv')[1:]
-    feature_all=get_colums('features/test_sklearn_SelectFromModel.csv')[1:]
+    feature_alpha1 = get_colums('test_sklearn_SelectFromModel_alpha1.csv')[1:]
+    feature_alpha2 = get_colums('test_sklearn_SelectFromModel_alpha2.csv')[1:]
+    feature_all = get_colums('features/test_sklearn_SelectFromModel.csv')[1:]
 
     print(len(feature_alpha1))
     print(feature_alpha1)
@@ -73,12 +81,12 @@ def get_all_colums():
     print(len(feature_all))
     print(feature_all)
 
-    temp=analyze_colums(feature_all,feature_alpha1)
-    temp=analyze_colums(temp,feature_alpha2)
+    temp = analyze_colums(feature_all, feature_alpha1)
+    temp = analyze_colums(temp, feature_alpha2)
     print(temp)
-    df=pd.DataFrame(temp)
-    df.to_csv('analyze_features.csv',index=False,header=False)
-    analyze_channel(feature_alpha1,feature_alpha2,feature_all)
+    df = pd.DataFrame(temp)
+    df.to_csv('analyze_features.csv', index=False, header=False)
+    analyze_channel(feature_alpha1, feature_alpha2, feature_all)
 
     df = pd.DataFrame(feature_alpha1)
     df.to_csv('analyze_features_alpha1.csv', index=False, header=False)
@@ -88,11 +96,10 @@ def get_all_colums():
     df.to_csv('analyze_features_all.csv', index=False, header=False)
 
 
-
-def analyze_channel_2(features1,features2,feature_all):
-    channel1=get_channel(features1)
-    channel2=get_channel(features2)
-    all=get_channel(feature_all)
+def analyze_channel_2(features1, features2, feature_all):
+    channel1 = get_channel(features1)
+    channel2 = get_channel(features2)
+    all = get_channel(feature_all)
 
     print('alpha1:')
     print(channel1)
@@ -104,15 +111,14 @@ def analyze_channel_2(features1,features2,feature_all):
     print(all)
     print(len(all))
 
-
-    alpha1=[]
+    alpha1 = []
     for x in channel1:
         if x not in channel2:
             alpha1.append(x)
     print('alpha1:')
     print(alpha1)
 
-    alpha2=[]
+    alpha2 = []
     for x in channel2:
         if x not in channel1:
             alpha2.append(x)
@@ -120,17 +126,18 @@ def analyze_channel_2(features1,features2,feature_all):
     print(alpha2)
 
     print('lack channel;')
-    channel_names, bad_channels=raw_data_info('../eegData')
+    channel_names, bad_channels = raw_data_info('../eegData')
     for x in channel_names:
         if x in channel2:
             pass
         else:
             print(x)
 
+
 def get_all_colums_2019():
     feature_alpha1 = get_colums('alpha1/select_features_VarianceThreshold.csv')[1:]
     feature_alpha2 = get_colums('alpha2/select_features_VarianceThreshold.csv')[1:]
-    feature_all=get_colums('all_cut/select_features_VarianceThreshold.csv')[1:]
+    feature_all = get_colums('all_cut/select_features_VarianceThreshold.csv')[1:]
 
     print(len(feature_alpha1))
     print(feature_alpha1)
@@ -139,13 +146,13 @@ def get_all_colums_2019():
     print(len(feature_all))
     print(feature_all)
 
-    temp = analyze_colums(feature_alpha1, feature_alpha2,feature_all)
+    temp = analyze_colums(feature_alpha1, feature_alpha2, feature_all)
 
     print(temp)
     df = pd.DataFrame(temp)
     df.to_csv('analyze_features.csv', index=False, header=False)
 
-    analyze_channel_2(feature_alpha1, feature_alpha2,feature_all)
+    analyze_channel_2(feature_alpha1, feature_alpha2, feature_all)
 
     df = pd.DataFrame(feature_alpha1)
     df.to_csv('analyze_features_alpha1.csv', index=False, header=False)
@@ -154,18 +161,19 @@ def get_all_colums_2019():
     df = pd.DataFrame(feature_all)
     df.to_csv('analyze_features_all.csv', index=False, header=False)
 
+
 def raw_data_info(filePath):
-    raw = mne.io.read_raw_brainvision(filePath+'/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
+    raw = mne.io.read_raw_brainvision(filePath + '/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
                                       preload=True)
-    #channel_names = raw.info['ch_names']
+    # channel_names = raw.info['ch_names']
     print()
     channel_names = []
     for i in raw.info['ch_names']:
-        if i!='Oz':
-            if i!='ECG':
+        if i != 'Oz':
+            if i != 'ECG':
                 channel_names.append(i)
 
-    bad_channels = ['Oz','ECG']
+    bad_channels = ['Oz', 'ECG']
     return channel_names, bad_channels
 
 

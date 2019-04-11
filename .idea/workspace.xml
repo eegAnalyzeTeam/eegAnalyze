@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="" />
+    <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/features/eeg_analyze_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/eeg_analyze_features.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,11 +43,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/features/cut_3s/eeg_analyze_features.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="700">
               <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/features/eeg_analyze_features.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="8" column="15" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -147,6 +161,8 @@
       <find>all_110_1min</find>
       <find>alpha1_110</find>
       <find>get_colums</find>
+      <find>analyze_colums</find>
+      <find>analyze_channel</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -155,7 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/features/cut_3s/all_select_features.py" />
         <option value="$PROJECT_DIR$/features/cut_3s/all_learn_curve.py" />
         <option value="$PROJECT_DIR$/features/cut_3s/all_classify_model_c_k.py" />
         <option value="$PROJECT_DIR$/features/cut_3s/eeg_analyze_anova_p.py" />
@@ -206,6 +221,7 @@
         <option value="$PROJECT_DIR$/Multiclass_code/tsfresh_multiclass_calcFeatures.py" />
         <option value="$PROJECT_DIR$/Multiclass_code/tsfresh_multiclass_selectFeatures.py" />
         <option value="I:/features_change/eeg_analyze_features.py" />
+        <option value="$PROJECT_DIR$/features/eeg_analyze_features.py" />
       </list>
     </option>
   </component>
@@ -235,18 +251,6 @@
             <path>
               <item name="eegAnalyze" type="b2602c69:ProjectViewProjectNode" />
               <item name="eegAnalyze" type="462c0819:PsiDirectoryNode" />
-              <item name="features" type="462c0819:PsiDirectoryNode" />
-              <item name="cut_1s" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eegAnalyze" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eegAnalyze" type="462c0819:PsiDirectoryNode" />
-              <item name="features" type="462c0819:PsiDirectoryNode" />
-              <item name="cut_3s" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eegAnalyze" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eegAnalyze" type="462c0819:PsiDirectoryNode" />
               <item name="Multiclass_code" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -268,11 +272,11 @@
       <recent name="E:\git_project\eegAnalyze\features\alpha2_110" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\eegAnalyze_4_10\eegAnalyze\features" />
       <recent name="E:\eegAnalyze_4_10\eegAnalyze\coherence_code" />
       <recent name="E:\eegAnalyze_4_10\eegAnalyze\psd_code" />
       <recent name="E:\git_project\eegAnalyze\features\1s_cut" />
       <recent name="E:\git_project\eegAnalyze\eegData_online_source\1s_cut" />
-      <recent name="E:\git_project\eegAnalyze\eegData_online_source\3s_cut" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -476,7 +480,7 @@
       <workItem from="1551839628284" duration="17830000" />
       <workItem from="1551928977350" duration="8919000" />
       <workItem from="1554884793392" duration="3069000" />
-      <workItem from="1554943738536" duration="25301000" />
+      <workItem from="1554943738536" duration="25749000" />
     </task>
     <servers />
   </component>
@@ -486,10 +490,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="436243000" />
+    <option name="totallyTimeSpent" value="436691000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22799511" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -540,16 +545,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/features/cut_3s/handle_multi_csv.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="44" column="12" lean-forward="true" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/features/cut_3s/all_select_features.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-358">
@@ -1009,16 +1004,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://I:/features_change/eeg_analyze_features.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="130" column="18" selection-start-line="130" selection-start-column="18" selection-end-line="130" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Multiclass_code/tsfresh_multiclass_selectFeatures.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="800">
@@ -1038,10 +1023,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://I:/features_change/eeg_analyze_features.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="692">
+          <caret line="171" column="19" selection-start-line="171" selection-end-line="171" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/features/cut_3s/eeg_analyze_features.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="700">
           <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/eeg_analyze_features.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="15" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
