@@ -1,17 +1,9 @@
 import pandas as pd
-from tsfresh.utilities.dataframe_functions import impute
-from tsfresh import extract_features, select_features
-from sklearn.feature_selection import SelectFromModel,VarianceThreshold,SelectKBest,chi2
+from tsfresh import select_features
+from sklearn.feature_selection import SelectFromModel, VarianceThreshold
 from sklearn.ensemble import ExtraTreesClassifier
 import numpy as np
 from sklearn.svm import LinearSVC
-from sklearn import svm
-from sklearn.externals import joblib
-from sklearn.svm import SVR
-from sklearn import linear_model
-from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
-
 
 
 def get_y():
@@ -25,7 +17,7 @@ def get_y():
 
 # 从文件读取feature,在已经保存全部特征的情况下使用
 def _select_features(extracted_features_name='tsfresh_extractedFeatures.csv'):
-    y=get_y()
+    y = get_y()
 
     # 全部特征
     extracted_features = pd.read_csv(extracted_features_name)
@@ -36,7 +28,7 @@ def _select_features(extracted_features_name='tsfresh_extractedFeatures.csv'):
 
     # 选取较相关的特征
     # 可选属性 fdr_level = 0.05 ?
-    features_filtered = select_features(extracted_features, y ,n_jobs=1,fdr_level =0.001,ml_task='classification')
+    features_filtered = select_features(extracted_features, y, n_jobs=1, fdr_level=0.001, ml_task='classification')
     print(features_filtered)
     features_filtered.to_csv('tsfresh_filteredFeatures.csv')
     print('select end')
@@ -44,7 +36,7 @@ def _select_features(extracted_features_name='tsfresh_extractedFeatures.csv'):
 
 # test sklearn SelectFromModel
 def test_sklearn_SelectFromModel(extracted_features_name='tsfresh_extractedFeatures.csv'):
-    y=get_y()
+    y = get_y()
 
     # 全部特征
     extracted_features = pd.read_csv(extracted_features_name)
@@ -52,7 +44,7 @@ def test_sklearn_SelectFromModel(extracted_features_name='tsfresh_extractedFeatu
     del extracted_features['id']
     # del extracted_features['Unnamed: 0']
 
-    cols=extracted_features.columns.values.tolist()
+    cols = extracted_features.columns.values.tolist()
     print('select start...')
 
     y = np.array(np.array(y).tolist())
@@ -61,8 +53,8 @@ def test_sklearn_SelectFromModel(extracted_features_name='tsfresh_extractedFeatu
     print(y)
     lsvc = LinearSVC(C=0.1, penalty="l1", dual=False).fit(extracted_features_arr, y)
     res = SelectFromModel(lsvc, prefit=True)
-    features_filtered=res.transform(extracted_features_arr)
-    cols=get_cols(cols,res.get_support())
+    features_filtered = res.transform(extracted_features_arr)
+    cols = get_cols(cols, res.get_support())
     print(np.array(features_filtered))
 
     # # 获取列名？
@@ -79,7 +71,7 @@ def test_sklearn_SelectFromModel(extracted_features_name='tsfresh_extractedFeatu
 
 # test sklearn ExtraTreesClassifier
 def test_sklearn_ExtraTreesClassifier(extracted_features_name='tsfresh_extractedFeatures.csv'):
-    y=get_y()
+    y = get_y()
 
     # 全部特征
     extracted_features = pd.read_csv(extracted_features_name)
@@ -87,7 +79,7 @@ def test_sklearn_ExtraTreesClassifier(extracted_features_name='tsfresh_extracted
     del extracted_features['id']
     # del extracted_features['Unnamed: 0']
 
-    cols=extracted_features.columns.values.tolist()
+    cols = extracted_features.columns.values.tolist()
     print('select start...')
 
     y = np.array(np.array(y).tolist())
@@ -96,19 +88,18 @@ def test_sklearn_ExtraTreesClassifier(extracted_features_name='tsfresh_extracted
     print(y)
     clf = ExtraTreesClassifier(n_estimators=10, max_depth=4)
     clf = clf.fit(extracted_features_arr, y)
-    res=SelectFromModel(clf, prefit=True)
+    res = SelectFromModel(clf, prefit=True)
     features_filtered = res.transform(extracted_features_arr)
-    cols=get_cols(cols,res.get_support())
+    cols = get_cols(cols, res.get_support())
     print(np.array(features_filtered))
-
 
     df = pd.DataFrame(features_filtered, columns=cols)
     df.to_csv('test_sklearn_ExtraTreesClassifier_4.csv')
 
 
 # test
-def get_cols(x,y):
-    cols=[]
+def get_cols(x, y):
+    cols = []
     for i in range(len(y)):
         if y[i]:
             cols.append(x[i])
@@ -117,7 +108,7 @@ def get_cols(x,y):
 
 # test sklearn VarianceThreshold
 def test_sklearn_VarianceThreshold(extracted_features_name='tsfresh_extractedFeatures.csv'):
-    y=get_y()
+    y = get_y()
 
     # 全部特征
     extracted_features = pd.read_csv(extracted_features_name)
@@ -125,7 +116,7 @@ def test_sklearn_VarianceThreshold(extracted_features_name='tsfresh_extractedFea
     del extracted_features['id']
     # del extracted_features['Unnamed: 0']
 
-    cols=extracted_features.columns.values.tolist()
+    cols = extracted_features.columns.values.tolist()
     print('select start...')
 
     y = np.array(np.array(y).tolist())
@@ -133,17 +124,16 @@ def test_sklearn_VarianceThreshold(extracted_features_name='tsfresh_extractedFea
     print(extracted_features)
     print(y)
     res = VarianceThreshold(threshold=(.6 * (1 - .6)))
-    features_filtered=res.fit_transform(extracted_features_arr)
-    cols=get_cols(cols,res.fit(extracted_features_arr).get_support())
+    features_filtered = res.fit_transform(extracted_features_arr)
+    cols = get_cols(cols, res.fit(extracted_features_arr).get_support())
     print(np.array(features_filtered))
 
     df = pd.DataFrame(features_filtered, columns=cols)
     df.to_csv('test_sklearn_VarianceThreshold.csv')
 
 
-
 def test_select_features_VarianceThreshold(extracted_features_name='test_sklearn_VarianceThreshold.csv'):
-    y=get_y()
+    y = get_y()
 
     # 全部特征
     extracted_features = pd.read_csv(extracted_features_name)
@@ -154,7 +144,7 @@ def test_select_features_VarianceThreshold(extracted_features_name='test_sklearn
 
     # 选取较相关的特征
     # 可选属性 fdr_level = 0.05 ?
-    features_filtered = select_features(extracted_features, y, n_jobs=1, fdr_level=0.01,ml_task='classification')
+    features_filtered = select_features(extracted_features, y, n_jobs=1, fdr_level=0.01, ml_task='classification')
     print(features_filtered)
     features_filtered.to_csv('select_features_VarianceThreshold.csv')
     print('select end')
@@ -173,6 +163,3 @@ def start():
     print('varianceThreshold')
     test_sklearn_VarianceThreshold()
     test_select_features_VarianceThreshold()
-
-
-start()

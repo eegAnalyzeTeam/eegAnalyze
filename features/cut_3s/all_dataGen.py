@@ -1,12 +1,8 @@
 import numpy as np
 import mne
 import check_file
-import os, sys
+import os
 import pandas as pd
-from multiprocessing import Process
-import thread_cal_features
-# import eeg_tsfresh_calcFeatures
-import threading
 import csv
 
 
@@ -246,41 +242,6 @@ def save_csv_thread(control_raw, patient_raw, channel_names, bad_channels):
         person_count+=1
         print(person_count)
 
-    # for (eid, raw) in patient_raw.items():
-    #     patient_thread_entity(raw, bad_channels, tsfresh_data, counter)
-    #     counter += 1
-    #
-    #     if counter>=3:
-    #         break
-
-    # threads = []
-    # for (eid, raw) in control_raw.items():
-    #     t1 = Process(target=control_thread_entity, args=(raw, bad_channels, tsfresh_data, counter))
-    #     threads.append(t1)
-    #     counter += 1
-    #
-    # for (eid, raw) in patient_raw.items():
-    #     t1 = Process(target=patient_thread_entity, args=(raw, bad_channels, tsfresh_data, counter))
-    #     threads.append(t1)
-    #     counter += 1
-    #
-    # i = 0
-    # for x in threads:
-    #     i += 1
-    #     x.start()
-    #     if i % 10 == 0:
-    #         x.join()
-    #         threads[i - 2].join()
-    #         threads[i - 3].join()
-    #         threads[i - 4].join()
-    #         threads[i - 5].join()
-    #         threads[i - 6].join()
-    #         threads[i - 7].join()
-    #         threads[i - 8].join()
-    #         threads[i - 9].join()
-    #
-    # x.join()
-
 
 def read_file(filePath):
     control_raw, patient_raw = read_data(filePath)
@@ -289,10 +250,5 @@ def read_file(filePath):
     print('start save...')
     save_csv_thread(control_raw, patient_raw, channel_names, bad_channels)
 
-
-# read_file('/home/rbai/eegData')
-
-read_file('/home/public2/eegData')
-
-# eeg_tsfresh_calcFeatures.get_features('tsfresh_data.csv')
-thread_cal_features.get_features_thread()
+def start():
+    read_file('/home/rbai/eegData')

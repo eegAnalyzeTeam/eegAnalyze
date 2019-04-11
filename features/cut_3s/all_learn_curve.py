@@ -1,10 +1,8 @@
-from sklearn import svm
-from sklearn.model_selection import learning_curve,validation_curve
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB,MultinomialNB
+from sklearn.naive_bayes import GaussianNB
 from sklearn import tree
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
@@ -89,8 +87,6 @@ def init(my_csv):
 
 
 def start():
-    file_names = ['test_sklearn_ExtraTreesClassifier.csv']
+    file_names = ['test_sklearn_ExtraTreesClassifier_4.csv']
     for x in file_names:
         init(x)
-
-start()

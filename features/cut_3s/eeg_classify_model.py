@@ -2,31 +2,14 @@ import pandas as pd
 import numpy as np
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB, MultinomialNB
+from sklearn.naive_bayes import GaussianNB
 from sklearn import tree
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LinearRegression, LogisticRegression
-from sklearn.model_selection import cross_val_score
-import matplotlib.pyplot as plt
 from sklearn.metrics import precision_score, recall_score, accuracy_score
 from sklearn import preprocessing
-from sklearn.linear_model import SGDClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import PolynomialFeatures, StandardScaler
-from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
-
-
-def PolynomialSVC(degree, C=3):
-    return Pipeline([
-        ('poly', PolynomialFeatures(degree=degree)),
-        ('std_scaler', StandardScaler()),
-        # ('linearSVC', svm.LinearSVC(C=C))#注意这两句都行
-        ('kernelSVC', svm.SVC(kernel='linear', degree=degree, C=C))  # 注意这两句都行
-    ])
-
-
 
 
 def get_xy(name):
@@ -41,7 +24,6 @@ def get_xy(name):
         del csv_data['id']
     del csv_data['Unnamed: 0']
     x = np.array(csv_data, dtype=float)
-
 
     return x, y
 
@@ -76,7 +58,6 @@ def naive_bayes_GaussianNB(name, i=1):
     print(accuracy_little, accuracy_big)
     return clf.score(x_test, y_test), accuracy_little, accuracy_big
     # return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
-
 
 
 def k_n_n(name, i=1):
@@ -148,7 +129,7 @@ def svm_train(name, i=1):
 
     x_train = preprocessing.scale(x_train)
     x_test = preprocessing.scale(x_test)
-    clf = svm.LinearSVC(penalty='l2',class_weight='balanced',loss='hinge')
+    clf = svm.LinearSVC(penalty='l2', class_weight='balanced', loss='hinge')
     # clf = svm.SVC(C=10,kernel='rbf',class_weight='balanced')
 
     clf.fit(x_train, y_train.ravel())
@@ -174,15 +155,12 @@ def svm_train(name, i=1):
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
 
 
-
-
 def linear_svm(name, i=1):
     x_train, x_test, y_train, y_test = split_data(name, i)
 
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
-
 
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
@@ -211,10 +189,6 @@ def linear_svm(name, i=1):
     print(accuracy_little, accuracy_big)
     return clf.score(x_test, y_test), accuracy_little, accuracy_big
     # return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
-
-
-
-
 
 
 # 随机森林
@@ -248,13 +222,12 @@ def random_forest(name, i=1):
     # return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
 
 
-
-
 def init_main(name):
-    colums = ['svm','knn', 'decide_tree', 'naive_bayes_GaussianNB', 'random_forest']
+    colums = ['svm', 'knn', 'decide_tree', 'naive_bayes_GaussianNB', 'random_forest']
     res_pd = pd.DataFrame(columns=colums)
 
-    colums = ['svm_less', 'svm_many', 'knn_less', 'knn_many','tree_less', 'tree_many', 'bayes_less', 'bayes_many', 'forest_less',
+    colums = ['svm_less', 'svm_many', 'knn_less', 'knn_many', 'tree_less', 'tree_many', 'bayes_less', 'bayes_many',
+              'forest_less',
               'forest_many']
     acc_pd = pd.DataFrame(columns=colums)
 
@@ -306,73 +279,5 @@ def init_main(name):
     acc_pd.loc['mean'] = acc_pd.mean()
     acc_pd.to_csv(name[:-4] + '_classify_acc.csv')
 
-
-def init_main_3(name):
-    colums = ['svm_precision', 'svm_recall', 'svm_accuracy', 'tree_precision', 'tree_recall', 'tree_accuracy',
-              'bayes_precision', 'bayes_recall', 'bayes_accuracy', 'forest_precision', 'forest_recall',
-              'forest_accuracy']
-    acc_pd = pd.DataFrame(columns=colums)
-
-    for i in range(30):
-        temp = []
-
-        # print('svm:')
-        # precision,recall,accuracy=svm_train(name,i)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision,recall,accuracy)
-
-        # print('svm:')
-        # precision, recall, accuracy = nu_svm(name, i)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision, recall, accuracy)
-
-        print('svm:')
-        precision, recall, accuracy = linear_svm(name, i)
-        temp.append(precision)
-        temp.append(recall)
-        temp.append(accuracy)
-        print(precision, recall, accuracy)
-
-        # print('svm:')
-        # precision, recall, accuracy = SGDRegressor1(name, i)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision, recall, accuracy)
-
-        # print('svm:')
-        # precision, recall, accuracy = _PolynomialSVC(name, i)
-        # temp.append(precision)
-        # temp.append(recall)
-        # temp.append(accuracy)
-        # print(precision, recall, accuracy)
-
-        print('decide tree:')
-        precision, recall, accuracy = decide_tree(name, i)
-        temp.append(precision)
-        temp.append(recall)
-        temp.append(accuracy)
-
-        print('native bayes:')
-        precision, recall, accuracy = naive_bayes_GaussianNB(name, i)
-        temp.append(precision)
-        temp.append(recall)
-        temp.append(accuracy)
-
-        print('random forest:')
-        precision, recall, accuracy = random_forest(name, i)
-        temp.append(precision)
-        temp.append(recall)
-        temp.append(accuracy)
-
-        acc_pd.loc[len(acc_pd)] = temp
-
-    acc_pd.loc['mean'] = acc_pd.mean()
-    acc_pd.to_csv(name[:-4] + '_classify_1.csv')
-
-
-init_main('test_sklearn_ExtraTreesClassifier.csv')
+def start():
+    init_main('test_sklearn_ExtraTreesClassifier_4.csv')
