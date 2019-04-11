@@ -1,4 +1,7 @@
 # 这是对110个人的信号并截取1分钟信号，利用tsfresh库计算特征并进行分类的主要python文件
+
+## 调用命令 python -m features.all_110_1min
+
 - [ ] eeg_analyze_channel.py
     - [ ] 将特征按p值排序（test）
 - [ ] eeg_classify_model.py
