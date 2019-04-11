@@ -224,4 +224,5 @@ def init_main():
     acc_pd.to_csv('eeg_classify_acc.csv')
 
 
-init_main()
+def start():
+    init_main()

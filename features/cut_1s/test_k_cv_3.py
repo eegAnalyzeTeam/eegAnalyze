@@ -1,33 +1,25 @@
 import pandas as pd
 import numpy as np
-from sklearn import metrics
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB, MultinomialNB
+from sklearn.naive_bayes import GaussianNB
 from sklearn import tree
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
 from sklearn.metrics import precision_score, recall_score, accuracy_score
-from sklearn import preprocessing
-from sklearn.linear_model import SGDClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
 
 
-# 从文件中读取训练需要的x，y
-# x会按照p值排序的结果选择特定几列
+# 从文件中读取训练需要的x、y
 def get_xy(name):
+    csv_data = pd.read_csv(name)
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)[:, 1]
 
-    # 选取p值最小的6ge
-    pick = pd.read_csv('analyze_result.csv')
-    pick = list(np.array(pick['name'])[:6])
-    print(pick)
-
-    csv_data = pd.read_csv(name, usecols=pick)
-
+    # 如果有id这一列，则删掉
+    if 'id' in csv_data.columns.values.tolist():
+        del csv_data['id']
+    del csv_data['Unnamed: 0']
     x = np.array(csv_data, dtype=float)
 
     return x, y
@@ -38,6 +30,7 @@ def naive_bayes_GaussianNB(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 将数据缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -56,6 +49,7 @@ def decide_tree(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 将数据缩放到（-1，1）
     print(x_train)
     print(len(x_train[0]))
     print(x_test)
@@ -79,6 +73,7 @@ def linear_svm(x_train, x_test, y_train, y_test):
     # x_train=preprocessing.scale(x_train)
     # x_test=preprocessing.scale(x_test)
 
+    # 将数据缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -101,6 +96,7 @@ def k_n_n(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 将数据缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -123,6 +119,7 @@ def random_forest(x_train, x_test, y_train, y_test):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
+    # 将数据缩放到（-1，1）
     scaling = MinMaxScaler(feature_range=(-1, 1)).fit(x_train)
     x_train = scaling.transform(x_train)
     x_test = scaling.transform(x_test)
@@ -142,9 +139,6 @@ def k_cv_3(name):
               'tree_precision', 'tree_recall', 'tree_accuracy',
               'bayes_precision', 'bayes_recall', 'bayes_accuracy', 'forest_precision', 'forest_recall',
               'forest_accuracy']
-    # colums = ['tree_precision', 'tree_recall', 'tree_accuracy',
-    #           'bayes_precision', 'bayes_recall', 'bayes_accuracy', 'forest_precision', 'forest_recall',
-    #           'forest_accuracy']
     acc_pd = pd.DataFrame(columns=colums)
 
     x, y = get_xy(name)
@@ -193,9 +187,11 @@ def k_cv_3(name):
         acc_pd.loc[len(acc_pd)] = temp
 
     acc_pd.loc['mean'] = acc_pd.mean()
-    acc_pd.to_csv(name[:-4] + '_classify_c_k_p_6.csv')
+    acc_pd.to_csv(name[:-4] + '_classify_c_k.csv')
 
 
-file_names = ['test_sklearn_ExtraTreesClassifier_4.csv']
-for x in file_names:
-    k_cv_3(x)
+def start():
+    file_names = ['tsfresh_filteredFeatures.csv', 'test_sklearn_SelectFromModel.csv',
+                  'select_features_VarianceThreshold.csv', 'test_sklearn_ExtraTreesClassifier_4.csv']
+    for x in file_names:
+        k_cv_3(x)

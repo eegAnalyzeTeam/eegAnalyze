@@ -54,6 +54,7 @@ def troublesome_data(filePath):
 
     return control_q, patient_q
 
+
 # 读取文件
 def read_data(filePath):
     # q contains troublesome eeg files. skip them for now
@@ -118,7 +119,7 @@ def handle_badchannel(raw, badchannels, counter):
     temp_res = []
     i = 0
     # 每秒的数据都截开
-    while temp-512 >= 0:
+    while temp - 512 >= 0:
         x = raw.get_data(picks, start=i, stop=i + 512)
         i += 512
         temp -= 512
@@ -126,7 +127,7 @@ def handle_badchannel(raw, badchannels, counter):
         temp_res.append(x)
         print(temp)
 
-    return temp_res # list
+    return temp_res  # list
 
 
 # 将正常人的数据整理成tsfresh库需要的格式
@@ -186,7 +187,7 @@ def save_csv(control_raw, patient_raw, channel_names, bad_channels):
     # tsfresh_data = pd.DataFrame(columns=columns)
 
     counter = 0
-    person_count=0
+    person_count = 0
 
     for (eid, raw) in control_raw.items():
         # if person_count == 0 or person_count ==15:
@@ -194,13 +195,13 @@ def save_csv(control_raw, patient_raw, channel_names, bad_channels):
         #     continue
 
         # 略去特别大的几条数据
-        if len(raw)>2000000:
-            fileObject = open(str(person_count)+'.txt', 'w')
+        if len(raw) > 2000000:
+            fileObject = open(str(person_count) + '.txt', 'w')
             fileObject.write(str(person_count))
             fileObject.close()
             continue
         counter = control_thread_entity(raw, bad_channels, columns, counter)
-        person_count+=1
+        person_count += 1
         print(person_count)
 
     for (eid, raw) in patient_raw.items():
@@ -209,13 +210,13 @@ def save_csv(control_raw, patient_raw, channel_names, bad_channels):
         #     continue
 
         # 略去特别小的几条数据
-        if len(raw)<400000:
-            fileObject = open(str(person_count)+'.txt', 'w')
+        if len(raw) < 400000:
+            fileObject = open(str(person_count) + '.txt', 'w')
             fileObject.write(str(person_count))
             fileObject.close()
             continue
         counter = patient_thread_entity(raw, bad_channels, columns, counter)
-        person_count+=1
+        person_count += 1
         print(person_count)
 
 
@@ -229,4 +230,5 @@ def read_file(filePath):
     save_csv(control_raw, patient_raw, channel_names, bad_channels)
 
 
-read_file('/home/rbai/eegData')
+def start():
+    read_file('/home/rbai/eegData')

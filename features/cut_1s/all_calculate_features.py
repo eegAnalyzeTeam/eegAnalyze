@@ -54,5 +54,5 @@ def get_features_thread():
     #         print(i)
 
 
-
-get_features_thread()
+def start():
+    get_features_thread()

@@ -1,16 +1,9 @@
 import pandas as pd
-from tsfresh.utilities.dataframe_functions import impute
-from tsfresh import extract_features, select_features
-from sklearn.feature_selection import SelectFromModel,VarianceThreshold,SelectKBest,chi2
+from tsfresh import select_features
+from sklearn.feature_selection import SelectFromModel,VarianceThreshold
 from sklearn.ensemble import ExtraTreesClassifier
 import numpy as np
 from sklearn.svm import LinearSVC
-from sklearn import svm
-from sklearn.externals import joblib
-from sklearn.svm import SVR
-from sklearn import linear_model
-from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
 
 
 # 从文件中读取y
@@ -180,5 +173,3 @@ def start(extracted_features_name='tsfresh_extractedFeatures.csv'):
     test_sklearn_VarianceThreshold(extracted_features)
     test_select_features_VarianceThreshold()
 
-
-start()

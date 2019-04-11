@@ -213,4 +213,5 @@ def get_same_channel(channel1, channel3):
     print(len(same))
 
 
-get_colums_tree('test_sklearn_ExtraTreesClassifier_4.csv')
+def start():
+    get_colums_tree('test_sklearn_ExtraTreesClassifier_4.csv')

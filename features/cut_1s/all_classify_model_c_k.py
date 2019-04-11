@@ -20,7 +20,6 @@ def get_xy(name):
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)[:, 1]
 
-
     if 'id' in csv_data.columns.values.tolist():
         del csv_data['id']
     del csv_data['Unnamed: 0']
@@ -77,7 +76,7 @@ def decide_tree(x_train, x_test, y_train, y_test, i):
 
 
 # 线性svm
-def linear_svm(x_train, x_test, y_train, y_test,i):
+def linear_svm(x_train, x_test, y_train, y_test, i):
     # x_train=preprocessing.scale(x_train)
     # x_test=preprocessing.scale(x_test)
 
@@ -87,7 +86,6 @@ def linear_svm(x_train, x_test, y_train, y_test,i):
 
     clf = svm.LinearSVC(penalty='l2', class_weight='balanced', loss='hinge')
     clf.fit(x_train, y_train)
-
 
     if i == 0:
         # 保存训练好的模型，以及标准化数据的模型
@@ -102,8 +100,9 @@ def linear_svm(x_train, x_test, y_train, y_test,i):
 
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
 
+
 # knn
-def k_n_n(x_train, x_test, y_train, y_test,i):
+def k_n_n(x_train, x_test, y_train, y_test, i):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
@@ -176,14 +175,14 @@ def k_cv_3(name):
         temp = []
 
         print('svm:')
-        precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test,i)
+        precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test, i)
         temp.append(precision)
         temp.append(recall)
         temp.append(accuracy)
         print(precision, recall, accuracy)
 
         print('knn:')
-        precision, recall, accuracy = k_n_n(x_train, x_test, y_train, y_test,i)
+        precision, recall, accuracy = k_n_n(x_train, x_test, y_train, y_test, i)
         temp.append(precision)
         temp.append(recall)
         temp.append(accuracy)
@@ -213,6 +212,7 @@ def k_cv_3(name):
     acc_pd.loc['mean'] = acc_pd.mean()
     acc_pd.to_csv(name[:-4] + '_c_k_clf_test.csv')
 
+
 # 把数据三七分割
 def get_train_test(name):
     csv_data = pd.read_csv(name)
@@ -227,6 +227,7 @@ def get_train_test(name):
     x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=1, train_size=0.7)
 
     return x_train, x_test, y_train.ravel(), y_test.ravel()
+
 
 # 利用保存的模型，在原先没有用的30%的数据上测试
 # 调用方法见下
@@ -243,7 +244,6 @@ def get_3test(name_x, name_y):
     expected = y_test.ravel()
     predicted = clf.predict(x_test)
     print(precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted))
-
 
     x_test = np.loadtxt(name_x, delimiter=",")
     y_test = np.loadtxt(name_y, delimiter=",")
@@ -272,8 +272,9 @@ def get_3test(name_x, name_y):
     print(precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted))
 
 
-file_names=['test_sklearn_ExtraTreesClassifier_4.csv']
-for x in file_names:
-    k_cv_3(x)
+def start():
+    file_names = ['test_sklearn_ExtraTreesClassifier_4.csv']
+    for x in file_names:
+        k_cv_3(x)
 
-get_3test('x_test.csv', 'y_test.csv')
+    get_3test('x_test.csv', 'y_test.csv')
