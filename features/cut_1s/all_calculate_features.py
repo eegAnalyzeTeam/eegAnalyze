@@ -32,7 +32,7 @@ def get_features_thread():
             print(i)
 
     # 病人
-    for i in range(23003, 24363):
+    for i in range(5774, 24363):
         try:
             temp='patient_data_' + str(i) + '.csv'
             get_features(temp, i)

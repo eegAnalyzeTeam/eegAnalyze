@@ -16,24 +16,17 @@ from sklearn.preprocessing import MinMaxScaler
 
 
 def get_xy(name):
-    # csv_data = pd.read_csv(name)
+    csv_data = pd.read_csv(name)
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)[:, 1]
 
-    # if 'id' in csv_data.columns.values.tolist():
-    #     del csv_data['id']
-    # del csv_data['Unnamed: 0']
-
-    pick=pd.read_csv('analyze_result.csv')
-    pick=list(np.array(pick['name'])[:5])
-    print(pick)
-    # csv_data=csv_data[pick]
-
-    csv_data = pd.read_csv(name,usecols=pick)
-
+    if 'id' in csv_data.columns.values.tolist():
+        del csv_data['id']
+    del csv_data['Unnamed: 0']
     x = np.array(csv_data, dtype=float)
 
     return x, y
+
 
 
 def naive_bayes_GaussianNB(x_train, x_test, y_train, y_test):
@@ -73,6 +66,7 @@ def decide_tree(x_train, x_test, y_train, y_test):
 
     expected = y_test
     predicted = clf.predict(x_test)
+
 
     return  precision_score(expected,predicted),recall_score(expected,predicted),accuracy_score(expected,predicted)
 
@@ -211,8 +205,9 @@ def k_cv_3(name):
         acc_pd.loc[len(acc_pd)] = temp
 
     acc_pd.loc['mean'] = acc_pd.mean()
-    acc_pd.to_csv(name[:-4] + '_classify_c_k_p_5.csv')
+    acc_pd.to_csv(name[:-4] + '_classify_c_k.csv')
 
-file_names=['test_sklearn_ExtraTreesClassifier.csv']
-for x in file_names:
-    k_cv_3(x)
+def start():
+    file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier.csv']
+    for x in file_names:
+        k_cv_3(x)
