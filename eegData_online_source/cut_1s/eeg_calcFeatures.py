@@ -1,4 +1,4 @@
-import eeg_getData
+from eegData_online_source.cut_1s import eeg_getData
 import numpy as np
 import mne
 import csv
@@ -95,21 +95,19 @@ def get_DataFrame(control_raw, patient_raw):
         print(person_count)
 
 
-
 # 计算全部特征
-def get_features(file_name,count):
+def get_features(file_name, count):
     csv_data = pd.read_csv(file_name)
     timeseries = csv_data.iloc[:, :-1]
-
 
     print('start getfeatures...')
     # 全部特征
     extracted_features = extract_features(timeseries, column_id="id", column_sort="time")
     impute(extracted_features)
     print('start save ...')
-    extracted_features.to_csv('data/tsfresh_extractedFeatures'+str(count)+'.csv')
+    extracted_features.to_csv('data/tsfresh_extractedFeatures' + str(count) + '.csv')
 
-    print(str(count)+'  end')
+    print(str(count) + '  end')
 
 
 # 两个for循环针对每个csv文件计算特征
@@ -118,17 +116,18 @@ def get_features_thread():
 
     for i in range(0, 4275):
         try:
-            temp='data/control_data_' + str(i) + '.csv'
-            get_features(temp,i)
+            temp = 'data/control_data_' + str(i) + '.csv'
+            get_features(temp, i)
         except Exception:
             print(i)
 
     for i in range(4275, 8678):
         try:
-            temp='data/patient_data_' + str(i) + '.csv'
+            temp = 'data/patient_data_' + str(i) + '.csv'
             get_features(temp, i)
         except Exception:
             print(i)
 
 
-get_features_thread()
+def start():
+    get_features_thread()

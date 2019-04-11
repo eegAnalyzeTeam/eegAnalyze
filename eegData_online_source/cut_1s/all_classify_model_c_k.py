@@ -256,8 +256,10 @@ def get_3test(name_x, name_y):
     print(precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted))
 
 
-file_names = ['test_sklearn_ExtraTreesClassifier_4.csv']
-for x in file_names:
-    k_cv_3(x)
+def start():
+    file_names = ['tsfresh_filteredFeatures.csv', 'test_sklearn_SelectFromModel.csv',
+                  'select_features_VarianceThreshold.csv', 'test_sklearn_ExtraTreesClassifier_4.csv']
+    for x in file_names:
+        k_cv_3(x)
 
-get_3test('x_test.csv', 'y_test.csv')
+    get_3test('x_test.csv', 'y_test.csv')

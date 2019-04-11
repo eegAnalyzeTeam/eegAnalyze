@@ -98,10 +98,7 @@ def init(my_csv):
 
 # 学习曲线的入口函数
 def start():
-    file_names = ['test_sklearn_ExtraTreesClassifier_4.csv']
-    # 此处for循环留给同时画多个csv的学习曲线（此时for循环并没有什么意义）
+    file_names = ['tsfresh_filteredFeatures.csv', 'test_sklearn_SelectFromModel.csv',
+                  'select_features_VarianceThreshold.csv', 'test_sklearn_ExtraTreesClassifier_4.csv']
     for x in file_names:
         init(x)
-
-
-start()

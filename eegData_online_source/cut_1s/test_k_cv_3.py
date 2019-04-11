@@ -195,10 +195,8 @@ def k_cv_3(name):
     acc_pd.to_csv(name[:-4] + '_classify_c_k.csv')
 
 
-# k_cv_3('tsfresh_extractedFeatures.csv')
-#
-file_names = ['tsfresh_filteredFeatures.csv', 'test_sklearn_SelectFromModel.csv',
-              'select_features_VarianceThreshold.csv', 'test_sklearn_ExtraTreesClassifier_4.csv']
-# file_names=['test_sklearn_ExtraTreesClassifier_4.csv']
-for x in file_names:
-    k_cv_3(x)
+def start():
+    file_names = ['tsfresh_filteredFeatures.csv', 'test_sklearn_SelectFromModel.csv',
+                  'select_features_VarianceThreshold.csv', 'test_sklearn_ExtraTreesClassifier_4.csv']
+    for x in file_names:
+        k_cv_3(x)

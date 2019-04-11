@@ -173,5 +173,3 @@ def start(extracted_features_name='tsfresh_extractedFeatures.csv'):
     test_sklearn_VarianceThreshold(extracted_features)
     test_select_features_VarianceThreshold()
 
-
-start()
