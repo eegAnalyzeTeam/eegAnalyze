@@ -1,4 +1,4 @@
-import eeg_getData
+from eegData_online_source.cut_3s import eeg_getData
 import numpy as np
 import mne
 import csv
@@ -7,6 +7,7 @@ from tsfresh import extract_features
 from tsfresh.utilities.dataframe_functions import impute
 
 import pandas as pd
+
 
 def handle_channel(raw):
     picks = mne.pick_types(raw.info, eeg=True)
@@ -90,29 +91,27 @@ def get_DataFrame(control_raw, patient_raw):
         print(person_count)
 
 
-
 def handle_y(y):
-    y=y.drop_duplicates(subset=['id', 'y'], keep='first')
-    y=y.reset_index(drop=True)
-    y=y.iloc[:,-1]
+    y = y.drop_duplicates(subset=['id', 'y'], keep='first')
+    y = y.reset_index(drop=True)
+    y = y.iloc[:, -1]
 
     return y
 
 
 # 有效特征
-def get_features(file_name,count):
+def get_features(file_name, count):
     csv_data = pd.read_csv(file_name)
     timeseries = csv_data.iloc[:, :-1]
-
 
     print('start getfeatures...')
     # 全部特征
     extracted_features = extract_features(timeseries, column_id="id", column_sort="time")
     impute(extracted_features)
     print('start save ...')
-    extracted_features.to_csv('data/tsfresh_extractedFeatures'+str(count)+'.csv')
+    extracted_features.to_csv('data/tsfresh_extractedFeatures' + str(count) + '.csv')
 
-    print(str(count)+'  end')
+    print(str(count) + '  end')
 
 
 def get_features_thread():
@@ -120,18 +119,20 @@ def get_features_thread():
 
     for i in range(0, 1420):
         try:
-            temp='data/control_data_' + str(i) + '.csv'
-            get_features(temp,i)
+            temp = 'data/control_data_' + str(i) + '.csv'
+            get_features(temp, i)
         except Exception:
             print(i)
 
     for i in range(1420, 2881):
         try:
-            temp='data/patient_data_' + str(i) + '.csv'
+            temp = 'data/patient_data_' + str(i) + '.csv'
             get_features(temp, i)
         except Exception:
             print(i)
 
-# control_raw, patient_raw = eeg_getData.start()
-# get_DataFrame(control_raw, patient_raw)
-get_features_thread()
+
+def start():
+    control_raw, patient_raw = eeg_getData.start()
+    get_DataFrame(control_raw, patient_raw)
+    get_features_thread()

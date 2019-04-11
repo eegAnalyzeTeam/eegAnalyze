@@ -1,12 +1,10 @@
 import pandas as pd
 import numpy as np
-from sklearn import metrics
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB, MultinomialNB
+from sklearn.naive_bayes import GaussianNB
 from sklearn import tree
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
 from sklearn.metrics import precision_score, recall_score, accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
@@ -18,7 +16,6 @@ def get_xy(name):
     csv_data = pd.read_csv(name)
     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
     y = np.array(y_csv_data)[:, 1]
-
 
     if 'id' in csv_data.columns.values.tolist():
         del csv_data['id']
@@ -72,8 +69,7 @@ def decide_tree(x_train, x_test, y_train, y_test, i):
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
 
 
-
-def linear_svm(x_train, x_test, y_train, y_test,i):
+def linear_svm(x_train, x_test, y_train, y_test, i):
     # x_train=preprocessing.scale(x_train)
     # x_test=preprocessing.scale(x_test)
 
@@ -83,7 +79,6 @@ def linear_svm(x_train, x_test, y_train, y_test,i):
 
     clf = svm.LinearSVC(penalty='l2', class_weight='balanced', loss='hinge')
     clf.fit(x_train, y_train)
-
 
     if i == 0:
         joblib.dump(clf, "svm_model.m")
@@ -98,7 +93,7 @@ def linear_svm(x_train, x_test, y_train, y_test,i):
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
 
 
-def k_n_n(x_train, x_test, y_train, y_test,i):
+def k_n_n(x_train, x_test, y_train, y_test, i):
     # x_train = preprocessing.scale(x_train)
     # x_test = preprocessing.scale(x_test)
 
@@ -138,7 +133,6 @@ def random_forest(x_train, x_test, y_train, y_test):
     predicted = clf.predict(x_test)
 
     return precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted)
-
 
 
 def k_cv_3(name):
@@ -183,14 +177,14 @@ def k_cv_3(name):
         # print(precision, recall, accuracy)
 
         print('svm:')
-        precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test,i)
+        precision, recall, accuracy = linear_svm(x_train, x_test, y_train, y_test, i)
         temp.append(precision)
         temp.append(recall)
         temp.append(accuracy)
         print(precision, recall, accuracy)
 
         print('knn:')
-        precision, recall, accuracy = k_n_n(x_train, x_test, y_train, y_test,i)
+        precision, recall, accuracy = k_n_n(x_train, x_test, y_train, y_test, i)
         temp.append(precision)
         temp.append(recall)
         temp.append(accuracy)
@@ -248,7 +242,6 @@ def get_3test(name_x, name_y):
     predicted = clf.predict(x_test)
     print(precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted))
 
-
     x_test = np.loadtxt(name_x, delimiter=",")
     y_test = np.loadtxt(name_y, delimiter=",")
 
@@ -272,9 +265,10 @@ def get_3test(name_x, name_y):
     print(precision_score(expected, predicted), recall_score(expected, predicted), accuracy_score(expected, predicted))
 
 
+def start():
+    file_names = ['tsfresh_filteredFeatures.csv', 'test_sklearn_SelectFromModel.csv',
+                  'select_features_VarianceThreshold.csv', 'test_sklearn_ExtraTreesClassifier_8.csv']
+    for x in file_names:
+        k_cv_3(x)
 
-file_names=['test_sklearn_ExtraTreesClassifier_8.csv']
-for x in file_names:
-    k_cv_3(x)
-
-get_3test('x_test.csv', 'y_test.csv')
+    get_3test('x_test.csv', 'y_test.csv')
