@@ -1,4 +1,7 @@
 # 这是对110个人的alpha1频段的信号，利用tsfresh库计算特征并进行分类的主要python文件
+
+## 调用命令  python -m features.alpha1_110
+
 - [ ] eeg_analyze_channel.py
     - [ ] 将特征按p值排序（test）
 - [ ] eeg_classify_model.py
