@@ -9,9 +9,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 import check_file
-import psd_code.eeg_psd_anova as eeg_psd_anova
-import psd_code.eeg_psd_csv as eeg_psd_csv
-import psd_code.eeg_psd_plot as eeg_psd_plot
+from psd_code import eeg_psd_anova
+from psd_code import eeg_psd_csv
+from psd_code import eeg_psd_plot
 
 def troublesome_data(filePath):
     control_q = []
