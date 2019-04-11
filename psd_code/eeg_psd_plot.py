@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import eeg_psd_channel
+from psd_code import eeg_psd_channel
 import pandas as pd
 
-from eeg_psd_csv import pick_len
+from psd_code.eeg_psd_csv import pick_len
 
 
 

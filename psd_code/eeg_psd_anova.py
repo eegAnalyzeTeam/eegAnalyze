@@ -3,7 +3,7 @@ import numpy as np
 from scipy import stats
 from statsmodels.formula.api import ols
 from statsmodels.stats.anova import anova_lm
-import eeg_psd_channel
+from psd_code import eeg_psd_channel
 
 # This program reads all csv files and does the ANOVA test
 

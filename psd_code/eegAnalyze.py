@@ -2,23 +2,21 @@
 # The program calls preprocessing functions, calculate psds for each
 # person and use anova test to find the significant channels and sub-frequencies
 import os
-import sys
 
 import mne
-import numpy as np
-from matplotlib import pyplot as plt
 
-import check_file
+from psd_code import check_file
 from psd_code import eeg_psd_anova
 from psd_code import eeg_psd_csv
 from psd_code import eeg_psd_plot
+
 
 def troublesome_data(filePath):
     control_q = []
     patient_q = []
     for dirpath, _, files in os.walk(filePath):
         if 'eyeclose' in dirpath and 'health_control' in dirpath:
-            #health control group
+            # health control group
             for fname in files:
                 if '.vhdr' in fname:
                     id_control = fname[:-5]
@@ -30,7 +28,7 @@ def troublesome_data(filePath):
                         control_q.append(id_control)
 
         elif 'eyeclose' in dirpath and 'mdd_patient' in dirpath:
-            #mdd group
+            # mdd group
             for fname in files:
                 if '.vhdr' in fname:
                     id_patient = fname[:-5]
@@ -43,10 +41,11 @@ def troublesome_data(filePath):
 
     return control_q, patient_q
 
+
 def readData(filePath):
     # q contains troublesome eeg files. skip them for now
     control_q, patient_q = troublesome_data(filePath)
-    #q = ['njh_after_pjk_20180725_close.vhdr', 'ccs_yb_20180813_close.vhdr', 'njh_before_pjk_20180613_close.vhdr', 'ccs_before_wjy_20180817_close.vhdr', 'ccs_after_csx_20180511_close.vhdr']
+    # q = ['njh_after_pjk_20180725_close.vhdr', 'ccs_yb_20180813_close.vhdr', 'njh_before_pjk_20180613_close.vhdr', 'ccs_before_wjy_20180817_close.vhdr', 'ccs_after_csx_20180511_close.vhdr']
     print(patient_q)
     print('---------===========-----------')
     control_raw = {}
@@ -55,7 +54,7 @@ def readData(filePath):
     for dirpath, _, files in os.walk(filePath):
 
         if 'eyeclose' in dirpath and 'health_control' in dirpath:
-            #health control group
+            # health control group
             for fname in files:
                 if '.vhdr' in fname and fname not in control_q:
                     id_control = fname[:-5]
@@ -69,7 +68,7 @@ def readData(filePath):
                               str(len(raw.info['ch_names'])) + " channels. id=" + id_control)
 
         elif 'eyeclose' in dirpath and 'mdd_patient' in dirpath:
-            #mdd group
+            # mdd group
             for fname in files:
                 if '.vhdr' in fname and fname[:-5] not in patient_q:
                     id_patient = fname[:-5]
@@ -84,24 +83,17 @@ def readData(filePath):
                               str(len(raw.info['ch_names'])) + " channels. id=" + id_patient)
 
     return control_raw, patient_raw
-    #return control_q, patient_q
-#raw = mne.io.read_raw_brainvision('/home/caeit/Documents/work/eeg/eegData/mdd_patient/eyeopen/njh_after_pjk_20180725_open.vhdr',preload=True)
-#raw = mne.io.read_raw_brainvision('/home/caeit/Documents/work/eeg/eegData/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',preload=True)
-
-#control_raw, patient_raw = readData('/home/caeit/Documents/work/eeg/eegData')
-#control_q, patient_q = readData('/home/caeit/Documents/work/eeg/eegData')
-control_raw, patient_raw = readData('/home/rbai/eegData')
-#control_raw, patient_raw = readData('/home/paulbai/eeg/eegData')
-
-eeg_psd_csv.eeg_psd(control_raw, patient_raw)
-
-eeg_psd_anova.psd_anova()
-
-eeg_psd_plot.plot_psd()
+    # return control_q, patient_q
 
 
-#print(control_raw)
-#print('=================')
-#print(patient_raw)
-print('control: ' + str(len(control_raw)))
-print('patient: ' + str(len(patient_raw)))
+def start():
+    control_raw, patient_raw = readData('/home/rbai/eegData')
+
+    eeg_psd_csv.eeg_psd(control_raw, patient_raw)
+
+    eeg_psd_anova.psd_anova()
+
+    eeg_psd_plot.plot_psd()
+
+    print('control: ' + str(len(control_raw)))
+    print('patient: ' + str(len(patient_raw)))

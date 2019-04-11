@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-from eeg_psd_csv import pick_len
+from psd_code.eeg_psd_csv import pick_len
 
 
 def eeg_psd_pick_channel(name):
