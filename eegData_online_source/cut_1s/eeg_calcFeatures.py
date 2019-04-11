@@ -130,4 +130,6 @@ def get_features_thread():
 
 
 def start():
+    control_raw, patient_raw = eeg_getData.start()
+    get_DataFrame(control_raw, patient_raw)
     get_features_thread()
