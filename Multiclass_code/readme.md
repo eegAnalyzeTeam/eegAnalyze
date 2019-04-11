@@ -1,4 +1,7 @@
 # 这是对58个人的信号并截取1分钟信号，利用tsfresh库计算特征并进行多级分类的主要python文件
+
+## 调用命令   python -m Multiclass_code
+
 - [ ] tsfresh_multiclass_calcFeatures.py
     - [ ] 对每个人计算特征
     - [ ] 将所有特征合成一个文件
