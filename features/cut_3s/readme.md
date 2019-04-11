@@ -1,4 +1,7 @@
 # 这是对分割成3s的信号，利用tsfresh库计算特征并进行分类的主要python文件
+
+## 调用命令  python -m features.cut_3s
+
 - [ ] all_calculate_features.py
     - [ ] 用来计算全部的特征
 - [ ] all_classify_model_c_k.py
