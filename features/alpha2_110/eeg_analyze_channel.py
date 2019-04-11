@@ -38,7 +38,8 @@ def calculate_anova_p(name):
         temp.append(x[1])
         df.loc[len(df)] = x
 
-    df.to_csv('analyze_result.csv')
+    df.to_csv('analyze_result_alpha2.csv')
 
 
-calculate_anova_p('test_sklearn_ExtraTreesClassifier.csv')
+def start():
+    calculate_anova_p('select_features_VarianceThreshold.csv')

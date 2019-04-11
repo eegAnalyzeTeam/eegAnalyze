@@ -1,24 +1,23 @@
 import numpy as np
 import mne
 import check_file
-import os, sys
+import os
 import pandas as pd
 from multiprocessing import Process
-# import eeg_tsfresh_calcFeatures
 
 
 def raw_data_info(filePath):
-    raw = mne.io.read_raw_brainvision(filePath+'/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
+    raw = mne.io.read_raw_brainvision(filePath + '/health_control/eyeclose/jkdz_cc_20180430_close.vhdr',
                                       preload=True)
-    #channel_names = raw.info['ch_names']
+    # channel_names = raw.info['ch_names']
     print()
     channel_names = []
     for i in raw.info['ch_names']:
-        if i!='Oz':
-            if i!='ECG':
+        if i != 'Oz':
+            if i != 'ECG':
                 channel_names.append(i)
 
-    bad_channels = ['Oz','ECG']
+    bad_channels = ['Oz', 'ECG']
     return channel_names, bad_channels
 
 
@@ -93,20 +92,20 @@ def read_data(filePath):
     return control_raw, patient_raw
 
 
-def handle_badchannel(raw,badchannels):
+def handle_badchannel(raw, badchannels):
     raw.load_data()
     raw.info['bads'] = badchannels
     picks = mne.pick_types(raw.info, eeg=True, exclude='bads')
-    raw=raw.filter(10,12)
+    raw = raw.filter(10, 12)
     raw.resample(48, npad='auto')
     print('success resample')
     raw = raw.get_data(picks)
-    raw=np.array(raw).T
+    raw = np.array(raw).T
 
     return raw
 
 
-def control_thread_entity(raw,bad_channels,tsfresh_data,counter):
+def control_thread_entity(raw, bad_channels, tsfresh_data, counter):
     temp_raw = handle_badchannel(raw, bad_channels)
     time = 0.0
     print(len(temp_raw))
@@ -117,10 +116,11 @@ def control_thread_entity(raw,bad_channels,tsfresh_data,counter):
         time += 0.01
         x.append('0')
         tsfresh_data.loc[len(tsfresh_data)] = x
-    tsfresh_data.to_csv('control_data_'+str(counter)+'.csv')
+    tsfresh_data.to_csv('control_data_' + str(counter) + '.csv')
     print(counter)
 
-def patient_thread_entity(raw,bad_channels,tsfresh_data,counter):
+
+def patient_thread_entity(raw, bad_channels, tsfresh_data, counter):
     temp_raw = handle_badchannel(raw, bad_channels)
     time = 0.0
     print(len(temp_raw))
@@ -131,14 +131,14 @@ def patient_thread_entity(raw,bad_channels,tsfresh_data,counter):
         time += 0.01
         x.append('1')
         tsfresh_data.loc[len(tsfresh_data)] = x
-    tsfresh_data.to_csv('patient_data_'+str(counter)+'.csv')
+    tsfresh_data.to_csv('patient_data_' + str(counter) + '.csv')
     print(counter)
 
 
-def save_csv_thread(control_raw,patient_raw,channel_names, bad_channels):
+def save_csv_thread(control_raw, patient_raw, channel_names, bad_channels):
     columns = channel_names.copy()
-    columns.insert(0,'time')
-    columns.insert(0,'id')
+    columns.insert(0, 'time')
+    columns.insert(0, 'id')
     columns = columns[:-1]
     columns.append('y')
     tsfresh_data = pd.DataFrame(columns=columns)
@@ -147,72 +147,70 @@ def save_csv_thread(control_raw,patient_raw,channel_names, bad_channels):
 
     threads = []
     for (eid, raw) in control_raw.items():
-        t1 = Process(target=control_thread_entity, args=(raw,bad_channels,tsfresh_data,counter))
+        t1 = Process(target=control_thread_entity, args=(raw, bad_channels, tsfresh_data, counter))
         threads.append(t1)
-        counter+=1
-
+        counter += 1
 
     for (eid, raw) in patient_raw.items():
-        t1 = Process(target=patient_thread_entity, args=(raw,bad_channels,tsfresh_data,counter))
+        t1 = Process(target=patient_thread_entity, args=(raw, bad_channels, tsfresh_data, counter))
         threads.append(t1)
-        counter+=1
+        counter += 1
 
-    i=0
+    i = 0
     for x in threads:
-        i+=1
+        i += 1
         x.start()
-        if i%10==0:
+        if i % 10 == 0:
             x.join()
 
     x.join()
 
 
-
-def save_csv(control_raw,patient_raw,channel_names, bad_channels):
+def save_csv(control_raw, patient_raw, channel_names, bad_channels):
     columns = channel_names.copy()
-    columns.insert(0,'time')
-    columns.insert(0,'id')
+    columns.insert(0, 'time')
+    columns.insert(0, 'id')
     columns = columns[:-1]
     columns.append('y')
     tsfresh_data = pd.DataFrame(columns=columns)
 
     counter = 0
     for (eid, raw) in control_raw.items():
-        temp_raw=handle_badchannel(raw,bad_channels)
-        time=0.0
+        temp_raw = handle_badchannel(raw, bad_channels)
+        time = 0.0
         for x in temp_raw:
-            x=list(x)
-            x.insert(0,time)
-            x.insert(0,counter)
-            time+=0.01
+            x = list(x)
+            x.insert(0, time)
+            x.insert(0, counter)
+            time += 0.01
             x.append('0')
             tsfresh_data.loc[len(tsfresh_data)] = x
         print(counter)
-        counter+=1
+        counter += 1
 
     for (eid, raw) in patient_raw.items():
-        temp_raw=handle_badchannel(raw,bad_channels)
-        time=0.0
+        temp_raw = handle_badchannel(raw, bad_channels)
+        time = 0.0
         for x in temp_raw:
-            x=list(x)
-            x.insert(0,time)
-            x.insert(0,counter)
-            time+=0.01
+            x = list(x)
+            x.insert(0, time)
+            x.insert(0, counter)
+            time += 0.01
             x.append('1')
             tsfresh_data.loc[len(tsfresh_data)] = x
-        counter+=1
+        counter += 1
         print(counter)
 
     tsfresh_data.to_csv('features_change/tsfresh_data_alpha2.csv')
 
 
 def read_file(filePath):
-    control_raw,patient_raw=read_data(filePath)
+    control_raw, patient_raw = read_data(filePath)
     print('read success')
-    channel_names, bad_channels=raw_data_info(filePath)
+    channel_names, bad_channels = raw_data_info(filePath)
     print('start save...')
     save_csv_thread(control_raw, patient_raw, channel_names, bad_channels)
 
 
-read_file('/home/public2/eegData')
-# eeg_tsfresh_calcFeatures.get_features('tsfresh_data.csv')
+def start():
+    read_file('/home/rbai/eegData')

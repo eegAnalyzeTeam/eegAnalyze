@@ -7,8 +7,6 @@ import numpy as np
 from sklearn.svm import LinearSVC
 from sklearn import svm
 from sklearn.externals import joblib
-from sklearn.svm import SVR
-from sklearn import linear_model
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 
@@ -254,6 +252,3 @@ def start():
     test_sklearn_ExtraTreesClassifier()
     test_sklearn_VarianceThreshold()
     test_select_features_VarianceThreshold()
-
-
-start()
