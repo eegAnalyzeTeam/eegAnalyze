@@ -1,18 +1,12 @@
 import pandas as pd
 import numpy as np
-from sklearn import metrics
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB,MultinomialNB
+from sklearn.naive_bayes import GaussianNB
 from sklearn import tree
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
 from sklearn.metrics import precision_score,recall_score,accuracy_score
-from sklearn import preprocessing
-from sklearn.linear_model import SGDClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import MinMaxScaler
 
 
 lack_alpha1=[8,15,28]
@@ -213,9 +207,8 @@ def k_cv_3(name):
     acc_pd.loc['mean'] = acc_pd.mean()
     acc_pd.to_csv(name[:-4] + '_classify_c_k_3.csv')
 
-# k_cv_3('tsfresh_extractedFeatures.csv')
-#
-file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier.csv']
-# file_names=['test_sklearn_ExtraTreesClassifier_10.csv']
-for x in file_names:
-    k_cv_3(x)
+
+def start():
+    file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv','test_sklearn_ExtraTreesClassifier.csv']
+    for x in file_names:
+        k_cv_3(x)

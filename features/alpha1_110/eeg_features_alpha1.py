@@ -1,12 +1,9 @@
 import numpy as np
 import mne
 import check_file
-import os, sys
+import os
 import pandas as pd
 from multiprocessing import Process
-
-
-# import eeg_tsfresh_calcFeatures
 
 
 def raw_data_info(filePath):
@@ -178,7 +175,6 @@ def save_csv_thread(control_raw, patient_raw, channel_names, bad_channels):
     x.join()
 
 
-
 def read_file(filePath):
     control_raw, patient_raw = read_data(filePath)
     print('read success')
@@ -187,5 +183,5 @@ def read_file(filePath):
     save_csv_thread(control_raw, patient_raw, channel_names, bad_channels)
 
 
-read_file('/home/public2/eegData')
-# eeg_tsfresh_calcFeatures.get_features('tsfresh_data.csv')
+def start():
+    read_file('/home/rbai/eegData')

@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
 from scipy.stats import f_oneway
-from statsmodels.formula.api import ols
-from statsmodels.stats.anova import anova_lm
 import math
 
 def handle_data(name):
@@ -39,6 +37,8 @@ def calculate_anova_p(name):
         temp.append(x[1])
         df.loc[len(df)]=x
 
-    df.to_csv('analyze_result_all_tree.csv')
+    df.to_csv('analyze_result_all.csv')
 
-calculate_anova_p('test_sklearn_ExtraTreesClassifier.csv')
+
+def start():
+    calculate_anova_p('select_features_VarianceThreshold.csv')

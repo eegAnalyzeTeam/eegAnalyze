@@ -2,16 +2,16 @@ import pandas as pd
 import numpy as np
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB,MultinomialNB
+from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn import tree
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
 
+lack_alpha1 = [8, 15, 28]
+lack_alpha2 = [11, 21, 28, 53, 93, 95]
 
-lack_alpha1=[8,15,28]
-lack_alpha2=[11,21,28,53,93,95]
 
 def get_xy(name):
     csv_data = pd.read_csv(name)
@@ -31,7 +31,7 @@ def get_xy(name):
 
 # simple print result
 def simple_k_cv():
-    x,y=get_xy()
+    x, y = get_xy()
     clf = GaussianNB()
     scores = cross_val_score(clf, x, y, cv=10)
     print('bayes:')
@@ -44,13 +44,13 @@ def simple_k_cv():
     print(scores)
     print(scores.mean())
 
-    clf = svm.SVC(kernel='linear',class_weight='balanced')
+    clf = svm.SVC(kernel='linear', class_weight='balanced')
     scores = cross_val_score(clf, x, y, cv=10)
     print('svm:')
     print(scores)
     print(scores.mean())
 
-    clf = RandomForestClassifier(n_estimators=100, max_depth=4,class_weight='balanced')
+    clf = RandomForestClassifier(n_estimators=100, max_depth=4, class_weight='balanced')
     scores = cross_val_score(clf, x, y, cv=10)
     print('random forest:')
     print(scores)
@@ -68,11 +68,11 @@ def naive_bayes_GaussianNB(x_train, x_test, y_train, y_test):
     matrix = metrics.confusion_matrix(expected, predicted, labels=label)
     print(matrix)  # 输出混淆矩阵信息
 
-    accuracy_data=np.array(matrix)
-    accuracy_little=accuracy_data[0][0]/(accuracy_data[0][0]+accuracy_data[0][1])
-    accuracy_big=accuracy_data[1][1]/(accuracy_data[1][0]+accuracy_data[1][1])
-    print(accuracy_little,accuracy_big)
-    return clf.score(x_test, y_test),accuracy_little,accuracy_big
+    accuracy_data = np.array(matrix)
+    accuracy_little = accuracy_data[0][0] / (accuracy_data[0][0] + accuracy_data[0][1])
+    accuracy_big = accuracy_data[1][1] / (accuracy_data[1][0] + accuracy_data[1][1])
+    print(accuracy_little, accuracy_big)
+    return clf.score(x_test, y_test), accuracy_little, accuracy_big
 
 
 # 决策树
@@ -87,16 +87,16 @@ def decide_tree(x_train, x_test, y_train, y_test):
     matrix = metrics.confusion_matrix(expected, predicted, labels=label)
     print(matrix)  # 输出混淆矩阵信息
 
-    accuracy_data=np.array(matrix)
-    accuracy_little=accuracy_data[0][0]/(accuracy_data[0][0]+accuracy_data[0][1])
-    accuracy_big=accuracy_data[1][1]/(accuracy_data[1][0]+accuracy_data[1][1])
-    print(accuracy_little,accuracy_big)
-    return clf.score(x_test, y_test),accuracy_little,accuracy_big
+    accuracy_data = np.array(matrix)
+    accuracy_little = accuracy_data[0][0] / (accuracy_data[0][0] + accuracy_data[0][1])
+    accuracy_big = accuracy_data[1][1] / (accuracy_data[1][0] + accuracy_data[1][1])
+    print(accuracy_little, accuracy_big)
+    return clf.score(x_test, y_test), accuracy_little, accuracy_big
 
 
 # svm
 def svm_train(x_train, x_test, y_train, y_test):
-    clf = svm.SVC(kernel='linear',class_weight='balanced')
+    clf = svm.SVC(kernel='linear', class_weight='balanced')
     clf.fit(x_train, y_train)
 
     expected = y_train
@@ -110,16 +110,16 @@ def svm_train(x_train, x_test, y_train, y_test):
     matrix = metrics.confusion_matrix(expected, predicted, labels=label)
     print(matrix)  # 输出混淆矩阵信息
 
-    accuracy_data=np.array(matrix)
-    accuracy_little=accuracy_data[0][0]/(accuracy_data[0][0]+accuracy_data[0][1])
-    accuracy_big=accuracy_data[1][1]/(accuracy_data[1][0]+accuracy_data[1][1])
-    print(accuracy_little,accuracy_big)
-    return clf.score(x_test, y_test),accuracy_little,accuracy_big
+    accuracy_data = np.array(matrix)
+    accuracy_little = accuracy_data[0][0] / (accuracy_data[0][0] + accuracy_data[0][1])
+    accuracy_big = accuracy_data[1][1] / (accuracy_data[1][0] + accuracy_data[1][1])
+    print(accuracy_little, accuracy_big)
+    return clf.score(x_test, y_test), accuracy_little, accuracy_big
 
 
 # 随机森林
 def random_forest(x_train, x_test, y_train, y_test):
-    clf = RandomForestClassifier(n_estimators=100, max_depth=4,class_weight='balanced')
+    clf = RandomForestClassifier(n_estimators=100, max_depth=4, class_weight='balanced')
     clf.fit(x_train, y_train)
 
     expected = y_test
@@ -129,11 +129,11 @@ def random_forest(x_train, x_test, y_train, y_test):
     matrix = metrics.confusion_matrix(expected, predicted, labels=label)
     print(matrix)  # 输出混淆矩阵信息
 
-    accuracy_data=np.array(matrix)
-    accuracy_little=accuracy_data[0][0]/(accuracy_data[0][0]+accuracy_data[0][1])
-    accuracy_big=accuracy_data[1][1]/(accuracy_data[1][0]+accuracy_data[1][1])
-    print(accuracy_little,accuracy_big)
-    return clf.score(x_test, y_test),accuracy_little,accuracy_big
+    accuracy_data = np.array(matrix)
+    accuracy_little = accuracy_data[0][0] / (accuracy_data[0][0] + accuracy_data[0][1])
+    accuracy_big = accuracy_data[1][1] / (accuracy_data[1][0] + accuracy_data[1][1])
+    print(accuracy_little, accuracy_big)
+    return clf.score(x_test, y_test), accuracy_little, accuracy_big
 
 
 def k_cv(name):
@@ -144,8 +144,8 @@ def k_cv(name):
               'forest_many']
     acc_pd = pd.DataFrame(columns=colums)
 
-    x,y=get_xy(name)
-    kf = KFold(n_splits=6,shuffle=True)
+    x, y = get_xy(name)
+    kf = KFold(n_splits=6, shuffle=True)
     for train_index, test_index in kf.split(x):
         print('train_index', train_index, 'test_index', test_index)
         x_train, y_train = x[train_index], y[train_index]
@@ -181,12 +181,14 @@ def k_cv(name):
         acc_pd.loc[len(res_pd)] = acc_temp
 
     res_pd.loc['mean'] = res_pd.mean()
-    res_pd.to_csv(name[:-4]+'eeg_classify_kcv.csv')
+    res_pd.to_csv(name[:-4] + 'eeg_classify_kcv.csv')
 
     acc_pd.loc['mean'] = acc_pd.mean()
-    acc_pd.to_csv(name[:-4]+'eeg_classify_acc_kcv.csv')
+    acc_pd.to_csv(name[:-4] + 'eeg_classify_acc_kcv.csv')
 
 
-file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','test_sklearn_ExtraTreesClassifier.csv','select_features_VarianceThreshold.csv']
-for x in file_names:
-    k_cv(x)
+def start():
+    file_names = ['tsfresh_filteredFeatures.csv', 'test_sklearn_SelectFromModel.csv',
+                  'test_sklearn_ExtraTreesClassifier.csv', 'select_features_VarianceThreshold.csv']
+    for x in file_names:
+        k_cv(x)
