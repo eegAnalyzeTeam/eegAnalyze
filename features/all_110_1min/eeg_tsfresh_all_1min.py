@@ -1,12 +1,8 @@
 import numpy as np
 import mne
 import check_file
-import os, sys
+import os
 import pandas as pd
-from multiprocessing import Process
-import thread_cal_features
-# import eeg_tsfresh_calcFeatures
-import threading
 
 
 def raw_data_info(filePath):
@@ -102,18 +98,17 @@ def handle_badchannel(raw, badchannels, counter):
     print('filter success')
     raw.resample(160, npad='auto')
     print(len(raw))
-    if len(raw)>100000 or len(raw)<19000:
+    if len(raw) > 100000 or len(raw) < 19000:
         print(counter)
-        fileObject = open(str(counter)+'.txt', 'w')
+        fileObject = open(str(counter) + '.txt', 'w')
         fileObject.write(str(counter))
         fileObject.close()
     print('success resample')
     raw.info['bads'] = badchannels
     picks = mne.pick_types(raw.info, eeg=True, exclude='bads')
 
-
-    raw = raw.get_data(picks,start=9500,stop=19000)
-    raw=np.array(raw).T
+    raw = raw.get_data(picks, start=9500, stop=19000)
+    raw = np.array(raw).T
 
     return raw
 
@@ -160,7 +155,7 @@ def control_thread_entity(raw, bad_channels, tsfresh_data, counter):
     temp_raw_arr = handle_badchannel(raw, bad_channels, counter)
     for temp_raw in temp_raw_arr:
         time = 0.0
-        tsfresh_data_copy=tsfresh_data.copy()
+        tsfresh_data_copy = tsfresh_data.copy()
         print(len(temp_raw))
         for x in temp_raw:
             x = list(x)
@@ -179,7 +174,7 @@ def patient_thread_entity(raw, bad_channels, tsfresh_data, counter):
     temp_raw_arr = handle_badchannel(raw, bad_channels, counter)
     for temp_raw in temp_raw_arr:
         time = 0.0
-        tsfresh_data_copy=tsfresh_data.copy()
+        tsfresh_data_copy = tsfresh_data.copy()
         print(len(temp_raw))
         for x in temp_raw:
             x = list(x)
@@ -203,35 +198,33 @@ def save_csv_thread(control_raw, patient_raw, channel_names, bad_channels):
     tsfresh_data = pd.DataFrame(columns=columns)
 
     counter = 0
-    person_count=0
+    person_count = 0
 
     for (eid, raw) in control_raw.items():
         # if person_count == 0 or person_count ==15:
         #     person_count += 1
         #     continue
-        if len(raw)>2000000:
-            fileObject = open(str(person_count)+'.txt', 'w')
+        if len(raw) > 2000000:
+            fileObject = open(str(person_count) + '.txt', 'w')
             fileObject.write(str(person_count))
             fileObject.close()
             continue
         counter = control_thread_entity(raw, bad_channels, tsfresh_data, counter)
-        person_count+=1
+        person_count += 1
         print(person_count)
 
     for (eid, raw) in patient_raw.items():
         # if person_count == 77:
         #     person_count += 1
         #     continue
-        if len(raw)<400000:
-            fileObject = open(str(person_count)+'.txt', 'w')
+        if len(raw) < 400000:
+            fileObject = open(str(person_count) + '.txt', 'w')
             fileObject.write(str(person_count))
             fileObject.close()
             continue
         counter = patient_thread_entity(raw, bad_channels, tsfresh_data, counter)
-        person_count+=1
+        person_count += 1
         print(person_count)
-
-
 
 
 def read_file(filePath):
@@ -242,9 +235,5 @@ def read_file(filePath):
     save_csv_thread(control_raw, patient_raw, channel_names, bad_channels)
 
 
-read_file('/home/rbai/eegData')
-
-# read_file('/home/public2/eegData')
-
-# eeg_tsfresh_calcFeatures.get_features('tsfresh_data.csv')
-thread_cal_features.get_features_thread()
+def start():
+    read_file('/home/rbai/eegData')

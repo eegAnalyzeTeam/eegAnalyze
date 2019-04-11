@@ -247,6 +247,3 @@ def start():
     test_sklearn_VarianceThreshold()
     test_select_features_VarianceThreshold()
 
-
-
-start()

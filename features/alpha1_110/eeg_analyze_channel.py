@@ -42,19 +42,3 @@ def calculate_anova_p(name):
     df.to_csv('analyze_result_all_tree.csv')
 
 calculate_anova_p('test_sklearn_ExtraTreesClassifier.csv')
-
-
-# def get_data(name):
-#     df = pd.read_csv(name)
-#
-#     del df['Unnamed: 0']
-#
-#     y_csv_data = np.loadtxt('svm_y.csv', dtype=float, delimiter=',')
-#     y = np.array(y_csv_data)[:, 1]
-#
-#     df['type']=y
-#
-#     anova_res = anova_lm(ols('CP5__mean_abs_change ~ C(type)', df).fit(), typ=1)
-#
-#     print(anova_res)
-# get_data('test_sklearn_ExtraTreesClassifier.csv')

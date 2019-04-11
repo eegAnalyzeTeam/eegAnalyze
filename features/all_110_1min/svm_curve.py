@@ -89,13 +89,14 @@ def my_validation_curve():
     plt.savefig('validation_curve.png')
     plt.show()
 
-name =['svm','bayes','decision tree','random forest']
-clf = svm.SVC(kernel='linear', class_weight='balanced')
-svm_curve(clf,name[0])
-clf = GaussianNB()
-svm_curve(clf,name[1])
-clf = tree.DecisionTreeClassifier(class_weight='balanced')
-svm_curve(clf,name[2])
-clf = RandomForestClassifier(n_estimators=100, max_depth=4, class_weight='balanced')
-svm_curve(clf,name[3])
-# my_validation_curve()
+
+def start():
+    name =['svm','bayes','decision tree','random forest']
+    clf = svm.SVC(kernel='linear', class_weight='balanced')
+    svm_curve(clf,name[0])
+    clf = GaussianNB()
+    svm_curve(clf,name[1])
+    clf = tree.DecisionTreeClassifier(class_weight='balanced')
+    svm_curve(clf,name[2])
+    clf = RandomForestClassifier(n_estimators=100, max_depth=4, class_weight='balanced')
+    svm_curve(clf,name[3])

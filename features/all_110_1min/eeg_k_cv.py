@@ -10,6 +10,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
 
 
+# 缺失的情况，具体情况具体分析
 lack_alpha1=[8,15,28]
 lack_alpha2=[11,21,28,53,93,95]
 lack_cutall=[0,15,77]
@@ -188,6 +189,7 @@ def k_cv(name):
     acc_pd.to_csv(name[:-4]+'eeg_classify_acc_kcv.csv')
 
 
-file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv']
-for x in file_names:
-    k_cv(x)
+def start():
+    file_names=['tsfresh_filteredFeatures.csv','test_sklearn_SelectFromModel.csv','select_features_VarianceThreshold.csv']
+    for x in file_names:
+        k_cv(x)
