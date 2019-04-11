@@ -65,7 +65,7 @@ def read_file(file_dir):
 
 
 def start():
-    control_raw,patient_raw=read_file('eegData_4244171/')
+    control_raw,patient_raw=read_file('/home/rbai/eegData_source_online/eegData_4244171/')
 
     print(len(control_raw))
     print(len(patient_raw))

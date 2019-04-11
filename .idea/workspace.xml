@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bbbc27e7-9735-441d-837d-11b21960f2eb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eegData_online_source/cut_3s/all_classify_model_c_k.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/cut_3s/all_classify_model_c_k.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eegData_online_source/cut_3s/all_learn_curve.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/cut_3s/all_learn_curve.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eegData_online_source/cut_3s/all_select_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/cut_3s/all_select_features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_analyze_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_analyze_features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_calcFeatures.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_calcFeatures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eegData_online_source/cut_3s/handle_multi_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/cut_3s/handle_multi_csv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eegData_online_source/cut_3s/test_k_cv_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/cut_3s/test_k_cv_3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eegData_online_source/cut_1s/eeg_getData.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/cut_1s/eeg_getData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_getData.py" beforeDir="false" afterPath="$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_getData.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,34 +21,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_3s/test_k_cv_3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="198" column="95" selection-start-line="198" selection-start-column="95" selection-end-line="198" selection-end-column="95" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-                <element signature="e#647#944#0" />
-                <element signature="e#1014#1471#0" />
-                <element signature="e#3552#4074#0" />
-                <element signature="e#4100#6761#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_3s/handle_multi_csv.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="723">
-              <caret line="43" column="8" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_calcFeatures.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -114,11 +81,39 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_3s/__main__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="4" column="51" selection-start-line="4" selection-start-column="51" selection-end-line="4" selection-end-column="51" />
+            <state relative-caret-position="375">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+              <folding>
+                <element signature="e#0#57#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_1s/eeg_getData.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="725">
+              <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="72" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_getData.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="875">
+              <caret line="67" column="72" selection-start-line="67" selection-start-column="72" selection-end-line="67" selection-end-column="72" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#851#968#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -196,7 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/features/1s_cut/test_k_cv_3.py" />
         <option value="$PROJECT_DIR$/features/all_110_1min/eeg_tsfresh_selectFeatures.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/1s_cut/all_classify_model_c_k.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/3s_cut/all_classify_model_c_k.py" />
@@ -230,7 +224,6 @@
         <option value="$PROJECT_DIR$/coherence_code/eeg_coherence.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/1s_cut/__main__.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/1s_cut/eeg_getData.py" />
-        <option value="$PROJECT_DIR$/eegData_online_source/cut_1s/eeg_getData.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/cut_1s/test_k_cv_3.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/cut_1s/handle_multi_csv.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/cut_1s/eeg_analyze_features.py" />
@@ -247,6 +240,8 @@
         <option value="$PROJECT_DIR$/eegData_online_source/cut_3s/all_classify_model_c_k.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/cut_1s/__main__.py" />
         <option value="$PROJECT_DIR$/eegData_online_source/cut_3s/__main__.py" />
+        <option value="$PROJECT_DIR$/eegData_online_source/cut_1s/eeg_getData.py" />
+        <option value="$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_getData.py" />
       </list>
     </option>
   </component>
@@ -495,16 +490,15 @@
       <workItem from="1551839628284" duration="17830000" />
       <workItem from="1551928977350" duration="8919000" />
       <workItem from="1554884793392" duration="3069000" />
-      <workItem from="1554943738536" duration="13769000" />
+      <workItem from="1554943738536" duration="14314000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="424711000" />
+    <option name="totallyTimeSpent" value="425256000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22799511" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -858,22 +852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_1s/eeg_getData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#62#247#0" />
-            <element signature="e#310#503#0" />
-            <element signature="e#522#818#0" />
-            <element signature="e#876#993#0" />
-            <element signature="e#1594#2186#0" />
-            <element signature="e#2218#2364#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_1s/eeg_analyze_features.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
@@ -918,17 +896,6 @@
           <caret line="132" column="50" lean-forward="true" selection-start-line="132" selection-start-column="50" selection-end-line="132" selection-end-column="50" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_getData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#851#968#0" />
           </folding>
         </state>
       </provider>
@@ -1056,8 +1023,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_3s/__main__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="51" selection-start-line="4" selection-start-column="51" selection-end-line="4" selection-end-column="51" />
+        <state relative-caret-position="375">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_1s/eeg_getData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eegData_online_source/cut_3s/eeg_getData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="875">
+          <caret line="67" column="72" selection-start-line="67" selection-start-column="72" selection-end-line="67" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#851#968#0" />
+          </folding>
         </state>
       </provider>
     </entry>
