@@ -1,6 +1,6 @@
 # 此文件主要完成了对eeg文件的读取
 # 输入参数：目录路径
-# 返回:(list)正常人raw，(list)病人raw，(list)通道名称，(list)坏道名称
+# 返回:(dic)正常人raw，(dic)病人raw，(list)通道名称
 
 import mne
 import os
@@ -18,7 +18,7 @@ def get_raw_info(filePath):
                 channel_names.append(i)
 
     bad_channels = ['Oz', 'ECG']
-    return channel_names, bad_channels
+    return channel_names
 
 
 def troublesome_data(filePath):
@@ -93,7 +93,7 @@ def read_data(filePath):
 
 def read_file(filePath = '/home/rbai/eegData'):
     control_raw, patient_raw = read_data(filePath)
-    channel_names, bad_channels = get_raw_info(filePath)
-    return control_raw, patient_raw, channel_names, bad_channels
+    channel_names = get_raw_info(filePath)
+    return control_raw, patient_raw, channel_names
 
 
