@@ -2,10 +2,7 @@
 
 import mne
 import read_file
-
-right_brain = ['FP2', 'F4', 'F8']
-left_brain = ['FP1', 'F3', 'F7']
-brain = ['FP1', 'F3', 'F7', 'FP2', 'F4', 'F8', 'Fz']
+import const
 
 
 def get_filter(raw):
@@ -38,7 +35,7 @@ def handle_raw(raw):
     raw = raw.load_data()
     if len(raw.get_data()[0]) > 6000000:
         return None
-    raw = raw.pick_channels(brain)
+    raw = raw.pick_channels(const.brain)
     raw = raw.resample(256, npad="auto")
     res = get_filter(raw)
     return res
@@ -57,6 +54,7 @@ def get_bands():
         print('control: ' + str(count))
         count += 1
 
+
     patient_res = []
     count = 0
     for (eid, raw) in patient_raw.items():
@@ -64,9 +62,9 @@ def get_bands():
         if temp is None:
             print('too large')
             continue
-        control_res.appe
         patient_res.append(temp)
         print('patient: ' + str(count))
         count += 1
+
 
     return control_res, patient_res
