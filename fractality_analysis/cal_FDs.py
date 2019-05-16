@@ -17,8 +17,10 @@ import csv
 def handle_raw(raw):
     res = []
     for x in const.brain:
-        picks = mne.pick_types(raw.info, eeg=True, include=x)
-        data = raw.get_data(picks)[0]
+        temp = []
+        temp.append(x)
+        raw_temp = raw.copy().pick_channels(temp)
+        data = raw_temp.get_data()[0]
         hfd = higuchi_fd(data)
         kfd = katz_fd(data)
         res.append(hfd)
@@ -29,6 +31,7 @@ def handle_raw(raw):
 def get_raws():
     control_dic, patient_dic = get_bands.get_bands()
     for band in const.bands_name:
+        print(band)
         res = []
         res.append('id')
         for x in const.brain:
@@ -46,6 +49,14 @@ def get_raws():
             ress.append(temp)
             count += 1
 
+        fileread = open('csv/' + band + '_control.csv', 'w', newline='')
+        writer = csv.writer(fileread)
+        writer.writerows(ress)
+        fileread.close()
+
+        ress = []
+        ress.append(res)
+        count = 0
         for dic in patient_dic:
             raw = dic[band]
             temp = handle_raw(raw)
@@ -54,7 +65,7 @@ def get_raws():
             ress.append(temp)
             count += 1
 
-        fileread = open('csv/' + band + '.csv', 'w', newline='')
+        fileread = open('csv/' + band + '_patient.csv', 'w', newline='')
         writer = csv.writer(fileread)
         writer.writerows(ress)
         fileread.close()

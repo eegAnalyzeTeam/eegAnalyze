@@ -33,7 +33,7 @@ def handle_raw(raw):
     # ica = mne.preprocessing.ICA(method='extended-infomax', random_state = 1)
     # raw = ica.fit(raw)
     raw = raw.load_data()
-    if len(raw.get_data()[0]) > 6000000:
+    if len(raw.get_data()[0]) > 5000000:
         return None
     raw = raw.pick_channels(const.brain)
     raw = raw.resample(256, npad="auto")
@@ -55,6 +55,7 @@ def get_bands():
         count += 1
 
 
+
     patient_res = []
     count = 0
     for (eid, raw) in patient_raw.items():
@@ -65,6 +66,7 @@ def get_bands():
         patient_res.append(temp)
         print('patient: ' + str(count))
         count += 1
+
 
 
     return control_res, patient_res
